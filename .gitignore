@@ -1,0 +1,35 @@
+ # Fișiere de build
+bin/
+obj/
+
+# Fișiere de pachete
+*.nupkg
+*.snupkg
+packages/
+
+# Fișiere pentru setările locale ale utilizatorului și IDE-urilor
+*.user
+*.suo
+.vscode/
+.vs/
+.idea/
+
+# Fișiere de log și de urmărit
+*.log
+
+# Fișiere de configurare pentru debug și cache-uri locale
+.DS_Store
+*.psess
+*.testsettings
+*.vsix
+*.vspx
+.vscode/
+_ReSharper*/
+
+# Fișiere temporare și de cache
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.Cache/
+*.msbuild*
+*.sln.cache
