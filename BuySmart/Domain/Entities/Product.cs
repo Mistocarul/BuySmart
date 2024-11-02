@@ -11,10 +11,14 @@
         public string Image { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
 
-        // Foreign key for Category
-        public Guid CategoryId { get; set; }
+        public Guid CategoryId { get; set; } // FK for Category
+
+        public Guid BusinessId { get; set; } // FK to Business
+
         // Navigation property for the one-to-many relationship
         public Category Category { get; set; }
+
+        public Business Business { get; set; }
 
         public ICollection<Review> Reviews { get; set; } = new List<Review>(); // 1 product has many reviews
     }

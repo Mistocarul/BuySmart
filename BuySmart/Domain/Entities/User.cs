@@ -10,12 +10,10 @@
         public string Image { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
 
-        //public ICollection<Product> products { get; set; } = new List<Product>(); // 1 user has many products
-        //public ICollection<Order> orders { get; set; } = new List<Order>(); // 1 user has many orders
-        
         public Cart Cart { get; set; } // 1 user has 1 cart
 
-        public ICollection<Review> Reviews { get; set; } = new List<Review>(); // 1 user has many reviews
+        public Business Business { get; set; } // 1 user has 1 business
 
+        public ICollection<Review> Reviews { get; set; } = new List<Review>(); // 1 user has many reviews
     }
 }

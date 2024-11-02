@@ -14,6 +14,7 @@ namespace Domain.Entities
         public DbSet<User> Users { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Business> Businesses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,6 +36,11 @@ namespace Domain.Entities
                 entity.HasOne(p => p.Category)
                     .WithMany(c => c.Products)
                     .HasForeignKey(p => p.CategoryId);
+
+                entity.HasOne(p => p.Business)
+                    .WithMany(b => b.Products)
+                    .HasForeignKey(p => p.BusinessId);
+
             });
 
             modelBuilder.Entity<Category>(entity =>
@@ -69,6 +75,9 @@ namespace Domain.Entities
                 entity.HasMany(u => u.Reviews)
                     .WithOne(r => r.User)
                     .HasForeignKey(r => r.UserId);
+                entity.HasOne(u => u.Business)
+                    .WithOne(b => b.User)
+                    .HasForeignKey<Business>(b => b.UserId);
             });
 
             modelBuilder.Entity<Review>(entity =>
@@ -107,6 +116,20 @@ namespace Domain.Entities
                 entity.HasMany(c => c.Items)
                     .WithOne(ci => ci.Cart)
                     .HasForeignKey(ci => ci.CartId);
+            });
+
+            modelBuilder.Entity<Business>(entity =>
+            {
+                entity.ToTable("Businesses");
+                entity.HasKey(e => e.BusinessID);
+                entity.Property(e => e.BusinessID)
+                    .HasColumnType("uuid")
+                    .HasDefaultValueSql("uuid_generate_v4()")
+                    .ValueGeneratedOnAdd();
+
+                entity.HasOne(b => b.User)
+                    .WithOne(u => u.Business)
+                    .HasForeignKey<Business>(b => b.UserId);
             });
 
             modelBuilder.Entity<Item>(entity =>
