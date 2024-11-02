@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Commands;
+using Application.DTOs;
+using AutoMapper;
+using Domain.Entities;
 
 namespace Application.Utils
 {
-    internal class MappingProfile
+    public class MappingProfile : Profile
     {
+        public MappingProfile()
+        {
+            CreateMap<Product, ProductDto>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<CreateUserCommand, User>().ReverseMap();
+            CreateMap<UpdateUserCommand, User>().ReverseMap();
+        }
     }
 }

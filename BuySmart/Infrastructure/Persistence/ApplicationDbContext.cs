@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace Domain.Entities
+namespace Infrastructure.Persistence
 {
     public class ApplicationDbContext : DbContext
     {
@@ -67,6 +68,7 @@ namespace Domain.Entities
                 entity.Property(e => e.Email).IsRequired().HasMaxLength(200);
                 entity.Property(e => e.Password).IsRequired().HasMaxLength(200);
                 entity.Property(e => e.Role).IsRequired().HasMaxLength(200);
+                entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                 entity.HasOne(u => u.Cart)
                     .WithOne(c => c.User)
