@@ -1,10 +1,12 @@
-﻿using Domain.Entities;
+﻿using Domain.Common;
+using Domain.Entities;
 using Domain.Repositories;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,33 +34,48 @@ namespace Infrastructure.Repositories
             return user;
         }
 
-        public async Task<Guid> AddAsync(User user)
+        public async Task<Result<Guid>> AddAsync(User user)
         {
-            await context.Users.AddAsync(user);
-            await context.SaveChangesAsync();
-            return user.UserId;
+            try
+            {
+                await context.Users.AddAsync(user);
+                await context.SaveChangesAsync();
+                return Result<Guid>.Success(user.UserId);
+            }
+            catch (Exception ex)
+            {
+                return Result<Guid>.Failure(ex.Message);
+            }
         }
 
-        public async Task UpdateAsync(User user)
+        public async Task<Result<object>> UpdateAsync(User user)
         {
-            var existingUser = await context.Users.FindAsync(user.UserId);
-            if (existingUser == null)
+            try
             {
-                throw new Exception("User not found");
+                var existingUser = await context.Users.FindAsync(user.UserId);
+                if (existingUser == null)
+                {
+                    return Result<object>.Failure("User not found");
+                }
+                var newUser = new User
+                {
+                    UserId = user.UserId,
+                    Name = user.Name,
+                    Email = existingUser.Email,
+                    Password = user.Password,
+                    Image = user.Image,
+                    CreatedAt = existingUser.CreatedAt,
+                    Role = existingUser.Role
+                    // vedeti sa puneti si UpdatedAt
+                };
+                context.Entry(existingUser).CurrentValues.SetValues(newUser);
+                await context.SaveChangesAsync();
+                return Result<object>.Success(null);
             }
-            var newUser = new User
+            catch (Exception ex)
             {
-                UserId = user.UserId,
-                Name = user.Name,
-                Email = existingUser.Email,
-                Password = user.Password,
-                Image = user.Image,
-                CreatedAt = existingUser.CreatedAt,
-                Role = existingUser.Role
-                // vedeti sa puneti si UpdatedAt
-            };
-            context.Entry(existingUser).CurrentValues.SetValues(newUser);
-            await context.SaveChangesAsync();
+                return Result<object>.Failure(ex.Message);
+            }
         }
 
         public async Task DeleteAsync(Guid id)

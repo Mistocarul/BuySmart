@@ -1,12 +1,13 @@
 ﻿using Application.Commands;
 using AutoMapper;
+using Domain.Common;
 using Domain.Entities;
 using Domain.Repositories;
 using MediatR;
 
 namespace Application.CommandHandlers
 {
-    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
+    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Result<Guid>>
     {
         private readonly IUserRepository userRepository;
         private readonly IMapper mapper;
@@ -15,11 +16,15 @@ namespace Application.CommandHandlers
             this.userRepository = userRepository;
             this.mapper = mapper;
         }
-        public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<Result<Guid>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             var user = mapper.Map<User>(request);
-            await userRepository.AddAsync(user);
-            return user.UserId;
+            var result = await userRepository.AddAsync(user);
+            if (result.IsSuccess)
+            {
+                return Result<Guid>.Success(result.Data);
+            }
+            return Result<Guid>.Failure(result.ErrorMessage);
         }
     }
 }

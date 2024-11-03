@@ -1,6 +1,7 @@
 using Application.Commands;
 using Application.DTOs;
 using Application.Queries;
+using Domain.Common;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,10 +30,10 @@ namespace BuySmartController.Controllers
         }
 
         [HttpPost("CreateUser")]
-        public async Task<ActionResult<Guid>> CreateUser([FromBody] CreateUserCommand command)
+        public async Task<ActionResult<Result<Guid>>> CreateUser([FromBody] CreateUserCommand command)
         {
-            var userId = await mediator.Send(command);
-            return CreatedAtAction(nameof(CreateUser), new { id = userId }, userId);
+            var result = await mediator.Send(command);
+            return CreatedAtAction(nameof(CreateUser), new { id = result.Data }, result.Data);
         }
 
         [HttpDelete("{id:guid}")]
@@ -43,13 +44,13 @@ namespace BuySmartController.Controllers
         }
 
         [HttpPut("UpdateUser/{id:guid}")]
-        public async Task<ActionResult> UpdateUser(Guid id, [FromBody] UpdateUserCommand command)
+        public async Task<ActionResult<Result<object>>> UpdateUser(Guid id, [FromBody] UpdateUserCommand command)
         {
             if (id != command.UserId)
             {
                 return BadRequest();
             }
-            await mediator.Send(command);
+            var result = await mediator.Send(command);
             return NoContent();
         }
 
