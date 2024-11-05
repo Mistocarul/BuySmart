@@ -1,6 +1,0 @@
-@BuySmart_HostAddress = http://localhost:5095
-
-GET {{BuySmart_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
