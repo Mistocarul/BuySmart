@@ -20,7 +20,6 @@ namespace Infrastructure
             services.AddScoped<IUserClientRepository, UserClientRepository>();
             services.AddScoped<IUserBusinessRepository, UserBusinessRepository>();
 
-            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBusinessRepository, BusinessRepository>();
 
             return services;

@@ -17,10 +17,6 @@ namespace Application.Utils
             CreateMap<UpdateUserBusinessCommand, UserBusiness>().ReverseMap();
             CreateMap<UserBusiness, UserBusinessDto>().ReverseMap();
 
-            CreateMap<User, UserDto>().ReverseMap();
-            CreateMap<CreateUserCommand, User>().ReverseMap();
-            CreateMap<UpdateUserCommand, User>().ReverseMap();
-
             CreateMap<CreateBusinessCommand, Business>().ReverseMap();
             CreateMap<UpdateBusinessCommand, Business>().ReverseMap();
             CreateMap<Business, BusinessDto>().ReverseMap();
