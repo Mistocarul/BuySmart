@@ -18,7 +18,13 @@ namespace Infrastructure
                 );
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+<<<<<<< Updated upstream
             services.AddScoped<IUserRepository, UserRepository>();
+=======
+            services.AddScoped<IUserClientRepository, UserClientRepository>();
+            services.AddScoped<IBusinessRepository, BusinessRepository>();
+
+>>>>>>> Stashed changes
             return services;
         }
     }
