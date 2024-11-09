@@ -94,6 +94,48 @@ namespace BuySmartController.Controllers
 
         }
 
+        [HttpGet("GetAllBusinesses")]
+        public async Task<IActionResult> GetAllBusinesses()
+        {
+            var businesses = await mediator.Send(new GetAllBusinessesQuery());
+            return Ok(businesses);
+        }
 
+        [HttpGet("GetBusinessById/{id}")]
+        public async Task<ActionResult<BusinessDto>> GetBusinessById(Guid id)
+        {
+            return await mediator.Send(new GetBusinessByIdQuery { Id = id });
+        }
+
+        [HttpPost("CreateBusiness")]
+        public async Task<ActionResult<Result<Guid>>> CreateBusiness([FromBody] CreateBusinessCommand command)
+        {
+            var result = await mediator.Send(command);
+            return CreatedAtAction(nameof(CreateBusiness), new { id = result.Data }, result.Data);
+        }
+
+        [HttpDelete("DeleteBusiness/{id:guid}")]
+        public async Task<ActionResult> DeleteBusinessById(Guid id)
+        {
+            await mediator.Send(new DeleteBusinessCommand { BusinessID = id });
+            return NoContent();
+        }
+
+        [HttpPut("UpdateBusiness/{id:guid}")]
+        public async Task<ActionResult<Result<object>>> UpdateBusiness(Guid id, [FromBody] UpdateBusinessCommand command)
+        {
+            if (id != command.BusinessID)
+            {
+                return BadRequest();
+            }
+            var result = await mediator.Send(command);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.ErrorMessage);
+            }
+
+            return NoContent();
+        }
     }
 }
