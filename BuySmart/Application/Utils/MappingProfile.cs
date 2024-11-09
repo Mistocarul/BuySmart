@@ -13,6 +13,10 @@ namespace Application.Utils
             CreateMap<UserClient, UserClientDto>().ReverseMap();
             CreateMap<CreateUserClientCommand, UserClient>().ReverseMap();
             CreateMap<UpdateUserClientCommand, UserClient>().ReverseMap();
+            CreateMap<CreateUserBusinessCommand, UserBusiness>().ReverseMap();
+            CreateMap<UpdateUserBusinessCommand, UserBusiness>().ReverseMap();
+            CreateMap<UserBusiness, UserBusinessDto>().ReverseMap();
+
         }
     }
 }
