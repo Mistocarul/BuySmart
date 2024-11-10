@@ -5,11 +5,6 @@ using AutoMapper;
 using Domain.Entities;
 using Domain.Repositories;
 using NSubstitute;
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
 
 public class GetAllUserBusinessesQueryHandlerTests
 {

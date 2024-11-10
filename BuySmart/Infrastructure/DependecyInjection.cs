@@ -19,8 +19,8 @@ namespace Infrastructure
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IUserClientRepository, UserClientRepository>();
             services.AddScoped<IUserBusinessRepository, UserBusinessRepository>();
-
             services.AddScoped<IBusinessRepository, BusinessRepository>();
+            services.AddScoped<IReviewBusinessRepository, ReviewBusinessRepository>();
 
             return services;
         }

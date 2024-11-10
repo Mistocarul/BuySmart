@@ -289,8 +289,8 @@ namespace Infrastructure.Migrations
                 {
                     ReviewId = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
                     UserClientId = table.Column<Guid>(type: "uuid", nullable: false),
-                    BusinessId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uuid", nullable: false),
+                    BusinessId = table.Column<Guid>(type: "uuid", nullable: true),
+                    ProductId = table.Column<Guid>(type: "uuid", nullable: true),
                     Rating = table.Column<double>(type: "double precision", nullable: false),
                     Comment = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: false),
                     ReviewDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)

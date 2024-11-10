@@ -10,11 +10,11 @@
 
         //Business : Review (1:N)
         public Guid? BusinessId { get; set; }
-        public Business Business { get; set; } = null!;
+        public Business? Business { get; set; }
 
         //Product : Review (1:N)
         public Guid? ProductId { get; set; }
-        public Product Product { get; set; } = null!;
+        public Product? Product { get; set; }
 
         public double Rating { get; set; }
         public string Comment { get; set; } = string.Empty;

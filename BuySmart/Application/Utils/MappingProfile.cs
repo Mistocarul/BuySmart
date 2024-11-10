@@ -1,4 +1,5 @@
 ﻿using Application.Commands;
+using Application.Commands.ReviewBusinessCommands;
 using Application.DTOs;
 using AutoMapper;
 using Domain.Entities;
@@ -21,6 +22,9 @@ namespace Application.Utils
             CreateMap<UpdateBusinessCommand, Business>().ReverseMap();
             CreateMap<Business, BusinessDto>().ReverseMap();
 
+            CreateMap<CreateReviewBusinessCommand, Review>().ReverseMap();
+            CreateMap<UpdateReviewBusinessCommand, Review>().ReverseMap();
+            CreateMap<Review, ReviewDto>().ReverseMap();
         }
     }
 }

@@ -90,7 +90,6 @@ namespace Infrastructure.Persistence
                 entity.HasMany(b => b.Reviews)
                     .WithOne(r => r.Business)
                     .HasForeignKey(r => r.BusinessId)
-                    .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade);
 
 
@@ -193,7 +192,6 @@ namespace Infrastructure.Persistence
                 entity.HasMany(e => e.Reviews)
                     .WithOne(r => r.Product)
                     .HasForeignKey(r => r.ProductId)
-                    .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasMany(e => e.Histories)

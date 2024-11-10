@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241109193415_InitialCreate")]
+    [Migration("20241110120704_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -299,7 +299,6 @@ namespace Infrastructure.Migrations
                         .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.Property<Guid?>("BusinessId")
-                        .IsRequired()
                         .HasColumnType("uuid");
 
                     b.Property<string>("Comment")
@@ -308,7 +307,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("character varying(1000)");
 
                     b.Property<Guid?>("ProductId")
-                        .IsRequired()
                         .HasColumnType("uuid");
 
                     b.Property<double>("Rating")
@@ -522,14 +520,12 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.Entities.Business", "Business")
                         .WithMany("Reviews")
                         .HasForeignKey("BusinessId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.Entities.Product", "Product")
                         .WithMany("Reviews")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.Entities.UserClient", "UserClient")
                         .WithMany("Reviews")

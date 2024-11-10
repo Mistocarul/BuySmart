@@ -5,10 +5,6 @@ using Domain.Common;
 using Domain.Entities;
 using Domain.Repositories;
 using NSubstitute;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
 
 public class UpdateUserBusinessCommandHandlerTests
 {
