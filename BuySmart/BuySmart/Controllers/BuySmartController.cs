@@ -29,35 +29,58 @@ namespace BuySmartController.Controllers
             return await mediator.Send(new GetUserClientByIdQuery { Id = id });
         }
 
-        [HttpPost("CreateUserClient")]
-        public async Task<ActionResult<Result<Guid>>> CreateUser([FromBody] CreateUserClientCommand command)
+        [HttpPost("CreateUserClient_and_Cart")]
+        public async Task<ActionResult<Result<Guid>>> CreateUserClient([FromBody] CreateUserClientCommand command)
         {
+            command.Password = BCrypt.Net.BCrypt.HashPassword(command.Password);
+
             var result = await mediator.Send(command);
-            return CreatedAtAction(nameof(CreateUser), new { id = result.Data }, result.Data);
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.ErrorMessage);
+            }
+            CreateCartCommand createCartCommand = new CreateCartCommand { UserClientId = result.Data };
+            var cartResult = await mediator.Send(createCartCommand);
+            if (!cartResult.IsSuccess)
+            {
+                await mediator.Send(new DeleteUserClientCommand { UserId = result.Data });
+                return BadRequest(cartResult.ErrorMessage);
+            }
+            return CreatedAtAction(nameof(CreateUserClient), new { id = result.Data }, result.Data);
         }
 
-        [HttpDelete("{id:guid}")]
+        [HttpDelete("DeleteUserClient/{id:guid}")]
         public async Task<ActionResult> DeleteUserById(Guid id)
         {
             await mediator.Send(new DeleteUserClientCommand { UserId = id });
             return NoContent();
         }
 
-        [HttpPut("UpdateUser/{id:guid}")]
+        [HttpPut("UpdateUserClient/{id:guid}")]
         public async Task<ActionResult<Result<object>>> UpdateUser(Guid id, [FromBody] UpdateUserClientCommand command)
         {
             if (id != command.UserId)
             {
                 return BadRequest();
             }
+            command.Password = BCrypt.Net.BCrypt.HashPassword(command.Password);
             var result = await mediator.Send(command);
+            if (!result.IsSuccess) 
+            {
+                return BadRequest(result.ErrorMessage);
+            }
             return NoContent();
         }
 
         [HttpPost("CreateUserBusiness")]
         public async Task<ActionResult<Result<Guid>>> CreateUserBusiness([FromBody] CreateUserBusinessCommand command)
         {
+            command.Password = BCrypt.Net.BCrypt.HashPassword(command.Password);
             var result = await mediator.Send(command);
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.ErrorMessage);
+            }
             return CreatedAtAction(nameof(CreateUserBusiness), new { id = result.Data }, result.Data);
         }
 
@@ -71,6 +94,7 @@ namespace BuySmartController.Controllers
 
         public async Task<ActionResult<Result<object>>> UpdateUserBusiness(Guid id, [FromBody] UpdateUserBusinessCommand command)
         {
+            command.Password = BCrypt.Net.BCrypt.HashPassword(command.Password);
             if (id != command.UserId)
             {
                 return BadRequest();

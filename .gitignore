@@ -33,3 +33,6 @@ artifacts/
 *.Cache/
 *.msbuild*
 *.sln.cache
+
+# Migrari
+/BuySmart/Infrastructure/Migrations

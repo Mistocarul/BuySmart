@@ -25,6 +25,9 @@ namespace Application.Utils
             CreateMap<CreateReviewBusinessCommand, Review>().ReverseMap();
             CreateMap<UpdateReviewBusinessCommand, Review>().ReverseMap();
             CreateMap<Review, ReviewDto>().ReverseMap();
+            CreateMap<CreateCartCommand, Cart>().ReverseMap();
+            CreateMap<Cart, CartDto>().ReverseMap();
+
         }
     }
 }
