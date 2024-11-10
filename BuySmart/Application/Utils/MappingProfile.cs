@@ -21,6 +21,9 @@ namespace Application.Utils
             CreateMap<UpdateBusinessCommand, Business>().ReverseMap();
             CreateMap<Business, BusinessDto>().ReverseMap();
 
+            CreateMap<CreateCartCommand, Cart>().ReverseMap();
+            CreateMap<Cart, CartDto>().ReverseMap();
+
         }
     }
 }

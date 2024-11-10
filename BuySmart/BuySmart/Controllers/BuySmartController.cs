@@ -29,11 +29,22 @@ namespace BuySmartController.Controllers
             return await mediator.Send(new GetUserClientByIdQuery { Id = id });
         }
 
-        [HttpPost("CreateUserClient")]
-        public async Task<ActionResult<Result<Guid>>> CreateUser([FromBody] CreateUserClientCommand command)
+        [HttpPost("CreateUserClient_and_Cart")]
+        public async Task<ActionResult<Result<Guid>>> CreateUserClient([FromBody] CreateUserClientCommand command)
         {
             var result = await mediator.Send(command);
-            return CreatedAtAction(nameof(CreateUser), new { id = result.Data }, result.Data);
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.ErrorMessage);
+            }
+            CreateCartCommand createCartCommand = new CreateCartCommand { UserClientId = result.Data };
+            var cartResult = await mediator.Send(createCartCommand);
+            if (!cartResult.IsSuccess)
+            {
+                await mediator.Send(new DeleteUserClientCommand { UserId = result.Data });
+                return BadRequest(cartResult.ErrorMessage);
+            }
+            return CreatedAtAction(nameof(CreateUserClient), new { id = result.Data }, result.Data);
         }
 
         [HttpDelete("{id:guid}")]
@@ -54,58 +65,6 @@ namespace BuySmartController.Controllers
             return NoContent();
         }
 
-        [HttpPost("CreateUserBusiness")]
-        public async Task<ActionResult<Result<Guid>>> CreateUserBusiness([FromBody] CreateUserBusinessCommand command)
-        {
-            var result = await mediator.Send(command);
-            return CreatedAtAction(nameof(CreateUserBusiness), new { id = result.Data }, result.Data);
-        }
-
-        [HttpDelete("DeleteUserBusiness/{id:guid}")]
-        public async Task<ActionResult> DeleteUserBusiness(Guid id)
-        {
-            await mediator.Send(new DeleteUserBusinessCommand { UserId = id });
-            return NoContent();
-        }
-        [HttpPut("UpdateUserBusiness/{id:guid}")]
-
-        public async Task<ActionResult<Result<object>>> UpdateUserBusiness(Guid id, [FromBody] UpdateUserBusinessCommand command)
-        {
-            if (id != command.UserId)
-            {
-                return BadRequest();
-            }
-            var result = await mediator.Send(command);
-            return NoContent();
-
-        }
-        [HttpGet("GetUserBusinessById/{id:guid}")]
-
-        public async Task<ActionResult<UserBusinessDto>> GetUserBusinessById(Guid id)
-        {
-            return await mediator.Send(new GetUserBusinessByIdQuery { Id = id });
-        }
-
-        [HttpGet("GetAllUserBusinesses")]
-        public async Task<ActionResult> GetAllUserBusinesses()
-        {
-            var users = await mediator.Send(new GetAllUserBusinessesQuery());
-            return Ok(users);
-
-        }
-
-        [HttpGet("GetAllBusinesses")]
-        public async Task<IActionResult> GetAllBusinesses()
-        {
-            var businesses = await mediator.Send(new GetAllBusinessesQuery());
-            return Ok(businesses);
-        }
-
-        [HttpGet("GetBusinessById/{id}")]
-        public async Task<ActionResult<BusinessDto>> GetBusinessById(Guid id)
-        {
-            return await mediator.Send(new GetBusinessByIdQuery { Id = id });
-        }
 
         [HttpPost("CreateBusiness")]
         public async Task<ActionResult<Result<Guid>>> CreateBusiness([FromBody] CreateBusinessCommand command)

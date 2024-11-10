@@ -19,7 +19,7 @@ namespace Infrastructure
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IUserClientRepository, UserClientRepository>();
             services.AddScoped<IUserBusinessRepository, UserBusinessRepository>();
-
+            services.AddScoped<ICartRepository, CartRepository>();
             services.AddScoped<IBusinessRepository, BusinessRepository>();
 
             return services;
