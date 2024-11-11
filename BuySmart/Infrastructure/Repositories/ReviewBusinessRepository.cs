@@ -67,7 +67,7 @@ namespace Infrastructure.Repositories
                 existingReview.UserClientId = review.UserClientId;
 
                 await context.SaveChangesAsync();
-                return Result<object>.Success(null);
+                return Result<object>.Success(new object());
             }
             catch (Exception ex)
             {
@@ -78,21 +78,21 @@ namespace Infrastructure.Repositories
         {
             return await context.Reviews.ToListAsync();
         }
-        public async Task<Review> GetByIdAsync(Guid id)
+        public async Task<Review> GetByIdAsync(Guid reviewId)
         {
-            var review = await context.Reviews.FindAsync(id);
+            var review = await context.Reviews.FindAsync(reviewId);
             if (review == null)
             {
-                throw new Exception("Review not found");
+                throw new KeyNotFoundException("Review not found");
             }
             return review;
         }
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid reviewId)
         {
-            var review = await context.Reviews.FindAsync(id);
+            var review = await context.Reviews.FindAsync(reviewId);
             if (review == null)
             {
-                throw new Exception("Review not found");
+                throw new KeyNotFoundException("Review not found");
             }
             context.Reviews.Remove(review);
             await context.SaveChangesAsync();

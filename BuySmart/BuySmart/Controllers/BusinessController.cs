@@ -33,6 +33,10 @@ namespace BuySmart.Controllers
         public async Task<ActionResult<Result<Guid>>> CreateBusiness([FromBody] CreateBusinessCommand command)
         {
             var result = await mediator.Send(command);
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.ErrorMessage);
+            }
             return CreatedAtAction(nameof(CreateBusiness), new { id = result.Data }, result.Data);
         }
 

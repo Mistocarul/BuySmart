@@ -6,74 +6,78 @@ using Domain.Entities;
 using Domain.Repositories;
 using NSubstitute;
 
-public class CreateUserClientCommandHandlerTests
+namespace Application.UnitTests.UserClientHandlersTests
 {
-    private readonly IUserClientRepository _userClientRepository;
-    private readonly IMapper _mapper;
-    private readonly CreateUserClientCommandHandler _handler;
-
-    public CreateUserClientCommandHandlerTests()
+    public class CreateUserClientCommandHandlerTests
     {
-        _userClientRepository = Substitute.For<IUserClientRepository>();
-        _mapper = Substitute.For<IMapper>();
-        _handler = new CreateUserClientCommandHandler(_userClientRepository, _mapper);
-    }
+        private readonly IUserClientRepository _userClientRepository;
+        private readonly IMapper _mapper;
+        private readonly CreateUserClientCommandHandler _handler;
 
-    [Fact]
-    public async Task Given_ValidCreateUserClientCommand_When_HandleIsCalled_Then_ReturnsSuccessResult()
-    {
-        // Arrange
-        var command = new CreateUserClientCommand
+        public CreateUserClientCommandHandlerTests()
         {
-            Name = "Test User",
-            Email = "test@example.com",
-            Password = "password",
-            UserType = UserType.Client,
-            Image = "image.png"
-        };
+            _userClientRepository = Substitute.For<IUserClientRepository>();
+            _mapper = Substitute.For<IMapper>();
+            _handler = new CreateUserClientCommandHandler(_userClientRepository, _mapper);
+        }
 
-        var userClient = new UserClient();
-        var result = Result<Guid>.Success(new Guid("e23c48a1-222b-4530-bd7f-67f5c7a702af"));
-
-        _mapper.Map<UserClient>(command).Returns(userClient);
-        _userClientRepository.AddAsync(userClient).Returns(result);
-
-        // Act
-        var response = await _handler.Handle(command, CancellationToken.None);
-
-        // Assert
-        Assert.True(response.IsSuccess);
-        Assert.Equal(result.Data, response.Data);
-        _mapper.Received(1).Map<UserClient>(command);
-        await _userClientRepository.Received(1).AddAsync(userClient);
-    }
-
-    [Fact]
-    public async Task Given_InvalidCreateUserClientCommand_When_HandleIsCalled_Then_ReturnsFailureResult()
-    {
-        // Arrange
-        var command = new CreateUserClientCommand
+        [Fact]
+        public async Task Given_ValidCreateUserClientCommand_When_HandleIsCalled_Then_ReturnsSuccessResult()
         {
-            Name = "Test User",
-            Email = "test",
-            Password = "password",
-            UserType = UserType.Client,
-            Image = "image.png"
-        };
+            // Arrange
+            var command = new CreateUserClientCommand
+            {
+                Name = "Test User",
+                Email = "test@example.com",
+                Password = "password",
+                UserType = UserType.Client,
+                Image = "image.png"
+            };
 
-        var userClient = new UserClient();
-        var result = Result<Guid>.Failure("Error creating user client");
+            var userClient = new UserClient();
+            var result = Result<Guid>.Success(new Guid("e23c48a1-222b-4530-bd7f-67f5c7a702af"));
 
-        _mapper.Map<UserClient>(command).Returns(userClient);
-        _userClientRepository.AddAsync(userClient).Returns(result);
+            _mapper.Map<UserClient>(command).Returns(userClient);
+            _userClientRepository.AddAsync(userClient).Returns(result);
 
-        // Act
-        var response = await _handler.Handle(command, CancellationToken.None);
+            // Act
+            var response = await _handler.Handle(command, CancellationToken.None);
 
-        // Assert
-        Assert.False(response.IsSuccess);
-        Assert.Equal(result.ErrorMessage, response.ErrorMessage);
-        _mapper.Received(1).Map<UserClient>(command);
-        await _userClientRepository.Received(1).AddAsync(userClient);
+            // Assert
+            Assert.True(response.IsSuccess);
+            Assert.Equal(result.Data, response.Data);
+            _mapper.Received(1).Map<UserClient>(command);
+            await _userClientRepository.Received(1).AddAsync(userClient);
+        }
+
+        [Fact]
+        public async Task Given_InvalidCreateUserClientCommand_When_HandleIsCalled_Then_ReturnsFailureResult()
+        {
+            // Arrange
+            var command = new CreateUserClientCommand
+            {
+                Name = "Test User",
+                Email = "test",
+                Password = "password",
+                UserType = UserType.Client,
+                Image = "image.png"
+            };
+
+            var userClient = new UserClient();
+            var result = Result<Guid>.Failure("Error creating user client");
+
+            _mapper.Map<UserClient>(command).Returns(userClient);
+            _userClientRepository.AddAsync(userClient).Returns(result);
+
+            // Act
+            var response = await _handler.Handle(command, CancellationToken.None);
+
+            // Assert
+            Assert.False(response.IsSuccess);
+            Assert.Equal(result.ErrorMessage, response.ErrorMessage);
+            _mapper.Received(1).Map<UserClient>(command);
+            await _userClientRepository.Received(1).AddAsync(userClient);
+        }
     }
 }
+

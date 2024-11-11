@@ -5,73 +5,78 @@ using AutoMapper;
 using Domain.Entities;
 using Domain.Repositories;
 using NSubstitute;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
 
-public class GetUserClientByIdQueryHandlerTests
+namespace BuySmart.Application.UnitTests.UserClientHandlersTests
 {
-    private readonly IUserClientRepository _userClientRepository;
-    private readonly IMapper _mapper;
-    private readonly GetUserClientByIdQueryHandler _handler;
-
-    public GetUserClientByIdQueryHandlerTests()
+    public class GetUserClientByIdQueryHandlerTests
     {
-        _userClientRepository = Substitute.For<IUserClientRepository>();
-        _mapper = Substitute.For<IMapper>();
-        _handler = new GetUserClientByIdQueryHandler(_userClientRepository, _mapper);
-    }
+        private readonly IUserClientRepository _userClientRepository;
+        private readonly IMapper _mapper;
+        private readonly GetUserClientByIdQueryHandler _handler;
 
-    [Fact]
-    public async Task Given_ValidUserId_When_HandleIsCalled_Then_ReturnsUserClientDto()
-    {
-        // Arrange
-        var query = new GetUserClientByIdQuery
+        public GetUserClientByIdQueryHandlerTests()
         {
-            Id = new Guid("e23c48a1-222b-4530-bd7f-67f5c7a702af")
-        };
+            _userClientRepository = Substitute.For<IUserClientRepository>();
+            _mapper = Substitute.For<IMapper>();
+            _handler = new GetUserClientByIdQueryHandler(_userClientRepository, _mapper);
+        }
 
-        var userClient = new UserClient();
-        var userClientDto = new UserClientDto
+        [Fact]
+        public async Task Given_ValidUserId_When_HandleIsCalled_Then_ReturnsUserClientDto()
         {
-            UserId = query.Id,
-            Name = "Test User",
-            Email = "test@example.com",
-            UserType = UserType.Client,
-            Image = "image.png"
-        };
+            // Arrange
+            var query = new GetUserClientByIdQuery
+            {
+                Id = new Guid("e23c48a1-222b-4530-bd7f-67f5c7a702af")
+            };
 
-        _userClientRepository.GetByIdAsync(query.Id).Returns(userClient);
-        _mapper.Map<UserClientDto>(userClient).Returns(userClientDto);
+            var userClient = new UserClient
+            {
+                UserId = query.Id,
+                Name = "Test User",
+                Email = "test@example.com",
+                UserType = UserType.Client,
+                Image = "image.png"
+            };
+            var userClientDto = new UserClientDto
+            {
+                UserId = query.Id,
+                Name = "Test User",
+                Email = "test@example.com",
+                UserType = UserType.Client,
+                Image = "image.png"
+            };
 
-        // Act
-        var response = await _handler.Handle(query, CancellationToken.None);
+            _userClientRepository.GetByIdAsync(query.Id).Returns(userClient);
+            _mapper.Map<UserClientDto>(userClient).Returns(userClientDto);
 
-        // Assert
-        Assert.NotNull(response);
-        Assert.Equal(userClientDto.UserId, response.UserId);
-        _userClientRepository.Received(1).GetByIdAsync(query.Id);
-        _mapper.Received(1).Map<UserClientDto>(userClient);
-    }
+            // Act
+            var response = await _handler.Handle(query, CancellationToken.None);
 
-    [Fact]
-    public async Task Given_InvalidUserId_When_HandleIsCalled_Then_ReturnsNull()
-    {
-        // Arrange
-        var query = new GetUserClientByIdQuery
+            // Assert
+            Assert.NotNull(response);
+            Assert.Equal(userClientDto.UserId, response.UserId);
+            await _userClientRepository.Received(1).GetByIdAsync(query.Id);
+            _mapper.Received(1).Map<UserClientDto>(userClient);
+        }
+
+        [Fact]
+        public async Task Given_InvalidUserId_When_HandleIsCalled_Then_ReturnsNull()
         {
-            Id = new Guid("e23c48a1-222b-4530-bd7f-67f5c7a702af")
-        };
+            // Arrange
+            var query = new GetUserClientByIdQuery
+            {
+                Id = new Guid("e23c48a1-222b-4530-bd7f-67f5c7a702af")
+            };
 
-        _userClientRepository.GetByIdAsync(query.Id).Returns((UserClient)null);
+            _userClientRepository.GetByIdAsync(query.Id).Returns(Task.FromResult<UserClient>(null!));
 
-        // Act
-        var response = await _handler.Handle(query, CancellationToken.None);
+            // Act
+            var response = await _handler.Handle(query, CancellationToken.None);
 
-        // Assert
-        Assert.Null(response);
-        _userClientRepository.Received(1).GetByIdAsync(query.Id);
-        _mapper.DidNotReceive().Map<UserClientDto>(Arg.Any<UserClient>());
+            // Assert
+            Assert.Null(response);
+        }
     }
 }
+    

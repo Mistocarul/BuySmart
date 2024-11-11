@@ -9,12 +9,10 @@ namespace Application.CommandHandlers.UserClientCommandHandlers
     public class DeleteUserClientCommandHandler : IRequestHandler<DeleteUserClientCommand, Result<object>>
     {
         private readonly IUserClientRepository userClientRepository;
-        private readonly IMapper mapper;
 
-        public DeleteUserClientCommandHandler(IUserClientRepository userClientRepository, IMapper mapper)
+        public DeleteUserClientCommandHandler(IUserClientRepository userClientRepository)
         {
             this.userClientRepository = userClientRepository;
-            this.mapper = mapper;
         }
 
         public async Task<Result<object>> Handle(DeleteUserClientCommand request, CancellationToken cancellationToken)
@@ -26,7 +24,7 @@ namespace Application.CommandHandlers.UserClientCommandHandlers
             }
 
             await userClientRepository.DeleteAsync(request.UserId);
-            return Result<object>.Success(null);
+            return Result<object>.Success(new object());
         }
     }
 }

@@ -8,13 +8,11 @@ namespace Application.CommandHandlers.ReviewBusinessCommandHandlers
 {
     public class DeleteReviewBusinessCommandHandler : IRequestHandler<DeleteReviewBusinessCommand, Result<object>>
     {
-        private readonly IMapper mapper;
         private readonly IReviewBusinessRepository reviewBusinessRepository;
 
-        public DeleteReviewBusinessCommandHandler(IReviewBusinessRepository ReviewBusinessRepository, IMapper mapper)
+        public DeleteReviewBusinessCommandHandler(IReviewBusinessRepository ReviewBusinessRepository)
         {
             this.reviewBusinessRepository = ReviewBusinessRepository;
-            this.mapper = mapper;
         }
 
         public async Task<Result<object>> Handle(DeleteReviewBusinessCommand request, CancellationToken cancellationToken)
@@ -26,7 +24,7 @@ namespace Application.CommandHandlers.ReviewBusinessCommandHandlers
                 return Result<object>.Failure("Review not found");
             }
             await reviewBusinessRepository.DeleteAsync(request.ReviewId);
-            return Result<object>.Success(null);
+            return Result<object>.Success(new object());
         }
     }
 }

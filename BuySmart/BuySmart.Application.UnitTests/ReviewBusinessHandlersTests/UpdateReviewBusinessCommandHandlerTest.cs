@@ -5,7 +5,6 @@ using Domain.Common;
 using Domain.Entities;
 using Domain.Repositories;
 using NSubstitute;
-using Xunit;
 
 namespace BuySmart.Application.UnitTests.ReviewBusinessHandlersTests
 {
@@ -67,7 +66,7 @@ namespace BuySmart.Application.UnitTests.ReviewBusinessHandlersTests
                 Comment = "Updated review"
             };
 
-            _reviewBusinessRepository.GetByIdAsync(command.ReviewId).Returns((Review)null);
+            _reviewBusinessRepository.GetByIdAsync(command.ReviewId).Returns(Task.FromResult<Review>(null!));
 
             var response = await _handler.Handle(command, CancellationToken.None);
 

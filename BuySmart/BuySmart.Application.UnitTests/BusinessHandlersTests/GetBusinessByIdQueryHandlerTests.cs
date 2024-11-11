@@ -1,5 +1,4 @@
 using Application.DTOs;
-using Application.Queries;
 using Application.Queries.BusinessQueries;
 using Application.QueryHandlers.BusinessQueryHandlers;
 using AutoMapper;
@@ -7,64 +6,68 @@ using Domain.Entities;
 using Domain.Repositories;
 using NSubstitute;
 
-public class GetBusinessByIdQueryHandlerTests
+namespace Application.UnitTests.BusinessHandlersTests
 {
-    private readonly IBusinessRepository businessRepository;
-    private readonly IMapper mapper;
-    private readonly GetBusinessByIdQueryHandler handler;
-
-    public GetBusinessByIdQueryHandlerTests()
+    public class GetBusinessByIdQueryHandlerTests
     {
-        businessRepository = Substitute.For<IBusinessRepository>();
-        mapper = Substitute.For<IMapper>();
-        handler = new GetBusinessByIdQueryHandler(businessRepository, mapper);
-    }
+        private readonly IBusinessRepository businessRepository;
+        private readonly IMapper mapper;
+        private readonly GetBusinessByIdQueryHandler handler;
 
-    [Fact]
-    public async Task Handle_ShouldReturnBusinessDto_WhenBusinessExists()
-    {
-        // Arrange
-        var query = new GetBusinessByIdQuery { Id = Guid.NewGuid() };
-        var business = new Business
+        public GetBusinessByIdQueryHandlerTests()
         {
-            BusinessID = query.Id,
-            Name = "Test Business",
-            Description = "Test Description",
-            Address = "Test Address",
-            PhoneNumber = "1234567890",
-            UserBusinessId = Guid.NewGuid()
-        };
+            businessRepository = Substitute.For<IBusinessRepository>();
+            mapper = Substitute.For<IMapper>();
+            handler = new GetBusinessByIdQueryHandler(businessRepository, mapper);
+        }
 
-        var businessDto = new BusinessDto
+        [Fact]
+        public async Task Handle_ShouldReturnBusinessDto_WhenBusinessExists()
         {
-            Name = "Test Business",
-            Description = "Test Description",
-            Address = "Test Address",
-            PhoneNumber = "1234567890",
-            UserBusinessId = business.UserBusinessId
-        };
+            // Arrange
+            var query = new GetBusinessByIdQuery { Id = Guid.NewGuid() };
+            var business = new Business
+            {
+                BusinessID = query.Id,
+                Name = "Test Business",
+                Description = "Test Description",
+                Address = "Test Address",
+                PhoneNumber = "1234567890",
+                UserBusinessId = Guid.NewGuid()
+            };
 
-        businessRepository.GetByIdAsync(query.Id).Returns(business);
-        mapper.Map<BusinessDto>(business).Returns(businessDto);
+            var businessDto = new BusinessDto
+            {
+                Name = "Test Business",
+                Description = "Test Description",
+                Address = "Test Address",
+                PhoneNumber = "1234567890",
+                UserBusinessId = business.UserBusinessId
+            };
 
-        // Act
-        var result = await handler.Handle(query, CancellationToken.None);
+            businessRepository.GetByIdAsync(query.Id).Returns(business);
+            mapper.Map<BusinessDto>(business).Returns(businessDto);
 
-        // Assert
-        Assert.Equal(businessDto, result);
-    }
+            // Act
+            var result = await handler.Handle(query, CancellationToken.None);
 
-    [Fact]
-    public async Task Handle_ShouldReturnNull_WhenBusinessDoesNotExist()
-    {
-        // Arrange
-        var query = new GetBusinessByIdQuery { Id = Guid.NewGuid() };
-        businessRepository.GetByIdAsync(query.Id).Returns((Business)null);
+            // Assert
+            Assert.Equal(businessDto, result);
+        }
 
-        // Act
-        var result = await handler.Handle(query, CancellationToken.None);
+        [Fact]
+        public async Task Handle_ShouldReturnNull_WhenBusinessDoesNotExist()
+        {
+            // Arrange
+            var query = new GetBusinessByIdQuery { Id = Guid.NewGuid() };
+            businessRepository.GetByIdAsync(query.Id).Returns(Task.FromResult<Business>(null!)); ;
 
-        // Assert
-        Assert.Null(result);
+            // Act
+            var result = await handler.Handle(query, CancellationToken.None);
+
+            // Assert
+            Assert.Null(result);
+        }
     }
 }
+

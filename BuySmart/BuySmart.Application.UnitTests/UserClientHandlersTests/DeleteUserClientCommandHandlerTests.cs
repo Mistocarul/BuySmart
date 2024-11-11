@@ -1,70 +1,67 @@
 using Application.CommandHandlers.UserClientCommandHandlers;
-using Application.Commands;
 using Application.Commands.UserClientCommands;
-using AutoMapper;
 using Domain.Common;
 using Domain.Entities;
 using Domain.Repositories;
 using NSubstitute;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
 
-public class DeleteUserClientCommandHandlerTests
+namespace Application.UnitTests.UserClientHandlersTests
 {
-    private readonly IUserClientRepository _userClientRepository;
-    private readonly IMapper _mapper;
-    private readonly DeleteUserClientCommandHandler _handler;
-
-    public DeleteUserClientCommandHandlerTests()
+    public class DeleteUserClientCommandHandlerTests
     {
-        _userClientRepository = Substitute.For<IUserClientRepository>();
-        _mapper = Substitute.For<IMapper>();
-        _handler = new DeleteUserClientCommandHandler(_userClientRepository, _mapper);
-    }
+        private readonly IUserClientRepository _userClientRepository;
+        private readonly DeleteUserClientCommandHandler _handler;
 
-    [Fact]
-    public async Task Given_ValidDeleteUserClientCommand_When_HandleIsCalled_Then_ReturnsSuccessResult()
-    {
-        // Arrange
-        var command = new DeleteUserClientCommand
+        public DeleteUserClientCommandHandlerTests()
         {
-            UserId = new Guid("e23c48a1-222b-4530-bd7f-67f5c7a702af")
-        };
+            _userClientRepository = Substitute.For<IUserClientRepository>();
+            _handler = new DeleteUserClientCommandHandler(_userClientRepository);
+        }
 
-        var userClient = new UserClient();
-
-        _userClientRepository.GetByIdAsync(command.UserId).Returns(userClient);
-
-        // Act
-        var response = await _handler.Handle(command, CancellationToken.None);
-
-        // Assert
-        Assert.True(response.IsSuccess);
-        Assert.Null(response.Data);
-        _userClientRepository.Received(1).GetByIdAsync(command.UserId);
-        await _userClientRepository.Received(1).DeleteAsync(command.UserId);
-    }
-
-    [Fact]
-    public async Task Given_InvalidDeleteUserClientCommand_When_HandleIsCalled_Then_ReturnsFailureResult()
-    {
-        // Arrange
-        var command = new DeleteUserClientCommand
+        [Fact]
+        public async Task Given_ValidDeleteUserClientCommand_When_HandleIsCalled_Then_ReturnsSuccessResult()
         {
-            UserId = new Guid("e23c48a1-222b-4530-bd7f-67f5c7a702af")
-        };
+            // Arrange
+            var command = new DeleteUserClientCommand
+            {
+                UserId = new Guid("e23c48a1-222b-4530-bd7f-67f5c7a702af")
+            };
 
-        _userClientRepository.GetByIdAsync(command.UserId).Returns((UserClient)null);
+            var userClient = new UserClient();
 
-        // Act
-        var response = await _handler.Handle(command, CancellationToken.None);
+            _userClientRepository.GetByIdAsync(command.UserId).Returns(userClient);
 
-        // Assert
-        Assert.False(response.IsSuccess);
-        Assert.Equal("User not found", response.ErrorMessage);
-        _userClientRepository.Received(1).GetByIdAsync(command.UserId);
-        await _userClientRepository.DidNotReceive().DeleteAsync(command.UserId);
+            // Act
+            var response = await _handler.Handle(command, CancellationToken.None);
+
+            // Assert
+            Assert.True(response.IsSuccess);
+            Assert.IsType<object>(response.Data);
+            Assert.Empty(response.Data.GetType().GetProperties());
+            await _userClientRepository.Received(1).GetByIdAsync(command.UserId);
+            await _userClientRepository.Received(1).DeleteAsync(command.UserId);
+        }
+
+        [Fact]
+        public async Task Given_InvalidDeleteUserClientCommand_When_HandleIsCalled_Then_ReturnsFailureResult()
+        {
+            // Arrange
+            var command = new DeleteUserClientCommand
+            {
+                UserId = new Guid("e23c48a1-222b-4530-bd7f-67f5c7a702af")
+            };
+
+            _userClientRepository.GetByIdAsync(command.UserId).Returns(Task.FromResult<UserClient>(null!));
+
+            // Act
+            var response = await _handler.Handle(command, CancellationToken.None);
+
+            // Assert
+            Assert.False(response.IsSuccess);
+            Assert.Equal("User not found", response.ErrorMessage);
+            await _userClientRepository.Received(1).GetByIdAsync(command.UserId);
+            await _userClientRepository.DidNotReceive().DeleteAsync(command.UserId);
+        }
     }
+
 }

@@ -21,7 +21,7 @@ namespace Infrastructure.Repositories
             var category = await context.Categories.FindAsync(categoryId);
             if (category == null)
             {
-                throw new Exception("Category not found");
+                throw new KeyNotFoundException("Category not found");
             }
             return category;
         }
@@ -36,7 +36,7 @@ namespace Infrastructure.Repositories
             var existingCategory = await context.Categories.FindAsync(category.CategoryId);
             if (existingCategory == null)
             {
-                throw new Exception("Category not found");
+                throw new KeyNotFoundException("Category not found");
             }
             context.Entry(existingCategory).CurrentValues.SetValues(category);
             await context.SaveChangesAsync();
@@ -46,7 +46,7 @@ namespace Infrastructure.Repositories
             var category = await context.Categories.FindAsync(categoryId);
             if (category == null)
             {
-                throw new Exception("Category not found");
+                throw new KeyNotFoundException("Category not found");
             }
             context.Categories.Remove(category);
             await context.SaveChangesAsync();

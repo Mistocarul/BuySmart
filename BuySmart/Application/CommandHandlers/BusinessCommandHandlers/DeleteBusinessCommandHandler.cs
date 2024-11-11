@@ -9,12 +9,10 @@ namespace Application.CommandHandlers.BusinessCommandHandlers
     public class DeleteBusinessCommandHandler : IRequestHandler<DeleteBusinessCommand, Result<object>>
     {
         private readonly IBusinessRepository businessRepository;
-        private readonly IMapper mapper;
 
-        public DeleteBusinessCommandHandler(IBusinessRepository businessRepository, IMapper mapper)
+        public DeleteBusinessCommandHandler(IBusinessRepository businessRepository)
         {
             this.businessRepository = businessRepository;
-            this.mapper = mapper;
         }
         public async Task<Result<object>> Handle(DeleteBusinessCommand request, CancellationToken cancellationToken)
         {
@@ -25,7 +23,7 @@ namespace Application.CommandHandlers.BusinessCommandHandlers
             }
 
             await businessRepository.DeleteAsync(request.BusinessID);
-            return Result<object>.Success(null);
+            return Result<object>.Success(new object());
         }
     }
 }

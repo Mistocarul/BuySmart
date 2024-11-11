@@ -17,12 +17,12 @@ namespace Infrastructure.Repositories
             return await context.Products.ToListAsync();
         }
 
-        public async Task<Product> GetByIdAsync(Guid id)
+        public async Task<Product> GetByIdAsync(Guid productId)
         {
-            var product = await context.Products.FindAsync(id);
+            var product = await context.Products.FindAsync(productId);
             if (product == null)
             {
-                throw new Exception("Product not found");
+                throw new KeyNotFoundException("Product not found");
             }
             return product;
         }
@@ -39,18 +39,18 @@ namespace Infrastructure.Repositories
             var existingProduct = await context.Products.FindAsync(product.ProductId);
             if (existingProduct == null)
             {
-                throw new Exception("Product not found");
+                throw new KeyNotFoundException("Product not found");
             }
             context.Entry(existingProduct).CurrentValues.SetValues(product);
             await context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid productId)
         {
-            var product = await context.Products.FindAsync(id);
+            var product = await context.Products.FindAsync(productId);
             if (product == null)
             {
-                throw new Exception("Product not found");
+                throw new KeyNotFoundException("Product not found");
             }
             context.Products.Remove(product);
             await context.SaveChangesAsync();

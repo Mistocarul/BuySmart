@@ -36,3 +36,7 @@ artifacts/
 
 # Migrari
 /BuySmart/Infrastructure/Migrations
+/BuySmart/BuySmart.Application.UnitTests/TestResults
+/BuySmart/BuySmart.IntegrationTests/TestResults
+/BuySmart/coverage
+/BuySmart/.sonarqube

@@ -43,7 +43,7 @@ namespace BuySmart.Controllers
             {
                 return BadRequest();
             }
-            var result = await mediator.Send(command);
+            await mediator.Send(command);
             return NoContent();
 
         }
