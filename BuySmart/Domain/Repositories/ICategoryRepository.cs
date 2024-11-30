@@ -9,6 +9,7 @@ namespace Domain.Repositories
         Task<Guid> AddAsync(Category category);
         Task UpdateAsync(Category category);
         Task DeleteAsync(Guid categoryId);
+        Task<IEnumerable<Category>> GetByNamesAsync(List<string> names);
 
     }
 }

@@ -25,6 +25,13 @@ namespace Infrastructure.Repositories
             }
             return category;
         }
+
+        public async Task<IEnumerable<Category>> GetByNamesAsync(List<string> names)
+        {
+            return await context.Categories
+                .Where(c => names.Contains(c.Name))
+                .ToListAsync();
+        }
         public async Task<Guid> AddAsync(Category category)
         {
             await context.Categories.AddAsync(category);
