@@ -11,7 +11,7 @@ namespace Application.Commands.CategoryCommands
     {
         public DeleteCategoryCommandValidator()
         {
-            RuleFor(x => x.Id).NotEmpty();
+            RuleFor(x => x.CategoryId).NotEmpty();
         }
     }
 }

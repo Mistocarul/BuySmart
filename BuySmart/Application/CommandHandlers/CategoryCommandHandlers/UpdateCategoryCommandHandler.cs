@@ -20,7 +20,6 @@ namespace Application.CommandHandlers.CategoryCommandHandlers
         public async Task<Result<object>> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
             var category = mapper.Map<Domain.Entities.Category>(request);
-            Console.WriteLine("category id din mapare:", category.CategoryId);
             var result = await categoryRepository.UpdateAsync(category);
             if (result.IsSuccess)
             {

@@ -37,7 +37,7 @@ namespace BuySmart.Application.UnitTests.ReviewBusinessHandlersTests
                 new ReviewDto { ReviewId = reviews[1].ReviewId, UserClientId = reviews[1].UserClientId, Rating = reviews[1].Rating, Comment = reviews[1].Comment, BusinessId = reviews[1].BusinessId }
             };
 
-            repository.GetAllAsync().Returns(reviews);
+            repository.GetAllAsync(1, 10).Returns(reviews);
             mapper.Map<List<ReviewDto>>(reviews).Returns(reviewDtos);
 
             var query = new GetAllReviewBusinessesQuery();
@@ -58,7 +58,7 @@ namespace BuySmart.Application.UnitTests.ReviewBusinessHandlersTests
             var reviews = new List<Review>();
             var reviewDtos = new List<ReviewDto>();
 
-            repository.GetAllAsync().Returns(reviews);
+            repository.GetAllAsync(1, 10).Returns(reviews);
             mapper.Map<List<ReviewDto>>(reviews).Returns(reviewDtos);
 
             var query = new GetAllReviewBusinessesQuery();

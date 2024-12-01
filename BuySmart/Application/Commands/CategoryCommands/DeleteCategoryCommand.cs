@@ -10,6 +10,6 @@ namespace Application.Commands.CategoryCommands
 {
     public class DeleteCategoryCommand : IRequest<Result<Guid>>
     {
-        public Guid Id { get; set; }
+        public Guid CategoryId { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace Application.QueryHandlers.BusinessQueryHandlers
 
         public async Task<List<BusinessDto>> Handle(GetAllBusinessesQuery request, CancellationToken cancellationToken)
         {
-            var businesses = await businessRepository.GetAllAsync();
+            var businesses = await businessRepository.GetAllAsync(request.PageNumber, request.PageSize);
             return mapper.Map<List<BusinessDto>>(businesses);
         }
     }

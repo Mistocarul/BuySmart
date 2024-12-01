@@ -18,16 +18,17 @@ namespace BuySmart.Controllers
         }
 
         [HttpGet("GetAllCategories")]
-        public async Task<IActionResult> GetAllCategories()
+        public async Task<IActionResult> GetAllCategories([FromQuery] string? keyWord , int pageNumber = 1, int pageSize = 10)
         {
-            var categories = await mediator.Send(new GetAllCategoriesQuery());
+            var categories = await mediator.Send(new GetAllCategoriesQuery { PageNumber = pageNumber, PageSize = pageSize, keyWord = keyWord });
             return Ok(categories);
-        }
+    }
+       
 
         [HttpGet("GetCategoryById/{id}")]
         public async Task<ActionResult<CategoryDto>> GetCategoryById(Guid id)
         {
-            return await mediator.Send(new GetCategoryByIdQuery { Id = id });
+            return await mediator.Send(new GetCategoryByIdQuery { CategoryId = id });
         }
 
         [HttpPost("CreateCategory")]
@@ -44,7 +45,7 @@ namespace BuySmart.Controllers
         [HttpDelete("DeleteCategory/{id:guid}")]
         public async Task<ActionResult> DeleteCategoryById(Guid id)
         {
-            await mediator.Send(new DeleteCategoryCommand { Id = id });
+            await mediator.Send(new DeleteCategoryCommand { CategoryId = id });
             return NoContent();
         }
 

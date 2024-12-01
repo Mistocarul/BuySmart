@@ -13,9 +13,12 @@ namespace Infrastructure.Repositories
         {
             this.context = context;
         }
-        public async Task<IEnumerable<Category>> GetAllAsync()
+        public async Task<IEnumerable<Category>> GetAllAsync(int pageNumber, int pageSize)
         {
-            return await context.Categories.ToListAsync();
+            return await context.Categories
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
         }
         public async Task<Category> GetByIdAsync(Guid categoryId)
         {

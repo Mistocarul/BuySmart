@@ -10,6 +10,6 @@ namespace Application.Queries.CategoryQueries
 {
     public class GetCategoryByIdQuery : IRequest<CategoryDto>
     {
-        public Guid Id { get; set; }
+        public Guid CategoryId { get; set; }
     }
 }

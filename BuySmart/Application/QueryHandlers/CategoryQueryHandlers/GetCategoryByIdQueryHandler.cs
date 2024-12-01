@@ -19,7 +19,7 @@ namespace Application.QueryHandlers.CategoryQueryHandlers
 
         public async Task<CategoryDto> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
         {
-            var category = await categoryRepository.GetByIdAsync(request.Id);
+            var category = await categoryRepository.GetByIdAsync(request.CategoryId);
             return mapper.Map<CategoryDto>(category);
         }
     }
