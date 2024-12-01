@@ -1,6 +1,9 @@
 ﻿using Application.Commands.BusinessCommands;
 using Application.Commands.CartCommands;
+
 using Application.Commands.ProductCommands;
+using Application.Commands.CategoryCommands;
+
 using Application.Commands.ReviewBusinessCommands;
 using Application.Commands.UserBusinessCommands;
 using Application.Commands.UserClientCommands;
@@ -35,6 +38,10 @@ namespace Application.Utils
             CreateMap<Cart, CartDto>().ReverseMap();
             CreateMap<Product, ProductDto>().ReverseMap();
       
+
+            CreateMap<CreateCategoryCommand, Category>().ReverseMap();
+            CreateMap<UpdateCategoryCommand, Category>().ReverseMap();
+            CreateMap<Category, CategoryDto>().ReverseMap();
 
         }
     }

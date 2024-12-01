@@ -74,9 +74,14 @@ namespace Infrastructure.Repositories
                 return Result<object>.Failure(ex.Message);
             }
         }
-        public async Task<IEnumerable<Review>> GetAllAsync()
+        public async Task<IEnumerable<Review>> GetAllAsync(int pageNumber, int pageSize)
         {
-            return await context.Reviews.ToListAsync();
+            return await context.Reviews
+                .OrderBy(r => r.ReviewId)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+           
         }
         public async Task<Review> GetByIdAsync(Guid reviewId)
         {

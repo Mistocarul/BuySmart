@@ -3,7 +3,6 @@ using Application.Commands.BusinessCommands;
 using Domain.Entities;
 using Domain.Repositories;
 using NSubstitute;
-using Xunit;
 
 namespace Application.UnitTests.BusinessHandlersTests
 {

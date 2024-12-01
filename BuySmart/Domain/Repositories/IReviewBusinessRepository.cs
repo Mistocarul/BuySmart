@@ -5,7 +5,7 @@ namespace Domain.Repositories
 {
     public interface IReviewBusinessRepository
     {
-        Task<IEnumerable<Review>> GetAllAsync();
+        Task<IEnumerable<Review>> GetAllAsync(int pageNumber, int pageSize);
         Task<Review> GetByIdAsync(Guid reviewId);
         Task<Result<Guid>> AddAsync(Review review);
         Task<Result<object>> UpdateAsync(Review review);

@@ -2,6 +2,7 @@
 using Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Domain.Entities;
+using Domain.Common;
 
 namespace Infrastructure.Repositories
 {
@@ -12,19 +13,26 @@ namespace Infrastructure.Repositories
         {
             this.context = context;
         }
-        public async Task<IEnumerable<Category>> GetAllAsync()
+        public async Task<IEnumerable<Category>> GetAllAsync(int pageNumber, int pageSize)
         {
-            return await context.Categories.ToListAsync();
+            return await context.Categories
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
         }
         public async Task<Category> GetByIdAsync(Guid categoryId)
         {
+            Console.WriteLine($"Verificare ID categorie: {categoryId}");
             var category = await context.Categories.FindAsync(categoryId);
             if (category == null)
             {
+                Console.WriteLine("Categorie nu a fost găsită");
                 throw new KeyNotFoundException("Category not found");
             }
+            Console.WriteLine("Categorie găsită");
             return category;
         }
+
 
         public async Task<IEnumerable<Category>> GetByNamesAsync(List<string> names)
         {
@@ -32,21 +40,43 @@ namespace Infrastructure.Repositories
                 .Where(c => names.Contains(c.Name))
                 .ToListAsync();
         }
-        public async Task<Guid> AddAsync(Category category)
+       
+
+        public async Task<Result<Guid>> AddAsync(Category category)
+
         {
-            await context.Categories.AddAsync(category);
-            await context.SaveChangesAsync();
-            return category.CategoryId;
-        }
-        public async Task UpdateAsync(Category category)
-        {
-            var existingCategory = await context.Categories.FindAsync(category.CategoryId);
-            if (existingCategory == null)
+            try
             {
-                throw new KeyNotFoundException("Category not found");
+                await context.Categories.AddAsync(category);
+                await context.SaveChangesAsync();
+                return Result<Guid>.Success(category.CategoryId);
             }
-            context.Entry(existingCategory).CurrentValues.SetValues(category);
-            await context.SaveChangesAsync();
+            catch (Exception ex)
+            {
+                return Result<Guid>.Failure(ex.Message);
+            }
+        }
+        public async Task<Result<object>> UpdateAsync(Category category)
+        {
+          try
+            {
+                var existingCategory = await context.Categories.FindAsync(category.CategoryId);
+                Console.WriteLine($"Verificare ID categorie: {category.CategoryId}");
+                if (existingCategory == null)
+                {
+                    return Result<object>.Failure("Category not found");
+                }
+                existingCategory.Name = category.Name;
+                existingCategory.Description = category.Description;
+
+                context.Categories.Update(existingCategory);
+                await context.SaveChangesAsync();
+                return Result<object>.Success(new object());
+            }
+            catch (Exception ex)
+            {
+                return Result<object>.Failure(ex.Message);
+            }
         }
         public async Task DeleteAsync(Guid categoryId)
         {

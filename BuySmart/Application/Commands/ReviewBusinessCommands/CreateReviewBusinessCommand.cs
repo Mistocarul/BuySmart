@@ -9,5 +9,6 @@ namespace Application.Commands.ReviewBusinessCommands
         public Guid BusinessId { get; set; }
         public double Rating { get; set; } = 0;
         public string Comment { get; set; } = string.Empty;
+        
     }
 }
