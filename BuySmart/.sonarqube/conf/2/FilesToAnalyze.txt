@@ -1,0 +1,10 @@
+﻿D:\Repos\BuySmart\BuySmart\Infrastructure\DependecyInjection.cs
+D:\Repos\BuySmart\BuySmart\Infrastructure\Migrations\ApplicationDbContextModelSnapshot.cs
+D:\Repos\BuySmart\BuySmart\Infrastructure\Persistence\ApplicationDbContext.cs
+D:\Repos\BuySmart\BuySmart\Infrastructure\Repositories\BusinessRepository.cs
+D:\Repos\BuySmart\BuySmart\Infrastructure\Repositories\CartRepository.cs
+D:\Repos\BuySmart\BuySmart\Infrastructure\Repositories\CategoryRepository.cs
+D:\Repos\BuySmart\BuySmart\Infrastructure\Repositories\ProductRepository.cs
+D:\Repos\BuySmart\BuySmart\Infrastructure\Repositories\ReviewBusinessRepository.cs
+D:\Repos\BuySmart\BuySmart\Infrastructure\Repositories\UserBusinessRepository.cs
+D:\Repos\BuySmart\BuySmart\Infrastructure\Repositories\UserClientRepository.cs

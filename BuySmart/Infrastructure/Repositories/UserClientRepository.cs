@@ -15,9 +15,12 @@ namespace Infrastructure.Repositories
             this.context = context;
         }
 
-        public async Task<IEnumerable<UserClient>> GetAllAsync()
+        public async Task<IEnumerable<UserClient>> GetAllAsync(int pageNumber, int pageSize)
         {
-            return await context.UserClients.ToListAsync();
+            return await context.UserClients
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
         }
 
         public async Task<UserClient> GetByIdAsync(Guid userClientId)

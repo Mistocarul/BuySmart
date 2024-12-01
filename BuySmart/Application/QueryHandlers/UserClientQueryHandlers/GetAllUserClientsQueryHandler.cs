@@ -18,7 +18,7 @@ namespace Application.QueryHandlers.UserClientQueryHandlers
         }
         public async Task<List<UserClientDto>> Handle(GetAllUserClientsQuery request, CancellationToken cancellationToken)
         {
-            var userClients = await repository.GetAllAsync();
+            var userClients = await repository.GetAllAsync(request.pageNumber, request.pageSize);
             return mapper.Map<List<UserClientDto>>(userClients);
         }
     }

@@ -26,7 +26,7 @@ namespace BuySmart.Application.UnitTests.UserClientHandlersTests
         public async Task Given_ValidRequest_When_HandleIsCalled_Then_ReturnsListOfUserClientDtos()
         {
             // Arrange
-            var query = new GetAllUserClientsQuery();
+            var query = new GetAllUserClientsQuery { pageNumber = 1, pageSize = 10 };
 
             var userClients = new List<UserClient>
             {
@@ -80,7 +80,7 @@ namespace BuySmart.Application.UnitTests.UserClientHandlersTests
                 }
             };
 
-            _userClientRepository.GetAllAsync().Returns(userClients);
+            _userClientRepository.GetAllAsync(query.pageNumber, query.pageSize).Returns(userClients);
             _mapper.Map<List<UserClientDto>>(userClients).Returns(userClientDtos);
 
             // Act
@@ -89,7 +89,7 @@ namespace BuySmart.Application.UnitTests.UserClientHandlersTests
             // Assert
             Assert.NotNull(response);
             Assert.Equal(userClientDtos.Count, response.Count);
-            await _userClientRepository.Received(1).GetAllAsync();
+            await _userClientRepository.Received(1).GetAllAsync(query.pageNumber, query.pageSize);
             _mapper.Received(1).Map<List<UserClientDto>>(userClients);
         }
 
@@ -97,12 +97,12 @@ namespace BuySmart.Application.UnitTests.UserClientHandlersTests
         public async Task Given_EmptyUserClients_When_HandleIsCalled_Then_ReturnsEmptyList()
         {
             // Arrange
-            var query = new GetAllUserClientsQuery();
+            var query = new GetAllUserClientsQuery { pageNumber = 1, pageSize = 10 };
 
             var userClients = new List<UserClient>();
             var userClientDtos = new List<UserClientDto>();
 
-            _userClientRepository.GetAllAsync().Returns(userClients);
+            _userClientRepository.GetAllAsync(query.pageNumber, query.pageSize).Returns(userClients);
             _mapper.Map<List<UserClientDto>>(userClients).Returns(userClientDtos);
 
             // Act
@@ -111,7 +111,7 @@ namespace BuySmart.Application.UnitTests.UserClientHandlersTests
             // Assert
             Assert.NotNull(response);
             Assert.Empty(response);
-            await _userClientRepository.Received(1).GetAllAsync();
+            await _userClientRepository.Received(1).GetAllAsync(query.pageNumber, query.pageSize);
             _mapper.Received(1).Map<List<UserClientDto>>(userClients);
         }
     }

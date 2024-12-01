@@ -13,12 +13,10 @@ namespace Application.CommandHandlers.ProductCommandHandlers
 {
     public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand, Result<object>>
     {
-        private readonly IMapper mapper;
         private readonly IProductRepository repository;
         
-        public DeleteProductCommandHandler(IMapper mapper, IProductRepository repository)
+        public DeleteProductCommandHandler(IProductRepository repository)
         {
-            this.mapper = mapper;
             this.repository = repository;
         }
         public async Task<Result<object>> Handle(DeleteProductCommand request, CancellationToken cancellationToken)

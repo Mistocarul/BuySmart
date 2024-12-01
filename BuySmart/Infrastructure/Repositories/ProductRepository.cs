@@ -4,6 +4,7 @@ using Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Domain.Common;
 
+
 namespace Infrastructure.Repositories
 {
     public class ProductRepository : IProductRepository
@@ -13,11 +14,36 @@ namespace Infrastructure.Repositories
         {
             this.context = context;
         }
-        public async Task<IEnumerable<Product>> GetAllAsync()
+        public async Task<IEnumerable<Product>> GetAllAsync(int pageNumber, int pageSize, ProductOrder order)
         {
-            return await context.Products
+            if (order == ProductOrder.Asc)
+            {
+                return await context.Products
+                .OrderBy(p => p.Price)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .Include(p => p.Categories)
+                .ToListAsync();
+            }
+            else if (order == ProductOrder.Desc)
+            {
+                return await context.Products
+                .OrderByDescending(p => p.Price)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .Include(p => p.Categories)
+                .ToListAsync();
+            }
+            else 
+            {
+             return await context.Products
+            .OrderBy(p => p.ProductId)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .Include(p => p.Categories)
             .ToListAsync();
+            }
+            
         }
 
         public async Task<Product> GetByIdAsync(Guid productId)

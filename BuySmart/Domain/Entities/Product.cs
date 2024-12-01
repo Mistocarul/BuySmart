@@ -29,4 +29,11 @@
         //Product : Recommendation (1:N)
         public ICollection<Recommendation> Recommendations { get; set; } = new List<Recommendation>(); // 1 product has many recommendations
     }
+
+    public enum ProductOrder
+    {
+        Def,
+        Asc,
+        Desc
+    }
 }

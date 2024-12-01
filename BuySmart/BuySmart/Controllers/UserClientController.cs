@@ -18,9 +18,9 @@ namespace BuySmart.Controllers
             this.mediator = mediator;
         }
         [HttpGet("GetAllUserClients")]
-        public async Task<IActionResult> GetAllUsers()
+        public async Task<IActionResult> GetAllUsers(int pageNumber = 1, int pageSize = 10)
         {
-            var users = await mediator.Send(new GetAllUserClientsQuery());
+            var users = await mediator.Send(new GetAllUserClientsQuery { pageNumber = pageNumber, pageSize = pageSize});
             return Ok(users);
         }
 

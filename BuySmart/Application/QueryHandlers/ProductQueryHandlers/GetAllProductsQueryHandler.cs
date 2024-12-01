@@ -19,7 +19,7 @@ namespace Application.QueryHandlers.ProductQueryHandlers
 
         public async Task<List<ProductDto>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
-            var products = await productRepository.GetAllAsync();
+            var products = await productRepository.GetAllAsync(request.pageNumber, request.pageSize, request.order);
 
             if (!string.IsNullOrEmpty(request.Name))
             {

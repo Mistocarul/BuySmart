@@ -2,6 +2,7 @@
 using Application.DTOs;
 using Application.Queries.ProductQueries;
 using Domain.Common;
+using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,14 +19,17 @@ namespace BuySmart.Controllers
         }
 
         [HttpGet("GetAllProducts")]
-        public async Task<IActionResult> GetAllProducts([FromQuery] string? name, [FromQuery] Guid? categoryId, [FromQuery] decimal? minPrice, [FromQuery] decimal? maxPrice)
+        public async Task<IActionResult> GetAllProducts([FromQuery] string? name, [FromQuery] Guid? categoryId, [FromQuery] decimal? minPrice, [FromQuery] decimal? maxPrice, ProductOrder order, int pageNumber = 1, int pageSize = 10)
         {
             var query = new GetAllProductsQuery
             {
                 Name = name,
                 CategoryId = categoryId,
                 MinPrice = minPrice,
-                MaxPrice = maxPrice
+                MaxPrice = maxPrice,
+                pageNumber = pageNumber,
+                pageSize = pageSize,
+                order = order
             };
             var products = await mediator.Send(query);
             return Ok(products);

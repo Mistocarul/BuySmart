@@ -1,0 +1,12 @@
+k
+`D:\Repos\BuySmart\BuySmart\BuySmart\obj\Debug\net8.0\BuySmart.MvcApplicationPartsAssemblyInfo.csutf-8X
+MD:\Repos\BuySmart\BuySmart\BuySmart\obj\Debug\net8.0\BuySmart.AssemblyInfo.csutf-8n
+cD:\Repos\BuySmart\BuySmart\BuySmart\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.csutf-8Z
+OD:\Repos\BuySmart\BuySmart\BuySmart\obj\Debug\net8.0\BuySmart.GlobalUsings.g.csutf-87
+.D:\Repos\BuySmart\BuySmart\BuySmart\Program.csutf-8V
+MD:\Repos\BuySmart\BuySmart\BuySmart\Middleware\ExceptionHandlingMiddleware.csutf-8P
+GD:\Repos\BuySmart\BuySmart\BuySmart\Controllers\UserClientController.csutf-8R
+ID:\Repos\BuySmart\BuySmart\BuySmart\Controllers\UserBusinessController.csutf-8T
+KD:\Repos\BuySmart\BuySmart\BuySmart\Controllers\ReviewBusinessController.csutf-8M
+DD:\Repos\BuySmart\BuySmart\BuySmart\Controllers\ProductController.csutf-8N
+ED:\Repos\BuySmart\BuySmart\BuySmart\Controllers\BusinessController.csutf-8

@@ -32,7 +32,7 @@ namespace BuySmart.Middleware
             }
         }
 
-        private async Task HandleKeyNotFoundExceptionAsync(HttpContext httpContext, KeyNotFoundException ex)
+        private static async Task HandleKeyNotFoundExceptionAsync(HttpContext httpContext, KeyNotFoundException ex)
         {
             httpContext.Response.ContentType = "application/json";
             httpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;

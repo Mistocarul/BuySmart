@@ -39,9 +39,12 @@ namespace Infrastructure.Repositories
             await context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<UserBusiness>> GetAllAsync()
+        public async Task<IEnumerable<UserBusiness>> GetAllAsync(int pageNumber, int pageSize)
         {
-            return await context.UserBusinesses.ToListAsync();
+            return await context.UserBusinesses
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
         }
 
         public async Task<UserBusiness> GetByIdAsync(Guid userBusinessId)
