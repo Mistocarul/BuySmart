@@ -28,12 +28,12 @@ namespace Infrastructure.Repositories
 
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid userBusinessId)
         {
-            var userBusiness = await context.UserBusinesses.FindAsync(id);
+            var userBusiness = await context.UserBusinesses.FindAsync(userBusinessId);
             if (userBusiness == null)
             {
-                throw new Exception("UserClient not found");
+                throw new KeyNotFoundException("UserBusiness not found");
             }
             context.UserBusinesses.Remove(userBusiness);
             await context.SaveChangesAsync();
@@ -44,12 +44,12 @@ namespace Infrastructure.Repositories
             return await context.UserBusinesses.ToListAsync();
         }
 
-        public async Task<UserBusiness> GetByIdAsync(Guid id)
+        public async Task<UserBusiness> GetByIdAsync(Guid userBusinessId)
         {
-            var userBusiness = await context.UserBusinesses.FindAsync(id);
+            var userBusiness = await context.UserBusinesses.FindAsync(userBusinessId);
             if (userBusiness == null)
             {
-                throw new Exception("UserBusiness not found");
+                throw new KeyNotFoundException("UserBusiness not found");
             }
             return userBusiness;
         }
@@ -73,7 +73,7 @@ namespace Infrastructure.Repositories
 
                 context.UserBusinesses.Update(existingUserBusiness);
                 await context.SaveChangesAsync();
-                return Result<object>.Success(null);
+                return Result<object>.Success(new object());
             }
             catch (Exception ex)
             {

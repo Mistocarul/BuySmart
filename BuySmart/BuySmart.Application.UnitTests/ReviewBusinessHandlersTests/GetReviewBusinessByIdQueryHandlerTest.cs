@@ -60,7 +60,7 @@ namespace BuySmart.Application.UnitTests.ReviewBusinessHandlersTests
         {
             // Arrange
             var query = new GetReviewBusinessByIdQuery { Id = Guid.NewGuid() };
-            reviewBusinessRepository.GetByIdAsync(query.Id).Returns((Review)null);
+            reviewBusinessRepository.GetByIdAsync(query.Id).Returns(Task.FromResult<Review>(null!));
 
             // Act
             var result = await handler.Handle(query, CancellationToken.None);

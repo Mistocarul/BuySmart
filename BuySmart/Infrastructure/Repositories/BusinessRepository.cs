@@ -25,7 +25,7 @@ namespace Infrastructure.Repositories
             var business = await context.Businesses.FindAsync(businessId);
             if (business == null)
             {
-                throw new Exception("Business not found");
+                throw new KeyNotFoundException("Business not found");
             }
             return business;
         }
@@ -70,7 +70,7 @@ namespace Infrastructure.Repositories
 
                 context.Businesses.Update(existingBusiness);
                 await context.SaveChangesAsync();
-                return Result<object>.Success(null);
+                return Result<object>.Success(new object());
             }
             catch (Exception ex)
             {
@@ -83,7 +83,7 @@ namespace Infrastructure.Repositories
             var business = await context.Businesses.FindAsync(businessId);
             if (business == null)
             {
-                throw new Exception("Business not found");
+                throw new KeyNotFoundException("Business not found");
             }
 
             context.Businesses.Remove(business);

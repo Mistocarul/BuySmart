@@ -1,47 +1,63 @@
 using System.Net;
 using System.Text.Json;
 
-public class ExceptionHandlingMiddleware
+namespace BuySmart.Middleware
 {
-    private readonly RequestDelegate _next;
-
-    public ExceptionHandlingMiddleware(RequestDelegate next)
+    public class ExceptionHandlingMiddleware
     {
-        _next = next;
-    }
+        private readonly RequestDelegate _next;
 
-    public async Task InvokeAsync(HttpContext httpContext)
-    {
-        try
+        public ExceptionHandlingMiddleware(RequestDelegate next)
         {
-            await _next(httpContext);
+            _next = next;
         }
-        catch (FluentValidation.ValidationException ex)
+
+        public async Task InvokeAsync(HttpContext httpContext)
         {
-            await HandleValidationExceptionAsync(httpContext, ex);
+            try
+            {
+                await _next(httpContext);
+            }
+            catch (FluentValidation.ValidationException ex)
+            {
+                await HandleValidationExceptionAsync(httpContext, ex);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                await HandleKeyNotFoundExceptionAsync(httpContext, ex);
+            }
+            catch (Exception ex)
+            {
+                await HandleExceptionAsync(httpContext, ex);
+            }
         }
-        catch (Exception ex)
+
+        private async Task HandleKeyNotFoundExceptionAsync(HttpContext httpContext, KeyNotFoundException ex)
         {
-            await HandleExceptionAsync(httpContext, ex);
+            httpContext.Response.ContentType = "application/json";
+            httpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
+
+            await httpContext.Response.WriteAsync(JsonSerializer.Serialize(new { error = ex.Message }));
         }
-    }
 
-    private static Task HandleValidationExceptionAsync(HttpContext context, FluentValidation.ValidationException exception)
-    {
-        context.Response.ContentType = "application/json";
-        context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+        private static Task HandleValidationExceptionAsync(HttpContext context, FluentValidation.ValidationException exception)
+        {
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
-        var errors = exception.Errors.Select(e => new { e.PropertyName, e.ErrorMessage });
+            var errors = exception.Errors.Select(e => new { e.PropertyName, e.ErrorMessage });
 
-        // Replace the line causing the error
-        return context.Response.WriteAsync(JsonSerializer.Serialize(new { errors }));
-    }
+            // Replace the line causing the error
+            return context.Response.WriteAsync(JsonSerializer.Serialize(new { errors }));
+        }
 
-    private static Task HandleExceptionAsync(HttpContext context, Exception exception)
-    {
-        context.Response.ContentType = "application/json";
-        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        private static Task HandleExceptionAsync(HttpContext context, Exception exception)
+        {
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-        return context.Response.WriteAsync(JsonSerializer.Serialize(new { error = exception.Message }));
+            return context.Response.WriteAsync(JsonSerializer.Serialize(new { error = exception.Message }));
+        }
     }
 }
+

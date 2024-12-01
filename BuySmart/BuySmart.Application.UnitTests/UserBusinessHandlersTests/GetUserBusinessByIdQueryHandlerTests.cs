@@ -1,5 +1,4 @@
 using Application.DTOs;
-using Application.Queries;
 using Application.Queries.UserBusinessQueries;
 using Application.QueryHandlers.UserBusinessQueryHandlers;
 using AutoMapper;
@@ -7,51 +6,55 @@ using Domain.Entities;
 using Domain.Repositories;
 using NSubstitute;
 
-public class GetUserBusinessByIdQueryHandlerTests
+namespace BuySmart.Application.UnitTests.UserBusinessHandlersTests
 {
-    private readonly IUserBusinessRepository _userBusinessRepository;
-    private readonly IMapper _mapper;
-    private readonly GetUserBusinessByIdQueryHandler _handler;
-
-    public GetUserBusinessByIdQueryHandlerTests()
+    public class GetUserBusinessByIdQueryHandlerTests
     {
-        _userBusinessRepository = Substitute.For<IUserBusinessRepository>();
-        _mapper = Substitute.For<IMapper>();
-        _handler = new GetUserBusinessByIdQueryHandler(_userBusinessRepository, _mapper);
-    }
+        private readonly IUserBusinessRepository _userBusinessRepository;
+        private readonly IMapper _mapper;
+        private readonly GetUserBusinessByIdQueryHandler _handler;
 
-    [Fact]
-    public async Task Handle_UserBusinessExists_ReturnsUserBusinessDto()
-    {
-        // Arrange
-        var userId = Guid.NewGuid();
-        var query = new GetUserBusinessByIdQuery { Id = userId };
-        var userBusiness = new UserBusiness { UserId = userId, Name = "Business", Email = "business@example.com", UserType = UserType.Business, Image = "image.png" };
-        var userBusinessDto = new UserBusinessDto { UserId = userId, Name = "Business", Email = "business@example.com", UserType = UserType.Business, Image = "image.png" };
+        public GetUserBusinessByIdQueryHandlerTests()
+        {
+            _userBusinessRepository = Substitute.For<IUserBusinessRepository>();
+            _mapper = Substitute.For<IMapper>();
+            _handler = new GetUserBusinessByIdQueryHandler(_userBusinessRepository, _mapper);
+        }
 
-        _userBusinessRepository.GetByIdAsync(userId).Returns(userBusiness);
-        _mapper.Map<UserBusinessDto>(userBusiness).Returns(userBusinessDto);
+        [Fact]
+        public async Task Handle_UserBusinessExists_ReturnsUserBusinessDto()
+        {
+            // Arrange
+            var userId = Guid.NewGuid();
+            var query = new GetUserBusinessByIdQuery { Id = userId };
+            var userBusiness = new UserBusiness { UserId = userId, Name = "Business", Email = "business@example.com", UserType = UserType.Business, Image = "image.png" };
+            var userBusinessDto = new UserBusinessDto { UserId = userId, Name = "Business", Email = "business@example.com", UserType = UserType.Business, Image = "image.png" };
 
-        // Act
-        var result = await _handler.Handle(query, CancellationToken.None);
+            _userBusinessRepository.GetByIdAsync(userId).Returns(userBusiness);
+            _mapper.Map<UserBusinessDto>(userBusiness).Returns(userBusinessDto);
 
-        // Assert
-        Assert.Equal(userBusinessDto, result);
-    }
+            // Act
+            var result = await _handler.Handle(query, CancellationToken.None);
 
-    [Fact]
-    public async Task Handle_UserBusinessDoesNotExist_ReturnsNull()
-    {
-        // Arrange
-        var userId = Guid.NewGuid();
-        var query = new GetUserBusinessByIdQuery { Id = userId };
+            // Assert
+            Assert.Equal(userBusinessDto, result);
+        }
 
-        _userBusinessRepository.GetByIdAsync(userId).Returns((UserBusiness)null);
+        [Fact]
+        public async Task Handle_UserBusinessDoesNotExist_ReturnsNull()
+        {
+            // Arrange
+            var userId = Guid.NewGuid();
+            var query = new GetUserBusinessByIdQuery { Id = userId };
 
-        // Act
-        var result = await _handler.Handle(query, CancellationToken.None);
+            _userBusinessRepository.GetByIdAsync(userId).Returns(Task.FromResult<UserBusiness>(null!));
 
-        // Assert
-        Assert.Null(result);
+            // Act
+            var result = await _handler.Handle(query, CancellationToken.None);
+
+            // Assert
+            Assert.Null(result);
+        }
     }
 }
+

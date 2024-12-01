@@ -1,5 +1,4 @@
 using Application.CommandHandlers.BusinessCommandHandlers;
-using Application.Commands;
 using Application.Commands.BusinessCommands;
 using AutoMapper;
 using Domain.Common;
@@ -7,84 +6,87 @@ using Domain.Entities;
 using Domain.Repositories;
 using NSubstitute;
 
-public class CreateBusinessCommandHandlerTests
+namespace Application.UnitTests.BusinessHandlersTests
 {
-    private readonly IBusinessRepository businessRepository;
-    private readonly IMapper mapper;
-    private readonly CreateBusinessCommandHandler handler;
-
-    public CreateBusinessCommandHandlerTests()
+    public class CreateBusinessCommandHandlerTests
     {
-        businessRepository = Substitute.For<IBusinessRepository>();
-        mapper = Substitute.For<IMapper>();
-        handler = new CreateBusinessCommandHandler(businessRepository, mapper);
-    }
+        private readonly IBusinessRepository businessRepository;
+        private readonly IMapper mapper;
+        private readonly CreateBusinessCommandHandler handler;
 
-    [Fact]
-    public async Task Handle_ShouldReturnSuccessResult_WhenBusinessIsCreated()
-    {
-        // Arrange
-        var command = new CreateBusinessCommand
+        public CreateBusinessCommandHandlerTests()
         {
-            Name = "Test Business",
-            Description = "Test Description",
-            Address = "Test Address",
-            PhoneNumber = "1234567890",
-            UserBusinessId = Guid.NewGuid()
-        };
+            businessRepository = Substitute.For<IBusinessRepository>();
+            mapper = Substitute.For<IMapper>();
+            handler = new CreateBusinessCommandHandler(businessRepository, mapper);
+        }
 
-        var business = new Business
+        [Fact]
+        public async Task Handle_ShouldReturnSuccessResult_WhenBusinessIsCreated()
         {
-            BusinessID = Guid.NewGuid(),
-            Name = command.Name,
-            Description = command.Description,
-            Address = command.Address,
-            PhoneNumber = command.PhoneNumber,
-            UserBusinessId = command.UserBusinessId
-        };
+            // Arrange
+            var command = new CreateBusinessCommand
+            {
+                Name = "Test Business",
+                Description = "Test Description",
+                Address = "Test Address",
+                PhoneNumber = "1234567890",
+                UserBusinessId = Guid.NewGuid()
+            };
 
-        mapper.Map<Business>(command).Returns(business);
-        businessRepository.AddAsync(business).Returns(Result<Guid>.Success(business.BusinessID));
+            var business = new Business
+            {
+                BusinessID = Guid.NewGuid(),
+                Name = command.Name,
+                Description = command.Description,
+                Address = command.Address,
+                PhoneNumber = command.PhoneNumber,
+                UserBusinessId = command.UserBusinessId
+            };
 
-        // Act
-        var result = await handler.Handle(command, CancellationToken.None);
+            mapper.Map<Business>(command).Returns(business);
+            businessRepository.AddAsync(business).Returns(Result<Guid>.Success(business.BusinessID));
 
-        // Assert
-        Assert.True(result.IsSuccess);
-        Assert.Equal(business.BusinessID, result.Data);
-    }
+            // Act
+            var result = await handler.Handle(command, CancellationToken.None);
 
-    [Fact]
-    public async Task Handle_ShouldReturnFailureResult_WhenBusinessCreationFails()
-    {
-        // Arrange
-        var command = new CreateBusinessCommand
+            // Assert
+            Assert.True(result.IsSuccess);
+            Assert.Equal(business.BusinessID, result.Data);
+        }
+
+        [Fact]
+        public async Task Handle_ShouldReturnFailureResult_WhenBusinessCreationFails()
         {
-            Name = "Test Business",
-            Description = "Test Description",
-            Address = "Test Address",
-            PhoneNumber = "1234567890",
-            UserBusinessId = Guid.NewGuid()
-        };
+            // Arrange
+            var command = new CreateBusinessCommand
+            {
+                Name = "Test Business",
+                Description = "Test Description",
+                Address = "Test Address",
+                PhoneNumber = "1234567890",
+                UserBusinessId = Guid.NewGuid()
+            };
 
-        var business = new Business
-        {
-            BusinessID = Guid.NewGuid(),
-            Name = command.Name,
-            Description = command.Description,
-            Address = command.Address,
-            PhoneNumber = command.PhoneNumber,
-            UserBusinessId = command.UserBusinessId
-        };
+            var business = new Business
+            {
+                BusinessID = Guid.NewGuid(),
+                Name = command.Name,
+                Description = command.Description,
+                Address = command.Address,
+                PhoneNumber = command.PhoneNumber,
+                UserBusinessId = command.UserBusinessId
+            };
 
-        mapper.Map<Business>(command).Returns(business);
-        businessRepository.AddAsync(business).Returns(Result<Guid>.Failure("Error creating business"));
+            mapper.Map<Business>(command).Returns(business);
+            businessRepository.AddAsync(business).Returns(Result<Guid>.Failure("Error creating business"));
 
-        // Act
-        var result = await handler.Handle(command, CancellationToken.None);
+            // Act
+            var result = await handler.Handle(command, CancellationToken.None);
 
-        // Assert
-        Assert.False(result.IsSuccess);
-        Assert.Equal("Error creating business", result.ErrorMessage);
+            // Assert
+            Assert.False(result.IsSuccess);
+            Assert.Equal("Error creating business", result.ErrorMessage);
+        }
     }
 }

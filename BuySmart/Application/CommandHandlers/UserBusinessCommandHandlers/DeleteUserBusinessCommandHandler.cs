@@ -9,11 +9,9 @@ namespace Application.CommandHandlers.UserBusinessCommandHandlers
     public class DeleteUserBusinessCommandHandler : IRequestHandler<DeleteUserBusinessCommand, Result<object>>
     {
         private readonly IUserBusinessRepository userBusinessRepository;
-        private readonly IMapper mapper;
-        public DeleteUserBusinessCommandHandler(IUserBusinessRepository userBusinessRepository, IMapper mapper)
+        public DeleteUserBusinessCommandHandler(IUserBusinessRepository userBusinessRepository)
         {
             this.userBusinessRepository = userBusinessRepository;
-            this.mapper = mapper;
         }
         public async Task<Result<object>> Handle(DeleteUserBusinessCommand request, CancellationToken cancellationToken)
         {
@@ -23,7 +21,7 @@ namespace Application.CommandHandlers.UserBusinessCommandHandlers
                 return Result<object>.Failure("User not found");
             }
             await userBusinessRepository.DeleteAsync(request.UserId);
-            return Result<object>.Success(null);
+            return Result<object>.Success(new object());
         }
     }
 }

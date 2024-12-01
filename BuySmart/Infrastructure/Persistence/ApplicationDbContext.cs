@@ -5,6 +5,7 @@ namespace Infrastructure.Persistence
 {
     public class ApplicationDbContext : DbContext
     {
+        private const string UuidGenerateV4 = "uuid_generate_v4()";
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
@@ -39,7 +40,7 @@ namespace Infrastructure.Persistence
                 entity.HasBaseType<User>();
                 entity.Property(e => e.UserId)
                     .HasColumnType("uuid")
-                    .HasDefaultValueSql("uuid_generate_v4()")
+                    .HasDefaultValueSql(UuidGenerateV4)
                     .ValueGeneratedOnAdd();
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -106,7 +107,7 @@ namespace Infrastructure.Persistence
                 entity.HasBaseType<User>();
                 entity.Property(e => e.UserId)
                     .HasColumnType("uuid")
-                    .HasDefaultValueSql("uuid_generate_v4()")
+                    .HasDefaultValueSql(UuidGenerateV4)
                     .ValueGeneratedOnAdd();
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -159,7 +160,7 @@ namespace Infrastructure.Persistence
                 entity.HasKey(e => e.ProductId);
                 entity.Property(e => e.ProductId)
                     .HasColumnType("uuid")
-                    .HasDefaultValueSql("uuid_generate_v4()")
+                    .HasDefaultValueSql(UuidGenerateV4)
                     .ValueGeneratedOnAdd();
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -213,7 +214,7 @@ namespace Infrastructure.Persistence
                 entity.HasKey(e => e.CategoryId);
                 entity.Property(e => e.CategoryId)
                     .HasColumnType("uuid")
-                    .HasDefaultValueSql("uuid_generate_v4()")
+                    .HasDefaultValueSql(UuidGenerateV4)
                     .ValueGeneratedOnAdd();
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -231,7 +232,7 @@ namespace Infrastructure.Persistence
 
                 entity.Property(e => e.OrderId)
                     .HasColumnType("uuid")
-                    .HasDefaultValueSql("uuid_generate_v4()")
+                    .HasDefaultValueSql(UuidGenerateV4)
                     .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.OrderStatus)
@@ -268,7 +269,7 @@ namespace Infrastructure.Persistence
                 entity.HasKey(e => e.CartId);
                 entity.Property(e => e.CartId)
                     .HasColumnType("uuid")
-                    .HasDefaultValueSql("uuid_generate_v4()")
+                    .HasDefaultValueSql(UuidGenerateV4)
                     .ValueGeneratedOnAdd();
                 
                 entity.HasMany(e => e.OrderItems)
@@ -284,7 +285,7 @@ namespace Infrastructure.Persistence
                 entity.HasKey(e => e.HistoryId);
                 entity.Property(e => e.HistoryId)
                     .HasColumnType("uuid")
-                    .HasDefaultValueSql("uuid_generate_v4()")
+                    .HasDefaultValueSql(UuidGenerateV4)
                     .ValueGeneratedOnAdd();
                 entity.Property(e => e.AccesDate)
                     .IsRequired();
@@ -296,7 +297,7 @@ namespace Infrastructure.Persistence
                 entity.HasKey(e => e.OrderItemId);
                 entity.Property(e => e.OrderItemId)
                     .HasColumnType("uuid")
-                    .HasDefaultValueSql("uuid_generate_v4()")
+                    .HasDefaultValueSql(UuidGenerateV4)
                     .ValueGeneratedOnAdd();
                 entity.Property(e => e.Quantity)
                     .IsRequired();
@@ -311,7 +312,7 @@ namespace Infrastructure.Persistence
                 entity.HasKey(e => e.RecommendationId);
                 entity.Property(e => e.RecommendationId)
                     .HasColumnType("uuid")
-                    .HasDefaultValueSql("uuid_generate_v4()")
+                    .HasDefaultValueSql(UuidGenerateV4)
                     .ValueGeneratedOnAdd();
                 entity.Property(e => e.RecommendationDate)
                     .IsRequired();
@@ -325,7 +326,7 @@ namespace Infrastructure.Persistence
                 entity.HasKey(e => e.ReviewId);
                 entity.Property(e => e.ReviewId)
                     .HasColumnType("uuid")
-                    .HasDefaultValueSql("uuid_generate_v4()")
+                    .HasDefaultValueSql(UuidGenerateV4)
                     .ValueGeneratedOnAdd();
                 entity.Property(e => e.ReviewDate)
                     .IsRequired();

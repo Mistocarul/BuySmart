@@ -20,12 +20,12 @@ namespace Infrastructure.Repositories
             return await context.UserClients.ToListAsync();
         }
 
-        public async Task<UserClient> GetByIdAsync(Guid id)
+        public async Task<UserClient> GetByIdAsync(Guid userClientId)
         {
-            var userClient = await context.UserClients.FindAsync(id);
+            var userClient = await context.UserClients.FindAsync(userClientId);
             if (userClient == null)
             {
-                throw new Exception("UserClient not found");
+                throw new KeyNotFoundException("UserClient not found");
             }
             return userClient;
         }
@@ -63,7 +63,7 @@ namespace Infrastructure.Repositories
 
                 context.UserClients.Update(existingUserClient);
                 await context.SaveChangesAsync();
-                return Result<object>.Success(null);
+                return Result<object>.Success(new object());
             }
             catch (Exception ex)
             {
@@ -71,12 +71,12 @@ namespace Infrastructure.Repositories
             }
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid userClientId)
         {
-            var userClient = await context.UserClients.FindAsync(id);
+            var userClient = await context.UserClients.FindAsync(userClientId);
             if (userClient == null)
             {
-                throw new Exception("UserClient not found");
+                throw new KeyNotFoundException("UserClient not found");
             }
             context.UserClients.Remove(userClient);
             await context.SaveChangesAsync();

@@ -1,4 +1,5 @@
 using Application;
+using BuySmart.Middleware;
 using Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+await app.RunAsync();
 
-public partial class Program { }
+public static partial class Program { }
