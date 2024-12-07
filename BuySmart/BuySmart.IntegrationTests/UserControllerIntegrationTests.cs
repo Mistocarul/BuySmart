@@ -1,5 +1,3 @@
-using Xunit;
-
 namespace BuySmart.IntegrationTests
 {
     public class UserControllerIntegrationTests

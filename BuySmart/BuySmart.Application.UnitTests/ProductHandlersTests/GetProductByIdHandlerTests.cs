@@ -1,6 +1,3 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Application.DTOs;
 using Application.QueryHandlers.ProductQueryHandlers;
 using Application.Queries.ProductQueries;
@@ -8,7 +5,6 @@ using AutoMapper;
 using Domain.Entities;
 using Domain.Repositories;
 using NSubstitute;
-using Xunit;
 
 namespace Application.UnitTests.ProductHandlersTests
 {

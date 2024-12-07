@@ -8,6 +8,7 @@
         public decimal Price { get; set; }
         public double Stock { get; set; }
         public double Rating { get; set; }
+        public ICollection<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
 
     }
 }

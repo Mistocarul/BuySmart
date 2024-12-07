@@ -3,7 +3,6 @@ using Application.Commands.CategoryCommands;
 using Domain.Entities;
 using Domain.Repositories;
 using NSubstitute;
-using Xunit;
 
 namespace BuySmart.Application.UnitTests.CategoryHandlersTests
 {

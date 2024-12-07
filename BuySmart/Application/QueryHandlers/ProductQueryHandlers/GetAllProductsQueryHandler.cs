@@ -40,7 +40,15 @@ namespace Application.QueryHandlers.ProductQueryHandlers
                 products = products.Where(p => p.Price <= request.MaxPrice.Value).ToList();
             }
 
-            return mapper.Map<List<ProductDto>>(products);
+            List<ProductDto> productsDto = new List<ProductDto>();
+            foreach (var product in products)
+            {
+                var categoryDtos = mapper.Map<List<CategoryDto>>(product.Categories);
+                var productDto = mapper.Map<ProductDto>(product);
+                productDto.Categories = categoryDtos;
+                productsDto.Add(productDto);
+            }
+            return productsDto;
         }
     }
 }

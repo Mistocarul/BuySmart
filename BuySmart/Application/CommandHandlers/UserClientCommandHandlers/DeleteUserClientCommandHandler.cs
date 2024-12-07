@@ -1,5 +1,4 @@
 using Application.Commands.UserClientCommands;
-using AutoMapper;
 using Domain.Common;
 using Domain.Repositories;
 using MediatR;

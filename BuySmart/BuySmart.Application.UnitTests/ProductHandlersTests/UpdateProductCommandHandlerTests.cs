@@ -1,6 +1,3 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Application.CommandHandlers.ProductCommandHandlers;
 using Application.Commands.ProductCommands;
 using AutoMapper;
@@ -8,7 +5,6 @@ using Domain.Common;
 using Domain.Entities;
 using Domain.Repositories;
 using NSubstitute;
-using Xunit;
 
 namespace Application.UnitTests.ProductHandlersTests
 {

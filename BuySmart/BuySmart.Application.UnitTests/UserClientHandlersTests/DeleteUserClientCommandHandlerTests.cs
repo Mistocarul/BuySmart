@@ -1,6 +1,5 @@
 using Application.CommandHandlers.UserClientCommandHandlers;
 using Application.Commands.UserClientCommands;
-using Domain.Common;
 using Domain.Entities;
 using Domain.Repositories;
 using NSubstitute;
