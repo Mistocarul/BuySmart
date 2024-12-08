@@ -2,9 +2,9 @@
 
 namespace Domain.Repositories
 {
-    public interface IUserAuthRepository<T> where T : User
+    public interface IUserAuthRepository<User>
     {
-        Task<Guid> Register(T user, CancellationToken cancellationToken);
-        Task<string> Login(T user);
+        Task<Guid> Register(User user, CancellationToken cancellationToken);
+        Task<string> Login(User user);
     }
 }
