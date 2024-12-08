@@ -5,7 +5,7 @@ namespace Domain.Repositories
 {
     public interface IUserRepository<T> where T : User
     {
-        Task<IEnumerable<T>> GetAllAsync();
+        Task<IEnumerable<T>> GetAllAsync(int pageNumber, int pageSize);
         Task<T> GetByIdAsync(Guid userId);
         Task<Result<Guid>> AddAsync(T user);
         Task<Result<object>> UpdateAsync(T user);
