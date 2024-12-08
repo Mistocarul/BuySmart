@@ -19,7 +19,7 @@ namespace Identity
 
 
             // Add Authentication
-            var key = Encoding.ASCII.GetBytes("YourSecretKeyHere");
+            var key = Encoding.ASCII.GetBytes("My Secret Key For Identity Module");
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

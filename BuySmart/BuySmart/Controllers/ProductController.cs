@@ -4,6 +4,7 @@ using Application.Queries.ProductQueries;
 using Domain.Common;
 using Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuySmart.Controllers
@@ -18,6 +19,7 @@ namespace BuySmart.Controllers
             this.mediator = mediator;
         }
 
+        [Authorize]
         [HttpGet("GetAllProducts")]
         public async Task<IActionResult> GetAllProducts([FromQuery] string? name, [FromQuery] Guid? categoryId, [FromQuery] decimal? minPrice, [FromQuery] decimal? maxPrice, ProductOrder order, int pageNumber = 1, int pageSize = 10)
         {
@@ -41,6 +43,7 @@ namespace BuySmart.Controllers
             return await mediator.Send(new GetProductByIdQuery { ProductId = id });
         }
 
+        [Authorize(Roles = "Business")]
         [HttpPost("CreateProduct")]
         public async Task<ActionResult<Result<Guid>>> CreateProduct([FromBody] CreateProductCommand command)
         {

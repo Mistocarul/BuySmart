@@ -2,7 +2,7 @@
 
 namespace Application.Commands.ProductCommands
 {
-    internal class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
+    public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
     {
         public CreateProductCommandValidator()
         {
