@@ -5,19 +5,18 @@ using AutoMapper;
 using Domain.Entities;
 using Domain.Repositories;
 using NSubstitute;
-using Xunit;
 
 namespace BuySmart.Application.UnitTests.UserClientHandlersTests
 {
     public class GetAllUserClientsQueryHandlerTests
     {
-        private readonly IUserClientRepository _userClientRepository;
+        private readonly IUserRepository<UserClient> _userClientRepository;
         private readonly IMapper _mapper;
         private readonly GetAllUserClientsQueryHandler _handler;
 
         public GetAllUserClientsQueryHandlerTests()
         {
-            _userClientRepository = Substitute.For<IUserClientRepository>();
+            _userClientRepository = Substitute.For<IUserRepository<UserClient>>();
             _mapper = Substitute.For<IMapper>();
             _handler = new GetAllUserClientsQueryHandler(_userClientRepository, _mapper);
         }

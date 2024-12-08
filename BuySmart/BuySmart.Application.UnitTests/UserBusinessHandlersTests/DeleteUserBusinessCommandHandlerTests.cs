@@ -3,18 +3,17 @@ using Application.Commands.UserBusinessCommands;
 using Domain.Entities;
 using Domain.Repositories;
 using NSubstitute;
-using Xunit;
 
 namespace Application.UnitTests.UserBusinessHandlersTests
 {
     public class DeleteUserBusinessCommandHandlerTests
     {
-        private readonly IUserBusinessRepository _userBusinessRepository;
+        private readonly IUserRepository<UserBusiness> _userBusinessRepository;
         private readonly DeleteUserBusinessCommandHandler _handler;
 
         public DeleteUserBusinessCommandHandlerTests()
         {
-            _userBusinessRepository = Substitute.For<IUserBusinessRepository>();
+            _userBusinessRepository = Substitute.For<IUserRepository<UserBusiness>>();
             _handler = new DeleteUserBusinessCommandHandler(_userBusinessRepository);
         }
 

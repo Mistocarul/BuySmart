@@ -9,19 +9,19 @@ namespace Application.CommandHandlers.UserClientCommandHandlers
 {
     public class CreateUserClientCommandHandler : IRequestHandler<CreateUserClientCommand, Result<Guid>>
     {
-        private readonly IUserClientRepository userClientRepository;
+        private readonly IUserRepository<UserClient> userRepository;
         private readonly IMapper mapper;
 
-        public CreateUserClientCommandHandler(IUserClientRepository userClientRepository, IMapper mapper)
+        public CreateUserClientCommandHandler(IUserRepository<UserClient> userRepository, IMapper mapper)
         {
-            this.userClientRepository = userClientRepository;
+            this.userRepository = userRepository;
             this.mapper = mapper;
         }
 
         public async Task<Result<Guid>> Handle(CreateUserClientCommand request, CancellationToken cancellationToken)
         {
             var userClient = mapper.Map<UserClient>(request);
-            var result = await userClientRepository.AddAsync(userClient);
+            var result = await userRepository.AddAsync(userClient);
 
             if (result.IsSuccess)
             {

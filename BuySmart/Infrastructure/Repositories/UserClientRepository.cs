@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
-    public class UserClientRepository : IUserClientRepository
+    public class UserClientRepository : IUserRepository<UserClient>
     {
         private readonly ApplicationDbContext context;
 

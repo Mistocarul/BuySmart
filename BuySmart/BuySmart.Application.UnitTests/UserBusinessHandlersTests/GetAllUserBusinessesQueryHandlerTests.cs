@@ -10,13 +10,13 @@ namespace BuySmart.Application.UnitTests.UserBusinessHandlersTests
 {
     public class GetAllUserBusinessesQueryHandlerTests
     {
-        private readonly IUserBusinessRepository _userBusinessRepository;
+        private readonly IUserRepository<UserBusiness> _userBusinessRepository;
         private readonly IMapper _mapper;
         private readonly GetAllUserBusinessesQueryHandler _handler;
 
         public GetAllUserBusinessesQueryHandlerTests()
         {
-            _userBusinessRepository = Substitute.For<IUserBusinessRepository>();
+            _userBusinessRepository = Substitute.For<IUserRepository<UserBusiness>>();
             _mapper = Substitute.For<IMapper>();
             _handler = new GetAllUserBusinessesQueryHandler(_userBusinessRepository, _mapper);
         }

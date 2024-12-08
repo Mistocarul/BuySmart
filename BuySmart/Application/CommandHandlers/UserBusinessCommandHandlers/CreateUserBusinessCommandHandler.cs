@@ -9,18 +9,18 @@ namespace Application.CommandHandlers.UserBusinessCommandHandlers
 {
     public class CreateUserBusinessCommandHandler : IRequestHandler<CreateUserBusinessCommand, Result<Guid>>
     {
-        private readonly IUserBusinessRepository userBusinessRepository;
+        private readonly IUserRepository<UserBusiness> userRepository;
         private readonly IMapper mapper;
 
-        public CreateUserBusinessCommandHandler(IUserBusinessRepository userBusinessRepository, IMapper mapper)
+        public CreateUserBusinessCommandHandler(IUserRepository<UserBusiness> userRepository, IMapper mapper)
         {
-            this.userBusinessRepository = userBusinessRepository;
+            this.userRepository = userRepository;
             this.mapper = mapper;
         }
         public async Task<Result<Guid>> Handle(CreateUserBusinessCommand request, CancellationToken cancellationToken)
         {
             var userBusiness = mapper.Map<UserBusiness>(request);
-            var result = await userBusinessRepository.AddAsync(userBusiness);
+            var result = await userRepository.AddAsync(userBusiness);
 
             if (result.IsSuccess)
             {

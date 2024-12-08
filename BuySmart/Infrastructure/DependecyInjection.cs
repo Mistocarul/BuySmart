@@ -1,4 +1,5 @@
-﻿using Domain.Repositories;
+﻿using Domain.Entities;
+using Domain.Repositories;
 using Infrastructure.Persistence;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -17,8 +18,8 @@ namespace Infrastructure
                 );
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IUserClientRepository, UserClientRepository>();
-            services.AddScoped<IUserBusinessRepository, UserBusinessRepository>();
+            services.AddScoped<IUserRepository<UserClient>, UserClientRepository>();
+            services.AddScoped<IUserRepository<UserBusiness>, UserBusinessRepository>();
             services.AddScoped<ICartRepository, CartRepository>();
             services.AddScoped<IBusinessRepository, BusinessRepository>();
             services.AddScoped<IReviewBusinessRepository, ReviewBusinessRepository>();

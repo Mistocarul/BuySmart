@@ -1,6 +1,5 @@
 using Application.CommandHandlers.UserClientCommandHandlers;
 using Application.Commands.UserClientCommands;
-using Domain.Common;
 using Domain.Entities;
 using Domain.Repositories;
 using NSubstitute;
@@ -9,12 +8,12 @@ namespace Application.UnitTests.UserClientHandlersTests
 {
     public class DeleteUserClientCommandHandlerTests
     {
-        private readonly IUserClientRepository _userClientRepository;
+        private readonly IUserRepository<UserClient> _userClientRepository;
         private readonly DeleteUserClientCommandHandler _handler;
 
         public DeleteUserClientCommandHandlerTests()
         {
-            _userClientRepository = Substitute.For<IUserClientRepository>();
+            _userClientRepository = Substitute.For<IUserRepository<UserClient>>();
             _handler = new DeleteUserClientCommandHandler(_userClientRepository);
         }
 

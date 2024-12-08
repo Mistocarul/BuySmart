@@ -1,6 +1,7 @@
 ﻿using Application.DTOs;
 using Application.Queries.UserClientQueries;
 using AutoMapper;
+using Domain.Entities;
 using Domain.Repositories;
 using MediatR;
 
@@ -8,10 +9,10 @@ namespace Application.QueryHandlers.UserClientQueryHandlers
 {
     public class GetAllUserClientsQueryHandler : IRequestHandler<GetAllUserClientsQuery, List<UserClientDto>>
     {
-        private readonly IUserClientRepository repository;
+        private readonly IUserRepository<UserClient> repository;
         private readonly IMapper mapper;
 
-        public GetAllUserClientsQueryHandler(IUserClientRepository repository, IMapper mapper)
+        public GetAllUserClientsQueryHandler(IUserRepository<UserClient> repository, IMapper mapper)
         {
             this.repository = repository;
             this.mapper = mapper;

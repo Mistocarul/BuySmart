@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
-    public class UserBusinessRepository : IUserBusinessRepository
+    public class UserBusinessRepository : IUserRepository<UserBusiness>
     {
         private readonly ApplicationDbContext context;
         public UserBusinessRepository(ApplicationDbContext context)

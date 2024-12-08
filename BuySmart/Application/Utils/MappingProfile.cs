@@ -14,6 +14,8 @@ namespace Application.Utils
         public MappingProfile()
         {
             CreateMap<Product, ProductDto>().ReverseMap();
+
+            CreateMap<User, UserDto>().ReverseMap();
             CreateMap<UserClient, UserClientDto>().ReverseMap();
             CreateMap<CreateUserClientCommand, UserClient>().ReverseMap();
             CreateMap<UpdateUserClientCommand, UserClient>().ReverseMap();
