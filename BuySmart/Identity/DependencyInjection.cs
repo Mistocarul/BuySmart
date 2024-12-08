@@ -14,7 +14,9 @@ namespace Identity
     {
         public static IServiceCollection AddIdentity(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<UsersDbContext>(options => options.UseSqlite(configuration.GetConnectionString("UserConnection")));
+            services.AddDbContext<UsersDbContext>(options =>
+            options.UseSqlite(configuration.GetConnectionString("UserConnection") + ";Cache=Shared"));
+
 
             // Add Authentication
             var key = Encoding.ASCII.GetBytes("YourSecretKeyHere");

@@ -26,6 +26,7 @@ namespace Application.Utils
 
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<RegisterUserCommand, User>().ReverseMap();
+            CreateMap<SendVerificationCodeCommand, User>().ReverseMap();
             CreateMap<LoginUserCommand, User>().ReverseMap();
             CreateMap<User, UserClient>().ReverseMap();
             CreateMap<User, UserBusiness>().ReverseMap();

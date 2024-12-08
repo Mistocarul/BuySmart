@@ -16,7 +16,7 @@ namespace BuySmart.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("register")]
+        [HttpPost("SendConfirmationCode")]
         public async Task<ActionResult<Result<Guid>>> Register([FromBody] RegisterUserCommand command)
         {
             var result = await _mediator.Send(command);
@@ -27,11 +27,22 @@ namespace BuySmart.Controllers
             return CreatedAtAction(nameof(Register), new { id = result.Data }, result.Data);
         }
 
-        [HttpPost("login")]
+        [HttpPost("Login")]
         public async Task<ActionResult<Result<string>>> Login(LoginUserCommand command)
         {
             var token = await _mediator.Send(command);
             return Ok(new { Token = token });
+        }
+
+        [HttpPost("Register")]
+        public async Task<ActionResult<Result<string>>> SendConfirmationCode(SendVerificationCodeCommand command)
+        {
+            var result = await _mediator.Send(command);
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.ErrorMessage);
+            }
+            return Ok(result.Data);
         }
     }
 }

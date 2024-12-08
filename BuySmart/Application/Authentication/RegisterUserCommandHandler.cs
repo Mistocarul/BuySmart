@@ -19,9 +19,8 @@ namespace Application.Authentication
 
         public async Task<Result<Guid>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
-            var user = mapper.Map<User>(request);
-            user.Password = BCrypt.Net.BCrypt.HashPassword(request.Password);
-            var result = await repository.Register(user, cancellationToken);
+            int confirmationCode = int.Parse(request.confirmationCode);
+            var result = await repository.Register(confirmationCode, cancellationToken);
             if (result.IsSuccess)
             {
                 return Result<Guid>.Success(result.Data);
