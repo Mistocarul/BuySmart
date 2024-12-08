@@ -35,8 +35,7 @@ namespace Identity
                 };
             });
 
-            services.AddScoped<IUserAuthRepository<UserClient>, UserClientAuthRepository>();
-            services.AddScoped<IUserAuthRepository<UserBusiness>, UserBusinessAuthRepository>();
+            services.AddScoped<IUserAuthRepository<User>, UserAuthRepository>();
 
             return services;
         }

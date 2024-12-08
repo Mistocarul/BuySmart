@@ -4,16 +4,16 @@ using MediatR;
 
 public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, Guid>
 {
-    private readonly IUserAuthRepository<UserClient> repository;
+    private readonly IUserAuthRepository<User> repository;
 
-    public RegisterUserCommandHandler(IUserAuthRepository<UserClient> repository)
+    public RegisterUserCommandHandler(IUserAuthRepository<User> repository)
     {
         this.repository = repository;
     }
 
     public async Task<Guid> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
-        var user = new UserClient
+        var user = new User
         {
             Email = request.Email,
             Password = BCrypt.Net.BCrypt.HashPassword(request.Password)

@@ -5,16 +5,16 @@ using MediatR;
 
 public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, string>
 {
-    private readonly IUserAuthRepository<UserClient> userRepository;
+    private readonly IUserAuthRepository<User> userRepository;
 
-    public LoginUserCommandHandler(IUserAuthRepository<UserClient> userRepository)
+    public LoginUserCommandHandler(IUserAuthRepository<User> userRepository)
     {
         this.userRepository = userRepository;
     }
 
     public async Task<string> Handle(LoginUserCommand request, CancellationToken cancellationToken)
     {
-        var user = new UserClient
+        var user = new User
         {
             Email = request.Email,
             Password = request.Password

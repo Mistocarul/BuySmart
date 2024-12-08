@@ -32,7 +32,7 @@ namespace Application.Utils
             CreateMap<Review, ReviewDto>().ReverseMap();
             CreateMap<CreateCartCommand, Cart>().ReverseMap();
             CreateMap<Cart, CartDto>().ReverseMap();
-
+            CreateMap<RegisterUserCommand, User>().ReverseMap();
         }
     }
 }
