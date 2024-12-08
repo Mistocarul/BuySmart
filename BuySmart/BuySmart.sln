@@ -34,6 +34,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuySmart.Application.UnitTe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuySmart.IntegrationTests", "BuySmart.IntegrationTests\BuySmart.IntegrationTests.csproj", "{1F3517F6-C01D-469E-AA74-15E770FD76D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity", "Identity\Identity.csproj", "{D42CD2B8-55B8-4079-BECA-F9A58DE66AF9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{1F3517F6-C01D-469E-AA74-15E770FD76D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F3517F6-C01D-469E-AA74-15E770FD76D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F3517F6-C01D-469E-AA74-15E770FD76D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D42CD2B8-55B8-4079-BECA-F9A58DE66AF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D42CD2B8-55B8-4079-BECA-F9A58DE66AF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D42CD2B8-55B8-4079-BECA-F9A58DE66AF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D42CD2B8-55B8-4079-BECA-F9A58DE66AF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +87,7 @@ Global
 		{E103FA3D-AA69-4CE9-BDA0-3A1566AE19EF} = {7E2A2853-A438-47C8-A08B-898D6B9FC8ED}
 		{9B32D70C-3E3B-4FC3-ADAA-F4183B757CF4} = {449B3114-E0FF-4ECB-9B1A-A057E962FE2D}
 		{1F3517F6-C01D-469E-AA74-15E770FD76D2} = {E103FA3D-AA69-4CE9-BDA0-3A1566AE19EF}
+		{D42CD2B8-55B8-4079-BECA-F9A58DE66AF9} = {4D188436-F8BE-4D43-A2F3-EE45E3756466}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F6146A61-A3F2-414D-882E-4DD82616B3E4}

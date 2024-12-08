@@ -9,10 +9,10 @@ namespace Application.CommandHandlers.UserClientCommandHandlers
 {
     public class UpdateUserClientCommandHandler : IRequestHandler<UpdateUserClientCommand, Result<object>>
     {
-        private readonly IUserClientRepository userClientRepository;
+        private readonly IUserRepository<UserClient> userClientRepository;
         private readonly IMapper mapper;
 
-        public UpdateUserClientCommandHandler(IUserClientRepository userClientRepository, IMapper mapper)
+        public UpdateUserClientCommandHandler(IUserRepository<UserClient> userClientRepository, IMapper mapper)
         {
             this.userClientRepository = userClientRepository;
             this.mapper = mapper;

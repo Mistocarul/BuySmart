@@ -10,13 +10,13 @@ namespace BuySmart.Application.UnitTests.UserClientHandlersTests
 {
     public class GetUserClientByIdQueryHandlerTests
     {
-        private readonly IUserClientRepository _userClientRepository;
+        private readonly IUserRepository<UserClient> _userClientRepository;
         private readonly IMapper _mapper;
         private readonly GetUserClientByIdQueryHandler _handler;
 
         public GetUserClientByIdQueryHandlerTests()
         {
-            _userClientRepository = Substitute.For<IUserClientRepository>();
+            _userClientRepository = Substitute.For<IUserRepository<UserClient>>();
             _mapper = Substitute.For<IMapper>();
             _handler = new GetUserClientByIdQueryHandler(_userClientRepository, _mapper);
         }

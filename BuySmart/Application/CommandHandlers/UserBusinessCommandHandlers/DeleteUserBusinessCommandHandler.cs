@@ -1,5 +1,6 @@
 ﻿using Application.Commands.UserBusinessCommands;
 using Domain.Common;
+using Domain.Entities;
 using Domain.Repositories;
 using MediatR;
 
@@ -7,8 +8,8 @@ namespace Application.CommandHandlers.UserBusinessCommandHandlers
 {
     public class DeleteUserBusinessCommandHandler : IRequestHandler<DeleteUserBusinessCommand, Result<object>>
     {
-        private readonly IUserBusinessRepository userBusinessRepository;
-        public DeleteUserBusinessCommandHandler(IUserBusinessRepository userBusinessRepository)
+        private readonly IUserRepository<UserBusiness> userBusinessRepository;
+        public DeleteUserBusinessCommandHandler(IUserRepository<UserBusiness> userBusinessRepository)
         {
             this.userBusinessRepository = userBusinessRepository;
         }
