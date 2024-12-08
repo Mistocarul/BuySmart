@@ -18,8 +18,13 @@ namespace Application.Utils
         public MappingProfile()
         {
             CreateMap<Product, ProductDto>().ReverseMap();
+
             CreateMap<CreateProductCommand, Product>().ReverseMap();
             CreateMap<UpdateProductCommand, Product>().ReverseMap();
+
+
+            CreateMap<User, UserDto>().ReverseMap();
+
             CreateMap<UserClient, UserClientDto>().ReverseMap();
             CreateMap<CreateUserClientCommand, UserClient>().ReverseMap();
             CreateMap<UpdateUserClientCommand, UserClient>().ReverseMap();
@@ -36,12 +41,13 @@ namespace Application.Utils
             CreateMap<Review, ReviewDto>().ReverseMap();
             CreateMap<CreateCartCommand, Cart>().ReverseMap();
             CreateMap<Cart, CartDto>().ReverseMap();
-      
+
 
             CreateMap<CreateCategoryCommand, Category>().ReverseMap();
             CreateMap<UpdateCategoryCommand, Category>().ReverseMap();
             CreateMap<Category, CategoryDto>().ReverseMap();
 
+            CreateMap<RegisterUserCommand, User>().ReverseMap();
         }
     }
 }

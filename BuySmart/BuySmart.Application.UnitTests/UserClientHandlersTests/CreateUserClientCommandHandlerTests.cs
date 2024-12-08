@@ -10,13 +10,13 @@ namespace Application.UnitTests.UserClientHandlersTests
 {
     public class CreateUserClientCommandHandlerTests
     {
-        private readonly IUserClientRepository _userClientRepository;
+        private readonly IUserRepository<UserClient> _userClientRepository;
         private readonly IMapper _mapper;
         private readonly CreateUserClientCommandHandler _handler;
 
         public CreateUserClientCommandHandlerTests()
         {
-            _userClientRepository = Substitute.For<IUserClientRepository>();
+            _userClientRepository = Substitute.For<IUserRepository<UserClient>>();
             _mapper = Substitute.For<IMapper>();
             _handler = new CreateUserClientCommandHandler(_userClientRepository, _mapper);
         }

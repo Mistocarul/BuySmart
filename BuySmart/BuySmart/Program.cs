@@ -1,6 +1,7 @@
 using Application;
 using BuySmart.Middleware;
 using Infrastructure;
+using Identity;
 var builder = WebApplication.CreateBuilder(args);
 
 var MyAllowSpecificOrigins = "MyAllowSpecificOrigins";
@@ -19,6 +20,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddIdentity(builder.Configuration);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -44,6 +46,7 @@ app.UseCors(MyAllowSpecificOrigins);
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

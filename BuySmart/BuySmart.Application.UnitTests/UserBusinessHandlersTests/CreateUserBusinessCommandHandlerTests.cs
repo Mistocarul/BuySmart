@@ -10,13 +10,13 @@ namespace Application.UnitTests.UserBusinessHandlersTests
 {
     public class CreateUserBusinessCommandHandlerTests
     {
-        private readonly IUserBusinessRepository _userBusinessRepository;
+        private readonly IUserRepository<UserBusiness> _userBusinessRepository;
         private readonly IMapper _mapper;
         private readonly CreateUserBusinessCommandHandler _handler;
 
         public CreateUserBusinessCommandHandlerTests()
         {
-            _userBusinessRepository = Substitute.For<IUserBusinessRepository>();
+            _userBusinessRepository = Substitute.For<IUserRepository<UserBusiness>>();
             _mapper = Substitute.For<IMapper>();
             _handler = new CreateUserBusinessCommandHandler(_userBusinessRepository, _mapper);
         }

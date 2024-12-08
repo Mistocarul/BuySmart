@@ -10,13 +10,13 @@ namespace Application.UnitTests.UserClientHandlersTests
 {
     public class UpdateUserClientCommandHandlerTests
     {
-        private readonly IUserClientRepository _userClientRepository;
+        private readonly IUserRepository<UserClient> _userClientRepository;
         private readonly IMapper _mapper;
         private readonly UpdateUserClientCommandHandler _handler;
 
         public UpdateUserClientCommandHandlerTests()
         {
-            _userClientRepository = Substitute.For<IUserClientRepository>();
+            _userClientRepository = Substitute.For<IUserRepository<UserClient>>();
             _mapper = Substitute.For<IMapper>();
             _handler = new UpdateUserClientCommandHandler(_userClientRepository, _mapper);
         }

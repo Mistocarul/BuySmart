@@ -9,10 +9,10 @@ namespace Application.CommandHandlers.UserBusinessCommandHandlers
 {
     public class UpdateUserBusinessCommandHandler : IRequestHandler<UpdateUserBusinessCommand, Result<object>>
     {
-        private readonly IUserBusinessRepository userBusinessRepository;
+        private readonly IUserRepository<UserBusiness> userBusinessRepository;
         private readonly IMapper mapper;
 
-        public UpdateUserBusinessCommandHandler(IUserBusinessRepository userBusinessRepository, IMapper mapper)
+        public UpdateUserBusinessCommandHandler(IUserRepository<UserBusiness> userBusinessRepository, IMapper mapper)
         {
             this.userBusinessRepository = userBusinessRepository;
             this.mapper = mapper;
