@@ -1,8 +1,11 @@
-using Application.DTOs;
+using Domain.Common;
 using MediatR;
 
-public class LoginUserCommand : IRequest<string>
+namespace Application.Authentication
 {
-    public string Email { get; set; } = string.Empty;
-    public string Password { get; set; } = string.Empty;
+    public class LoginUserCommand : IRequest<Result<string>>
+    {
+        public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+    }
 }

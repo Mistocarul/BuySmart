@@ -10,6 +10,7 @@ using Application.Commands.UserClientCommands;
 using Application.DTOs;
 using AutoMapper;
 using Domain.Entities;
+using Application.Authentication;
 
 namespace Application.Utils
 {
@@ -24,6 +25,10 @@ namespace Application.Utils
 
 
             CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<RegisterUserCommand, User>().ReverseMap();
+            CreateMap<LoginUserCommand, User>().ReverseMap();
+            CreateMap<User, UserClient>().ReverseMap();
+            CreateMap<User, UserBusiness>().ReverseMap();
 
             CreateMap<UserClient, UserClientDto>().ReverseMap();
             CreateMap<CreateUserClientCommand, UserClient>().ReverseMap();
@@ -47,7 +52,6 @@ namespace Application.Utils
             CreateMap<UpdateCategoryCommand, Category>().ReverseMap();
             CreateMap<Category, CategoryDto>().ReverseMap();
 
-            CreateMap<RegisterUserCommand, User>().ReverseMap();
         }
     }
 }

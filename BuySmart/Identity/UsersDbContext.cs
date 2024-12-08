@@ -17,8 +17,7 @@ public class UsersDbContext : DbContext
             entity.ToTable("Users");
             entity.HasKey(e => e.UserId);
             entity.Property(e => e.UserId)
-                .HasColumnType("TEXT")
-                .ValueGeneratedOnAdd();
+                .HasColumnType("TEXT");
             entity.Property(e => e.Email)
                 .IsRequired()
                 .HasMaxLength(200);

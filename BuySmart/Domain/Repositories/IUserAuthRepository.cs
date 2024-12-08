@@ -1,10 +1,10 @@
-﻿using Domain.Entities;
+﻿using Domain.Common;
 
 namespace Domain.Repositories
 {
     public interface IUserAuthRepository<User>
     {
-        Task<Guid> Register(User user, CancellationToken cancellationToken);
-        Task<string> Login(User user);
+        Task<Result<Guid>> Register(User user, CancellationToken cancellationToken);
+        Task<Result<string>> Login(User user);
     }
 }
