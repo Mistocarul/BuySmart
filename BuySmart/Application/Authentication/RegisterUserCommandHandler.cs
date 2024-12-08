@@ -1,25 +1,32 @@
-﻿using Domain.Entities;
+﻿using AutoMapper;
+using Domain.Common;
+using Domain.Entities;
 using Domain.Repositories;
 using MediatR;
 
-public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, Guid>
+namespace Application.Authentication
 {
-    private readonly IUserAuthRepository<User> repository;
-
-    public RegisterUserCommandHandler(IUserAuthRepository<User> repository)
+    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, Result<Guid>>
     {
-        this.repository = repository;
-    }
+        private readonly IUserAuthRepository<User> repository;
+        private readonly IMapper mapper;
 
-    public async Task<Guid> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
-    {
-        var user = new User
+        public RegisterUserCommandHandler(IUserAuthRepository<User> repository, IMapper mapper)
         {
-            Email = request.Email,
-            Password = BCrypt.Net.BCrypt.HashPassword(request.Password)
-        };
+            this.repository = repository;
+            this.mapper = mapper;
+        }
 
-        await repository.Register(user, cancellationToken);
-        return user.UserId;
+        public async Task<Result<Guid>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+        {
+            var user = mapper.Map<User>(request);
+            user.Password = BCrypt.Net.BCrypt.HashPassword(request.Password);
+            var result = await repository.Register(user, cancellationToken);
+            if (result.IsSuccess)
+            {
+                return Result<Guid>.Success(result.Data);
+            }
+            return Result<Guid>.Failure(result.ErrorMessage);
+        }
     }
 }

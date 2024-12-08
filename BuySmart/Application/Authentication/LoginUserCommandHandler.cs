@@ -1,25 +1,34 @@
-﻿using Application.DTOs;
+﻿using AutoMapper;
+using Domain.Common;
 using Domain.Entities;
 using Domain.Repositories;
 using MediatR;
 
-public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, string>
+namespace Application.Authentication
 {
-    private readonly IUserAuthRepository<User> userRepository;
-
-    public LoginUserCommandHandler(IUserAuthRepository<User> userRepository)
+    public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, Result<string>>
     {
-        this.userRepository = userRepository;
-    }
+        private readonly IUserAuthRepository<User> userRepository;
+        private readonly IMapper mapper;
 
-    public async Task<string> Handle(LoginUserCommand request, CancellationToken cancellationToken)
-    {
-        var user = new User
+        public LoginUserCommandHandler(IUserAuthRepository<User> userRepository, IMapper mapper)
         {
-            Email = request.Email,
-            Password = request.Password
-        };
-        var token = await userRepository.Login(user);
-        return token;
+            this.userRepository = userRepository;
+            this.mapper = mapper;
+        }
+
+        public async Task<Result<string>> Handle(LoginUserCommand request, CancellationToken cancellationToken)
+        {
+            var user = mapper.Map<User>(request);
+            var result = await userRepository.Login(user);
+
+            if (result.IsSuccess)
+            {
+                return Result<string>.Success(result.Data);
+            }
+
+            return Result<string>.Failure(result.ErrorMessage);
+        }
     }
 }
+

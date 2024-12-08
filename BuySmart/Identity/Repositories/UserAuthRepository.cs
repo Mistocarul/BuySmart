@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.Common;
+using Domain.Entities;
 using Domain.Repositories;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -23,43 +24,76 @@ namespace Identity.Repositories
             this.context = context;
         }
 
-        public async Task<string> Login(User user)
+        public async Task<Result<string>> Login(User user)
         {
-            var existingUser = await usersDbContext.Users.SingleOrDefaultAsync(u => u.Email == user.Email);
-            if (existingUser == null)
+            try
             {
-                throw new UnauthorizedAccessException("Invalid credentials");
+                var existingUser = await usersDbContext.Users.SingleOrDefaultAsync(u => u.Email == user.Email);
+                if (existingUser == null)
+                {
+                    return Result<string>.Failure("Invalid credentials");
+                }
+
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(configuration["Jwt:Key"]!);
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new List<Claim> { new Claim(ClaimTypes.Name, user.UserId.ToString(), user.UserType.ToString()) }),
+                    Expires = DateTime.UtcNow.AddDays(7),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                };
+
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+                return Result<string>.Success(tokenHandler.WriteToken(token));
             }
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(configuration["Jwt:Key"]!);
-            var tokenDescriptor = new SecurityTokenDescriptor
+            catch (Exception ex)
             {
-                Subject = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, user.UserId.ToString()) }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+                return Result<string>.Failure(ex.Message);
+            }
         }
 
-        public async Task<Guid> Register(User user, CancellationToken cancellationToken)
+        public async Task<Result<Guid>> Register(User user, CancellationToken cancellationToken)
         {
-            usersDbContext.Users.Add(user);
-            if (user.UserType == UserType.Client)
+            try
             {
-                var userClient = new UserClient
+                if (user.UserType == UserType.Client)
                 {
-                    UserId = user.UserId,
-                    Email = user.Email,
-                    Password = user.Password
-                };
-                await context.UserClients.AddAsync(userClient);
-                await context.SaveChangesAsync(cancellationToken);
+                    var userClient = new UserClient
+                    {
+                        Name = user.Name,
+                        Email = user.Email,
+                        Password = user.Password,
+                        UserType = UserType.Client,
+                        Image = user.Image
+                    };
+                    await context.UserClients.AddAsync(userClient);
+                    await context.SaveChangesAsync(cancellationToken);
+                    Guid userId = userClient.UserId;
+                    user.UserId = userId;
+                }
+                else if (user.UserType == UserType.Business)
+                {
+                    var userBusiness = new UserBusiness
+                    {
+                        Name = user.Name,
+                        Email = user.Email,
+                        Password = user.Password,
+                        UserType = UserType.Business,
+                        Image = user.Image
+                    };
+                    await context.UserBusinesses.AddAsync(userBusiness);
+                    await context.SaveChangesAsync(cancellationToken);
+                    Guid userId = userBusiness.UserId;
+                    user.UserId = userId;
+                }
+                usersDbContext.Users.Add(user);
+                await usersDbContext.SaveChangesAsync(cancellationToken);
+                return Result<Guid>.Success(user.UserId);
             }
-            await usersDbContext.SaveChangesAsync(cancellationToken);
-            return user.UserId;
+            catch (Exception ex)
+            {
+                return Result<Guid>.Failure(ex.Message);
+            }
         }
     }
 }
