@@ -43,7 +43,7 @@ namespace Identity.Repositories
                 {
                     Subject = new ClaimsIdentity(new List<Claim> 
                     {
-                        new Claim(ClaimTypes.Name, user.UserId.ToString()), 
+                        new Claim(ClaimTypes.Name, existingUser.UserId.ToString()), 
                         new Claim(ClaimTypes.Role, existingUser.UserType.ToString())
                     }),
                     Expires = DateTime.UtcNow.AddDays(7),

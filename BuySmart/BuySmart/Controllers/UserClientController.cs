@@ -5,6 +5,8 @@ using Domain.Common;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Application.Commands.CartCommands;
+using Microsoft.AspNetCore.Authorization;
+using BuySmart.JWT;
 
 namespace BuySmart.Controllers
 {
@@ -13,9 +15,12 @@ namespace BuySmart.Controllers
     public class UserClientController : ControllerBase
     {
         private readonly IMediator mediator;
-        public UserClientController(IMediator mediator)
+        private readonly IHttpContextAccessor httpContextAccessor;
+
+        public UserClientController(IMediator mediator, IHttpContextAccessor httpContextAccessor)
         {
             this.mediator = mediator;
+            this.httpContextAccessor = httpContextAccessor;
         }
         [HttpGet("GetAllUserClients")]
         public async Task<IActionResult> GetAllUsers(int pageNumber = 1, int pageSize = 10)
@@ -57,13 +62,16 @@ namespace BuySmart.Controllers
             return NoContent();
         }
 
-        [HttpPut("UpdateUserClient/{id:guid}")]
-        public async Task<ActionResult<Result<object>>> UpdateUser(Guid id, [FromBody] UpdateUserClientCommand command)
+        [Authorize]
+        [HttpPut("UpdateUserClient")]
+        public async Task<ActionResult<Result<object>>> UpdateUser([FromBody] UpdateUserClientCommand command)
         {
-            if (id != command.UserId)
+            var userId = JwtHelper.GetUserIdFromJwt(httpContextAccessor.HttpContext);
+            if (userId == null)
             {
-                return BadRequest();
+                return Unauthorized();
             }
+            command.UserId = new Guid(userId);
             command.Password = BCrypt.Net.BCrypt.HashPassword(command.Password);
             var result = await mediator.Send(command);
             if (!result.IsSuccess)
