@@ -5,6 +5,7 @@ using Domain.Common;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Application.Commands.CartCommands;
+using Application.Utils;
 
 namespace BuySmart.Controllers
 {
@@ -20,8 +21,31 @@ namespace BuySmart.Controllers
         [HttpGet("GetAllUserClients")]
         public async Task<IActionResult> GetAllUsers()
         {
+<<<<<<< Updated upstream
             var users = await mediator.Send(new GetAllUserClientsQuery());
+=======
+            var users = await mediator.Send(new GetAllUserClientsQuery ());
+>>>>>>> Stashed changes
             return Ok(users);
+        }
+
+        [HttpGet("GetPaginatedUserClients")]
+        public async Task<ActionResult<PagedResult<UserClientDto>>> GetFilteredUserClients([FromQuery] int page, [FromQuery] int pageSize)
+        {
+            var query = new GetFilteredUserClientsQuery
+            {
+                Page = page,
+                PageSize = pageSize,
+                Filter=null
+            };
+
+            var result=await mediator.Send(query);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            return NotFound(result.ErrorMessage);
+
         }
 
         [HttpGet("GetUserClientById/{id}")]

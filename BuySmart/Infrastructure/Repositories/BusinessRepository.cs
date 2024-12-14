@@ -15,13 +15,9 @@ namespace Infrastructure.Repositories
             this.context = context;
         }
 
-        public async Task<IEnumerable<Business>> GetAllAsync(int pageNumber, int pageSize)
+        public async Task<IEnumerable<Business>> GetAllAsync()
         {
-            return await context.Businesses
-                .OrderBy(b => b.BusinessID)
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
+            return await context.Businesses.ToListAsync();
         }
        
 

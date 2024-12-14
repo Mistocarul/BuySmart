@@ -15,6 +15,10 @@ namespace Infrastructure.Repositories
         public async Task<IEnumerable<Product>> GetAllAsync()
         {
             return await context.Products.ToListAsync();
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         }
 
         public async Task<Product> GetByIdAsync(Guid productId)

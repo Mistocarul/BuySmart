@@ -26,7 +26,11 @@ namespace BuySmart.Application.UnitTests.UserClientHandlersTests
         public async Task Given_ValidRequest_When_HandleIsCalled_Then_ReturnsListOfUserClientDtos()
         {
             // Arrange
+<<<<<<< Updated upstream
             var query = new GetAllUserClientsQuery();
+=======
+            var query = new GetAllUserClientsQuery ();
+>>>>>>> Stashed changes
 
             var userClients = new List<UserClient>
             {
@@ -97,7 +101,11 @@ namespace BuySmart.Application.UnitTests.UserClientHandlersTests
         public async Task Given_EmptyUserClients_When_HandleIsCalled_Then_ReturnsEmptyList()
         {
             // Arrange
+<<<<<<< Updated upstream
             var query = new GetAllUserClientsQuery();
+=======
+            var query = new GetAllUserClientsQuery ();
+>>>>>>> Stashed changes
 
             var userClients = new List<UserClient>();
             var userClientDtos = new List<UserClientDto>();

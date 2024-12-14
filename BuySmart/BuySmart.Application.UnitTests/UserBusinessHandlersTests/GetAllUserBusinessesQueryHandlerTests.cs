@@ -36,8 +36,15 @@ namespace BuySmart.Application.UnitTests.UserBusinessHandlersTests
             new UserBusinessDto { UserId = userBusinesses[1].UserId, Name = "Business 2", Email = "business2@example.com", UserType = UserType.Business, Image = "image2.png" }
         };
 
+<<<<<<< Updated upstream
             _userBusinessRepository.GetAllAsync().Returns(userBusinesses);
             _mapper.Map<List<UserBusinessDto>>(userBusinesses).Returns(userBusinessDtos);
+=======
+
+        _userBusinessRepository.GetAllAsync().Returns(userBusinesses);
+        _mapper.Map<List<UserBusinessDto>>(userBusinesses).Returns(userBusinessDtos);
+
+>>>>>>> Stashed changes
 
             // Act
             var result = await _handler.Handle(new GetAllUserBusinessesQuery(), CancellationToken.None);
@@ -53,8 +60,15 @@ namespace BuySmart.Application.UnitTests.UserBusinessHandlersTests
             var userBusinesses = new List<UserBusiness>();
             var userBusinessDtos = new List<UserBusinessDto>();
 
+<<<<<<< Updated upstream
             _userBusinessRepository.GetAllAsync().Returns(userBusinesses);
             _mapper.Map<List<UserBusinessDto>>(userBusinesses).Returns(userBusinessDtos);
+=======
+
+        _userBusinessRepository.GetAllAsync().Returns(userBusinesses);
+        _mapper.Map<List<UserBusinessDto>>(userBusinesses).Returns(userBusinessDtos);
+
+>>>>>>> Stashed changes
 
             // Act
             var result = await _handler.Handle(new GetAllUserBusinessesQuery(), CancellationToken.None);

@@ -17,7 +17,11 @@ namespace Infrastructure.Repositories
 
         public async Task<IEnumerable<UserClient>> GetAllAsync()
         {
+<<<<<<< Updated upstream
             return await context.UserClients.ToListAsync();
+=======
+           return await context.UserClients.ToListAsync();
+>>>>>>> Stashed changes
         }
 
         public async Task<UserClient> GetByIdAsync(Guid userClientId)
