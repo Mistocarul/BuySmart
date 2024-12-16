@@ -57,17 +57,17 @@ namespace BuySmart.Application.UnitTests.CategoryHandlersTests
                 }
             };
 
-            categoryRepository.GetAllAsync(1, 10).Returns(categories);
+            categoryRepository.GetAllAsync().Returns(categories);
             mapper.Map<List<CategoryDto>>(categories).Returns(categoryDtos);
 
-            var query = new GetAllCategoriesQuery { PageNumber = 1, PageSize = 10 };
+            var query = new GetAllCategoriesQuery();
             var response = await handler.Handle(query, CancellationToken.None);
 
             // Assert
             Assert.Equal(categoryDtos.Count, response.Count);
             Assert.Equal(categoryDtos[0].CategoryId, response[0].CategoryId);
             Assert.Equal(categoryDtos[1].CategoryId, response[1].CategoryId);
-            await categoryRepository.Received(1).GetAllAsync(1, 10);
+            await categoryRepository.Received(1).GetAllAsync();
         }
 
         [Fact]
@@ -77,16 +77,15 @@ namespace BuySmart.Application.UnitTests.CategoryHandlersTests
             var categories = new List<Category>();
             var categoryDtos = new List<CategoryDto>();
 
-            categoryRepository.GetAllAsync(1, 10).Returns(categories);
+            categoryRepository.GetAllAsync().Returns(categories);
             mapper.Map<List<CategoryDto>>(categories).Returns(categoryDtos);
 
-            var query = new GetAllCategoriesQuery { PageNumber = 1, PageSize = 10 };
+            var query = new GetAllCategoriesQuery();
             var response = await handler.Handle(query, CancellationToken.None);
 
             // Assert
             Assert.Empty(response);
-            await categoryRepository.Received(1).GetAllAsync(1, 10);
+            await categoryRepository.Received(1).GetAllAsync();
         }
     }
 }
-

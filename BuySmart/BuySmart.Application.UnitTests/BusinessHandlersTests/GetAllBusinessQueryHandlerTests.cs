@@ -1,6 +1,6 @@
 using Application.DTOs;
-using Application.QueryHandlers.ReviewBusinessQueryHandlers;
-using Application.Queries.ReviewBusinessQueries;
+using Application.QueryHandlers.BusinessQueryHandlers;
+using Application.Queries.BusinessQueries;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Repositories;
@@ -8,88 +8,95 @@ using NSubstitute;
 
 namespace BuySmart.Application.UnitTests.BusinessHandlersTests
 {
-    public class GetAllReviewBusinessesQueryHandlerTest
+    public class GetAllBusinessQueryHandlerTests
     {
         private readonly IMapper _mapper;
-        private readonly IReviewBusinessRepository _reviewBusinessRepository;
-        private readonly GetAllReviewBusinessesQueryHandler _handler;
+        private readonly IBusinessRepository _businessRepository;
+        private readonly GetAllBusinessQueryHandler _handler;
 
-        public GetAllReviewBusinessesQueryHandlerTest()
+        public GetAllBusinessQueryHandlerTests()
         {
             _mapper = Substitute.For<IMapper>();
-            _reviewBusinessRepository = Substitute.For<IReviewBusinessRepository>();
-            _handler = new GetAllReviewBusinessesQueryHandler(_reviewBusinessRepository, _mapper);
+            _businessRepository = Substitute.For<IBusinessRepository>();
+            _handler = new GetAllBusinessQueryHandler(_businessRepository, _mapper);
         }
 
         [Fact]
-        public async Task Handle_ShouldReturnListOfReviewDtos_WhenReviewsExist()
+        public async Task Handle_ShouldReturnListOfBusinessDtos_WhenBusinessesExist()
         {
-            var reviews = new List<Review>
+            // Arrange
+            var businesses = new List<Business>
             {
-                new Review
+                new Business
                 {
-                    ReviewId = Guid.NewGuid(),
-                    UserClientId = Guid.NewGuid(),
-                    BusinessId = Guid.NewGuid(),
-                    Rating = 5,
-                    Comment = "Great service!"
+                    BusinessID = Guid.NewGuid(),
+                    Name = "Business 1",
+                    Description = "Description 1",
+                    Address = "Address 1",
+                    PhoneNumber = "1234567890"
                 },
-                new Review
+                new Business
                 {
-                    ReviewId = Guid.NewGuid(),
-                    UserClientId = Guid.NewGuid(),
-                    BusinessId = Guid.NewGuid(),
-                    Rating = 4,
-                    Comment = "Good service!"
+                    BusinessID = Guid.NewGuid(),
+                    Name = "Business 2",
+                    Description = "Description 2",
+                    Address = "Address 2",
+                    PhoneNumber = "0987654321"
                 }
             };
 
-            var reviewDtos = new List<ReviewDto>
+            var businessDtos = new List<BusinessDto>
             {
-                new ReviewDto
+                new BusinessDto
                 {
-                    ReviewId = reviews[0].ReviewId,
-                    UserClientId = reviews[0].UserClientId,
-                    BusinessId = reviews[0].BusinessId,
-                    Rating = reviews[0].Rating,
-                    Comment = reviews[0].Comment
+                    
+                    Name = businesses[0].Name,
+                    Description = businesses[0].Description,
+                    Address = businesses[0].Address,
+                    PhoneNumber = businesses[0].PhoneNumber
                 },
-                new ReviewDto
+                new BusinessDto
                 {
-                    ReviewId = reviews[1].ReviewId,
-                    UserClientId = reviews[1].UserClientId,
-                    BusinessId = reviews[1].BusinessId,
-                    Rating = reviews[1].Rating,
-                    Comment = reviews[1].Comment
+                   
+                    Name = businesses[1].Name,
+                    Description = businesses[1].Description,
+                    Address = businesses[1].Address,
+                    PhoneNumber = businesses[1].PhoneNumber
                 }
             };
 
-            _reviewBusinessRepository.GetAllAsync().Returns(reviews);
-            _mapper.Map<List<ReviewDto>>(reviews).Returns(reviewDtos);
+            _businessRepository.GetAllAsync().Returns(businesses);
+            _mapper.Map<List<BusinessDto>>(businesses).Returns(businessDtos);
 
-            var query = new GetAllReviewBusinessesQuery();
+            var query = new GetAllBusinessesQuery();
             var response = await _handler.Handle(query, CancellationToken.None);
 
-            Assert.Equal(reviewDtos.Count, response.Count);
-            Assert.Equal(reviewDtos[0].ReviewId, response[0].ReviewId);
-            Assert.Equal(reviewDtos[1].ReviewId, response[1].ReviewId);
-            await _reviewBusinessRepository.Received(1).GetAllAsync();
+            // Assert
+            Assert.Equal(businessDtos.Count, response.Count);
+           
+            await _businessRepository.Received(1).GetAllAsync();
         }
 
         [Fact]
-        public async Task Handle_ShouldReturnEmptyList_WhenNoReviewsExist()
+        public async Task Handle_ShouldReturnEmptyList_WhenNoBusinessesExist()
         {
-            var reviews = new List<Review>();
-            var reviewDtos = new List<ReviewDto>();
+            // Arrange
+            var businesses = new List<Business>();
+            var businessDtos = new List<BusinessDto>();
 
-            _reviewBusinessRepository.GetAllAsync(1, 10).Returns(reviews);
-            _mapper.Map<List<ReviewDto>>(reviews).Returns(reviewDtos);
+            _businessRepository.GetAllAsync().Returns(businesses);
+            _mapper.Map<List<BusinessDto>>(businesses).Returns(businessDtos);
 
-            var query = new GetAllReviewBusinessesQuery();
+            var query = new GetAllBusinessesQuery();
             var response = await _handler.Handle(query, CancellationToken.None);
 
+            // Assert
             Assert.Empty(response);
-            await _reviewBusinessRepository.Received(1).GetAllAsync(1, 10);
+            await _businessRepository.Received(1).GetAllAsync();
         }
     }
 }
+
+
+
+

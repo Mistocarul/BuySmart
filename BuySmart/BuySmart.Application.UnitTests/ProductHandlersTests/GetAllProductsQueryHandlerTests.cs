@@ -6,7 +6,7 @@ using Domain.Entities;
 using Domain.Repositories;
 using NSubstitute;
 
-namespace Application.UnitTests.ProductHandlersTests
+namespace BuySmart.Application.UnitTests.ProductHandlersTests
 {
     public class GetAllProductsQueryHandlerTests
     {
@@ -22,120 +22,57 @@ namespace Application.UnitTests.ProductHandlersTests
         }
 
         [Fact]
-        public async Task Handle_ShouldReturnMappedProducts_WhenNoFiltersAreApplied()
+        public async Task Handle_ShouldReturnMappedProducts_WhenProductsExist()
         {
             // Arrange
-            var query = new GetAllProductsQuery { pageNumber = 1, pageSize = 10, order = ProductOrder.Def };
-            var products = new List<Product> { new Product { ProductId = Guid.NewGuid(), Name = "Product1" } };
-            var productDtos = new List<ProductDto> { new ProductDto { ProductId = products[0].ProductId, Name = "Product1" } };
+            var query = new GetAllProductsQuery();
+            var products = new List<Product>
+            {
+                new Product { ProductId = Guid.NewGuid(), Name = "Product1", Categories = new List<Category> { new Category { CategoryId = Guid.NewGuid(), Name = "Category1" } } },
+                new Product { ProductId = Guid.NewGuid(), Name = "Product2", Categories = new List<Category> { new Category { CategoryId = Guid.NewGuid(), Name = "Category2" } } }
+            };
+            var productDtos = new List<ProductDto>
+            {
+                new ProductDto { ProductId = products[0].ProductId, Name = "Product1", Categories = new List<CategoryDto> { new CategoryDto { CategoryId = products[0].Categories.First().CategoryId, Name = "Category1" } } },
+                new ProductDto { ProductId = products[1].ProductId, Name = "Product2", Categories = new List<CategoryDto> { new CategoryDto { CategoryId = products[1].Categories.First().CategoryId, Name = "Category2" } } }
+            };
 
-            productRepository.GetAllAsync(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<ProductOrder>()).Returns(products);
-            mapper.Map<List<ProductDto>>(Arg.Any<List<Product>>()).Returns(productDtos);
+            productRepository.GetAllAsync().Returns(products);
+            mapper.Map<List<CategoryDto>>(products[0].Categories).Returns(productDtos[0].Categories.ToList());
+            mapper.Map<List<CategoryDto>>(products[1].Categories).Returns(productDtos[1].Categories.ToList());
+            mapper.Map<ProductDto>(products[0]).Returns(productDtos[0]);
+            mapper.Map<ProductDto>(products[1]).Returns(productDtos[1]);
 
             // Act
             var result = await handler.Handle(query, CancellationToken.None);
 
             // Assert
-            Assert.Equal(productDtos, result);
+            Assert.Equal(productDtos.Count, result.Count);
+            Assert.Equal(productDtos[0].ProductId, result[0].ProductId);
+            Assert.Equal(productDtos[1].ProductId, result[1].ProductId);
+            await productRepository.Received(1).GetAllAsync();
         }
 
         [Fact]
-        public async Task Handle_ShouldFilterByName_WhenNameIsProvided()
+        public async Task Handle_ShouldReturnEmptyList_WhenNoProductsExist()
         {
             // Arrange
-            var query = new GetAllProductsQuery { pageNumber = 1, pageSize = 10, order = ProductOrder.Def, Name = "Product1" };
-            var products = new List<Product>
-        {
-            new Product { ProductId = Guid.NewGuid(), Name = "Product1" },
-            new Product { ProductId = Guid.NewGuid(), Name = "Product2" }
-        };
-            var filteredProducts = products.Where(p => p.Name.Contains(query.Name)).ToList();
-            var productDtos = new List<ProductDto> { new ProductDto { ProductId = filteredProducts[0].ProductId, Name = "Product1" } };
+            var query = new GetAllProductsQuery();
+            var products = new List<Product>();
+            var productDtos = new List<ProductDto>();
 
-            productRepository.GetAllAsync(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<ProductOrder>()).Returns(products);
-            mapper.Map<List<ProductDto>>(Arg.Any<List<Product>>()).Returns(productDtos);
+            productRepository.GetAllAsync().Returns(products);
+            mapper.Map<List<ProductDto>>(products).Returns(productDtos);
 
             // Act
             var result = await handler.Handle(query, CancellationToken.None);
 
             // Assert
-            Assert.Single(result);
-            Assert.Equal("Product1", result[0].Name);
-        }
-
-        [Fact]
-        public async Task Handle_ShouldFilterByCategoryId_WhenCategoryIdIsProvided()
-        {
-            // Arrange
-            var categoryId = Guid.NewGuid();
-            var query = new GetAllProductsQuery { pageNumber = 1, pageSize = 10, order = ProductOrder.Def, CategoryId = categoryId };
-            var products = new List<Product>
-        {
-            new Product { ProductId = Guid.NewGuid(), Name = "Product1", Categories = new List<Category> { new Category { CategoryId = categoryId } } },
-            new Product { ProductId = Guid.NewGuid(), Name = "Product2", Categories = new List<Category> { new Category { CategoryId = Guid.NewGuid() } } }
-        };
-            var filteredProducts = products.Where(p => p.Categories.Any(c => c.CategoryId == query.CategoryId)).ToList();
-            var productDtos = new List<ProductDto> { new ProductDto { ProductId = filteredProducts[0].ProductId, Name = "Product1" } };
-
-            productRepository.GetAllAsync(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<ProductOrder>()).Returns(products);
-            mapper.Map<List<ProductDto>>(Arg.Any<List<Product>>()).Returns(productDtos);
-
-            // Act
-            var result = await handler.Handle(query, CancellationToken.None);
-
-            // Assert
-            Assert.Single(result);
-            Assert.Equal("Product1", result[0].Name);
-        }
-
-        [Fact]
-        public async Task Handle_ShouldFilterByMinPrice_WhenMinPriceIsProvided()
-        {
-            // Arrange
-            var query = new GetAllProductsQuery { pageNumber = 1, pageSize = 10, order = ProductOrder.Def, MinPrice = 50 };
-            var products = new List<Product>
-        {
-            new Product { ProductId = Guid.NewGuid(), Name = "Product1", Price = 100 },
-            new Product { ProductId = Guid.NewGuid(), Name = "Product2", Price = 30 }
-        };
-            var filteredProducts = products.Where(p => p.Price >= query.MinPrice.Value).ToList();
-            var productDtos = new List<ProductDto> { new ProductDto { ProductId = filteredProducts[0].ProductId, Name = "Product1" } };
-
-            productRepository.GetAllAsync(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<ProductOrder>()).Returns(products);
-            mapper.Map<List<ProductDto>>(Arg.Any<List<Product>>()).Returns(productDtos);
-
-            // Act
-            var result = await handler.Handle(query, CancellationToken.None);
-
-            // Assert
-            Assert.Single(result);
-            Assert.Equal("Product1", result[0].Name);
-        }
-
-        [Fact]
-        public async Task Handle_ShouldFilterByMaxPrice_WhenMaxPriceIsProvided()
-        {
-            // Arrange
-            var query = new GetAllProductsQuery { pageNumber = 1, pageSize = 10, order = ProductOrder.Def, MaxPrice = 50 };
-            var products = new List<Product>
-        {
-            new Product { ProductId = Guid.NewGuid(), Name = "Product1", Price = 100 },
-            new Product { ProductId = Guid.NewGuid(), Name = "Product2", Price = 30 }
-        };
-            var filteredProducts = products.Where(p => p.Price <= query.MaxPrice.Value).ToList();
-            var productDtos = new List<ProductDto> { new ProductDto { ProductId = filteredProducts[0].ProductId, Name = "Product2" } };
-
-            productRepository.GetAllAsync(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<ProductOrder>()).Returns(products);
-            mapper.Map<List<ProductDto>>(Arg.Any<List<Product>>()).Returns(productDtos);
-
-            // Act
-            var result = await handler.Handle(query, CancellationToken.None);
-
-            // Assert
-            Assert.Single(result);
-            Assert.Equal("Product2", result[0].Name);
+            Assert.Empty(result);
+            await productRepository.Received(1).GetAllAsync();
         }
     }
-
 }
+
+
 
