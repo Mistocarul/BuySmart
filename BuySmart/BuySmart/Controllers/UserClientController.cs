@@ -50,10 +50,17 @@ namespace BuySmart.Controllers
 
         }
 
-        [HttpGet("GetUserClientById/{id}")]
-        public async Task<ActionResult<UserClientDto>> GetUserById(Guid id)
+        [Authorize]
+        [HttpGet("GetUserClientById")]
+        public async Task<ActionResult<UserClientDto>> GetUserById()
         {
-            return await mediator.Send(new GetUserClientByIdQuery { Id = id });
+            var userId = JwtHelper.GetUserIdFromJwt(httpContextAccessor.HttpContext);
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+            GetUserClientByIdQuery commandQuery = new GetUserClientByIdQuery { Id = new Guid(userId) };
+            return await mediator.Send(commandQuery);
         }
 
         [HttpPost("CreateUserClient_and_Cart")]

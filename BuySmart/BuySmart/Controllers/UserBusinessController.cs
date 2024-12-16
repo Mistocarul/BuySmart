@@ -35,8 +35,8 @@ namespace BuySmart.Controllers
             await mediator.Send(new DeleteUserBusinessCommand { UserId = id });
             return NoContent();
         }
-        [HttpPut("UpdateUserBusiness/{id:guid}")]
 
+        [HttpPut("UpdateUserBusiness/{id:guid}")]
         public async Task<ActionResult<Result<object>>> UpdateUserBusiness(Guid id, [FromBody] UpdateUserBusinessCommand command)
         {
             command.Password = BCrypt.Net.BCrypt.HashPassword(command.Password);
