@@ -5,9 +5,5 @@ namespace Application.Queries.UserBusinessQueries
 {
     public class GetAllUserBusinessesQuery : IRequest<List<UserBusinessDto>>
     {
-<<<<<<< Updated upstream
-=======
-       
->>>>>>> Stashed changes
     }
 }

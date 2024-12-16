@@ -32,11 +32,11 @@ namespace Application.QueryHandlers.ProductQueryHandlers
             {
                 if (request.SortDirection?.Equals("desc", StringComparison.OrdinalIgnoreCase) == true)
                 {
-                    products = products.AsQueryable().OrderByDescending(p=>p.Price);
+                    products = products.AsQueryable().OrderByDescending(p => p.Price);
                 }
                 else
                 {
-                    products= products.AsQueryable().OrderBy(p=>p.Price);
+                    products = products.AsQueryable().OrderBy(p => p.Price);
                 }
             }
             var totalCount = products.Count();
@@ -48,6 +48,4 @@ namespace Application.QueryHandlers.ProductQueryHandlers
             return Result<PagedResult<ProductDto>>.Success(pagedResult);
         }
     }
-    }
-
-
+}

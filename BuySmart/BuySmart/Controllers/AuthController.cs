@@ -31,6 +31,10 @@ namespace BuySmart.Controllers
         public async Task<ActionResult<Result<string>>> Login(LoginUserCommand command)
         {
             var token = await _mediator.Send(command);
+            if (!token.IsSuccess)
+            {
+                return Unauthorized(token.ErrorMessage);
+            }
             return Ok(new { Token = token });
         }
 

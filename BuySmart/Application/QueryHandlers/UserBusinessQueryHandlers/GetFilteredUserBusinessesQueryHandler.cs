@@ -6,14 +6,15 @@ using Domain.Common;
 using Domain.Repositories;
 using MediatR;
 using Gridify;
+using Domain.Entities;
 
 namespace Application.QueryHandlers.UserBusinessQueryHandlers
 {
     public class GetFilteredUserBusinessesQueryHandler : IRequestHandler<GetFilteredUserBusinessesQuery, Result<PagedResult<UserBusinessDto>>>
     {
-        private readonly IUserBusinessRepository repository;
+        private readonly IUserRepository<UserBusiness> repository;
         private readonly IMapper mapper;
-        public GetFilteredUserBusinessesQueryHandler(IUserBusinessRepository repository, IMapper mapper)
+        public GetFilteredUserBusinessesQueryHandler(IUserRepository<UserBusiness> repository, IMapper mapper)
         {
             this.repository = repository;
             this.mapper = mapper;
@@ -26,7 +27,7 @@ namespace Application.QueryHandlers.UserBusinessQueryHandlers
             {
                 userBusinesses = userBusinesses.AsQueryable().Where(request.Filter);
             }
-         
+
             var totalCount = userBusinesses.Count();
             var pagedUserBusinesses = userBusinesses.AsQueryable().ApplyPaging(request.Page, request.PageSize);
             var userBusinessDtos = mapper.Map<List<UserBusinessDto>>(pagedUserBusinesses);

@@ -10,5 +10,4 @@ namespace Application.Queries.CategoryQueries
         }
 
     }
-   
 }

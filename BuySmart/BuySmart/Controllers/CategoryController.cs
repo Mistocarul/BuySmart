@@ -23,7 +23,7 @@ namespace BuySmart.Controllers
         [HttpGet("GetAllCategories")]
         public async Task<IActionResult> GetAllCategories()
         {
-            var categories = await mediator.Send(new GetAllCategoriesQuery ());
+            var categories = await mediator.Send(new GetAllCategoriesQuery());
             return Ok(categories);
         }
 
@@ -46,6 +46,7 @@ namespace BuySmart.Controllers
             }
             return NotFound(result.ErrorMessage);
         }
+
 
         [HttpGet("GetCategoryById/{id}")]
         public async Task<ActionResult<CategoryDto>> GetCategoryById(Guid id)

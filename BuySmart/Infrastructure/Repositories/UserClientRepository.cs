@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
-    public class UserClientRepository : IUserClientRepository
+    public class UserClientRepository : IUserRepository<UserClient>
     {
         private readonly ApplicationDbContext context;
 
@@ -17,11 +17,7 @@ namespace Infrastructure.Repositories
 
         public async Task<IEnumerable<UserClient>> GetAllAsync()
         {
-<<<<<<< Updated upstream
             return await context.UserClients.ToListAsync();
-=======
-           return await context.UserClients.ToListAsync();
->>>>>>> Stashed changes
         }
 
         public async Task<UserClient> GetByIdAsync(Guid userClientId)

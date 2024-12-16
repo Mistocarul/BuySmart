@@ -5,7 +5,7 @@ namespace Domain.Repositories
 {
     public interface IProductRepository
     {
-        Task<IEnumerable<Product>> GetAllAsync(int pageNumber, int pageSize, ProductOrder order);
+        Task<IEnumerable<Product>> GetAllAsync();
         Task<Product> GetByIdAsync(Guid productId);
         Task<Result<Guid>> AddAsync(Product product);
         Task<Result<object>> UpdateAsync(Product product);

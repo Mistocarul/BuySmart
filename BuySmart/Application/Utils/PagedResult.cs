@@ -12,4 +12,3 @@
         public int TotalCount { get; }
     }
 }
-

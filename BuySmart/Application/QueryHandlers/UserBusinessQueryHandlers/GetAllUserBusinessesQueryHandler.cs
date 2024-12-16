@@ -20,7 +20,7 @@ namespace Application.QueryHandlers.UserBusinessQueryHandlers
 
         public async Task<List<UserBusinessDto>> Handle(GetAllUserBusinessesQuery request, CancellationToken cancellationToken)
         {
-            var userBusinesses = await repository.GetAllAsync(request.pageNumber, request.pageSize);
+            var userBusinesses = await repository.GetAllAsync();
             return mapper.Map<List<UserBusinessDto>>(userBusinesses);
         }
     }

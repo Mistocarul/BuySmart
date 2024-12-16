@@ -21,23 +21,23 @@ namespace Application.QueryHandlers.CategoryQueryHandlers
         public async Task<Result<PagedResult<CategoryDto>>> Handle(GetFilteredCategoriesQuery request, CancellationToken cancellationToken)
         {
             var categories = await repository.GetAllAsync();
-            
-            if (request.Filter!=null)
+
+            if (request.Filter != null)
             {
-                categories=categories.AsQueryable().Where(request.Filter);
+                categories = categories.AsQueryable().Where(request.Filter);
             }
 
             //lazy evaluation; interogare executata direct in baza de date 
             //doar datele necesare sunt aduse in memorie
             //daca faceam ca inainte, skip si take erau aplicate in memorie
 
-           var totalCount = categories.Count();
-           var pagedCategories=categories.AsQueryable().ApplyPaging(request.Page, request.PageSize);
-           var categoryDtos = mapper.Map<List<CategoryDto>>(pagedCategories);
+            var totalCount = categories.Count();
+            var pagedCategories = categories.AsQueryable().ApplyPaging(request.Page, request.PageSize);
+            var categoryDtos = mapper.Map<List<CategoryDto>>(pagedCategories);
 
-           var pagedResult = new PagedResult<CategoryDto>(categoryDtos, totalCount);
+            var pagedResult = new PagedResult<CategoryDto>(categoryDtos, totalCount);
 
-           return Result<PagedResult<CategoryDto>>.Success(pagedResult);
+            return Result<PagedResult<CategoryDto>>.Success(pagedResult);
         }
     }
 }

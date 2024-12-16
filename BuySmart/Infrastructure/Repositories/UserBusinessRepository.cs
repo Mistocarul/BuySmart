@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
-    public class UserBusinessRepository : IUserBusinessRepository
+    public class UserBusinessRepository : IUserRepository<UserBusiness>
     {
         private readonly ApplicationDbContext context;
         public UserBusinessRepository(ApplicationDbContext context)
@@ -41,11 +41,7 @@ namespace Infrastructure.Repositories
 
         public async Task<IEnumerable<UserBusiness>> GetAllAsync()
         {
-<<<<<<< Updated upstream
             return await context.UserBusinesses.ToListAsync();
-=======
-           return await context.UserBusinesses.ToListAsync();
->>>>>>> Stashed changes
         }
 
         public async Task<UserBusiness> GetByIdAsync(Guid userBusinessId)

@@ -5,8 +5,10 @@ using Application.Utils;
 using Domain.Common;
 using Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq.Expressions;
+using LinqKit;
 
 namespace BuySmart.Controllers
 {
@@ -20,6 +22,7 @@ namespace BuySmart.Controllers
             this.mediator = mediator;
         }
 
+        [Authorize]
         [HttpGet("GetAllProducts")]
         public async Task<IActionResult> GetAllProducts()
         {
@@ -28,52 +31,39 @@ namespace BuySmart.Controllers
             return Ok(products);
         }
 
+        [Authorize]
         [HttpGet("GetPaginatedProducts")]
-        public async Task<ActionResult<PagedResult<ProductDto>>> GetFilteredProducts([FromQuery] int page, [FromQuery] int pageSize, [FromQuery] string? name, [FromQuery] Guid? categoryId, [FromQuery] decimal? minPrice, [FromQuery] decimal? maxPrice, [FromQuery]  string? sortbyPriceDirection)
+        public async Task<ActionResult<PagedResult<ProductDto>>> GetFilteredProducts([FromQuery] int page, [FromQuery] int pageSize, [FromQuery] string? name, [FromQuery] Guid? categoryId, [FromQuery] decimal? minPrice, [FromQuery] decimal? maxPrice, [FromQuery] string? sortbyPriceDirection)
         {
-            //expresii lambda care iau un produs si ret un bool
-            //practic imi definesc predicate pt filtrare 
+            var filter = PredicateBuilder.New<Product>(true);
 
-            Expression<Func<Product, bool>> filterByProductName = m =>
-            string.IsNullOrEmpty(name) || m.Name.Contains(name);
+            if (!string.IsNullOrEmpty(name))
+            {
+                filter = filter.And(p => p.Name.Contains(name));
+            }
 
-            Expression<Func<Product, bool>> filterByCategoryId = p =>
-            !categoryId.HasValue || p.Categories.Any(c => c.CategoryId == categoryId);
+            if (categoryId.HasValue)
+            {
+                filter = filter.And(p => p.Categories.Any(c => c.CategoryId == categoryId));
+            }
 
-            Expression<Func<Product, bool>> filterByMinPrice = m =>
-            !minPrice.HasValue || m.Price >= minPrice;
+            if (minPrice.HasValue)
+            {
+                filter = filter.And(p => p.Price >= minPrice);
+            }
 
-            Expression<Func<Product, bool>> filterByMaxPrice = m =>
-            !maxPrice.HasValue || m.Price <= maxPrice;
-
+            if (maxPrice.HasValue)
+            {
+                filter = filter.And(p => p.Price <= maxPrice);
+            }
 
             var query = new GetFilteredProductsQuery
             {
                 Page = page,
                 PageSize = pageSize,
-                Filter = null,
+                Filter = filter,
                 SortDirection = sortbyPriceDirection,
-
             };
-
-            if (!string.IsNullOrEmpty(name))
-            {
-                query.Filter = filterByProductName;
-            }
-
-            if (categoryId.HasValue)
-            {
-                query.Filter = filterByCategoryId;
-            }
-            if (minPrice.HasValue)
-            {
-                query.Filter = filterByMinPrice;
-            }
-            if (maxPrice.HasValue)
-            {
-                query.Filter = filterByMaxPrice;
-            }
-
 
             var result = await mediator.Send(query);
             if (result.IsSuccess)
@@ -81,7 +71,7 @@ namespace BuySmart.Controllers
                 return Ok(result.Data);
             }
             return NotFound(result.ErrorMessage);
-        }      
+        }
 
         [HttpGet("GetProductById/{id}")]
         public async Task<ActionResult<ProductDto>> GetProductById(Guid id)
@@ -89,6 +79,7 @@ namespace BuySmart.Controllers
             return await mediator.Send(new GetProductByIdQuery { ProductId = id });
         }
 
+        [Authorize(Roles = "Business")]
         [HttpPost("CreateProduct")]
         public async Task<ActionResult<Result<Guid>>> CreateProduct([FromBody] CreateProductCommand command)
         {
@@ -125,6 +116,3 @@ namespace BuySmart.Controllers
         }
     }
 }
-
-
-

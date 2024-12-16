@@ -23,14 +23,14 @@ namespace BuySmart.Controllers
         [HttpGet("GetAllReviewBusinesses")]
         public async Task<IActionResult> GetAllReviewBusinesses()
         {
-            var reviews = await mediator.Send(new GetAllReviewBusinessesQuery ());
+            var reviews = await mediator.Send(new GetAllReviewBusinessesQuery());
             return Ok(reviews);
         }
 
         [HttpGet("GetPaginatedReviewBusinesses")]
         public async Task<ActionResult<PagedResult<ReviewDto>>> GetFilteredReviewBusinesses([FromQuery] int page, [FromQuery] int pageSize, [FromQuery] string? keyword)
         {
-            Expression<Func<Review, bool>> filter=m=>
+            Expression<Func<Review, bool>> filter = m =>
             string.IsNullOrEmpty(keyword) || m.Comment.Contains(keyword);
 
             var query = new GetFilteredReviewBusinessesQuery
@@ -40,7 +40,7 @@ namespace BuySmart.Controllers
                 Filter = null
             };
 
-            if(!string.IsNullOrEmpty(keyword))
+            if (!string.IsNullOrEmpty(keyword))
             {
                 query.Filter = filter;
             }

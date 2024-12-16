@@ -22,7 +22,7 @@ namespace BuySmart.Controllers
         [HttpGet("GetAllBusinesses")]
         public async Task<IActionResult> GetAllBusinesses()
         {
-            var businesses = await mediator.Send(new GetAllBusinessesQuery ());
+            var businesses = await mediator.Send(new GetAllBusinessesQuery());
             return Ok(businesses);
         }
 

@@ -20,8 +20,15 @@ namespace Application.QueryHandlers.ProductQueryHandlers
         public async Task<List<ProductDto>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
             var products = await productRepository.GetAllAsync();
-
-            return mapper.Map<List<ProductDto>>(products);
+            List<ProductDto> productsDto = new List<ProductDto>();
+            foreach (var product in products)
+            {
+                var categoryDtos = mapper.Map<List<CategoryDto>>(product.Categories);
+                var productDto = mapper.Map<ProductDto>(product);
+                productDto.Categories = categoryDtos;
+                productsDto.Add(productDto);
+            }
+            return productsDto;
         }
     }
 }

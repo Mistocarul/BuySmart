@@ -5,19 +5,18 @@ using AutoMapper;
 using Domain.Entities;
 using Domain.Repositories;
 using NSubstitute;
-using Xunit;
 
 namespace BuySmart.Application.UnitTests.UserClientHandlersTests
 {
     public class GetAllUserClientsQueryHandlerTests
     {
-        private readonly IUserClientRepository _userClientRepository;
+        private readonly IUserRepository<UserClient> _userClientRepository;
         private readonly IMapper _mapper;
         private readonly GetAllUserClientsQueryHandler _handler;
 
         public GetAllUserClientsQueryHandlerTests()
         {
-            _userClientRepository = Substitute.For<IUserClientRepository>();
+            _userClientRepository = Substitute.For<IUserRepository<UserClient>>();
             _mapper = Substitute.For<IMapper>();
             _handler = new GetAllUserClientsQueryHandler(_userClientRepository, _mapper);
         }
@@ -26,11 +25,7 @@ namespace BuySmart.Application.UnitTests.UserClientHandlersTests
         public async Task Given_ValidRequest_When_HandleIsCalled_Then_ReturnsListOfUserClientDtos()
         {
             // Arrange
-<<<<<<< Updated upstream
-            var query = new GetAllUserClientsQuery();
-=======
-            var query = new GetAllUserClientsQuery ();
->>>>>>> Stashed changes
+            var query = new GetAllUserClientsQuery { pageNumber = 1, pageSize = 10 };
 
             var userClients = new List<UserClient>
             {
@@ -84,7 +79,7 @@ namespace BuySmart.Application.UnitTests.UserClientHandlersTests
                 }
             };
 
-            _userClientRepository.GetAllAsync().Returns(userClients);
+            _userClientRepository.GetAllAsync(query.pageNumber, query.pageSize).Returns(userClients);
             _mapper.Map<List<UserClientDto>>(userClients).Returns(userClientDtos);
 
             // Act
@@ -93,7 +88,7 @@ namespace BuySmart.Application.UnitTests.UserClientHandlersTests
             // Assert
             Assert.NotNull(response);
             Assert.Equal(userClientDtos.Count, response.Count);
-            await _userClientRepository.Received(1).GetAllAsync();
+            await _userClientRepository.Received(1).GetAllAsync(query.pageNumber, query.pageSize);
             _mapper.Received(1).Map<List<UserClientDto>>(userClients);
         }
 
@@ -101,16 +96,12 @@ namespace BuySmart.Application.UnitTests.UserClientHandlersTests
         public async Task Given_EmptyUserClients_When_HandleIsCalled_Then_ReturnsEmptyList()
         {
             // Arrange
-<<<<<<< Updated upstream
-            var query = new GetAllUserClientsQuery();
-=======
-            var query = new GetAllUserClientsQuery ();
->>>>>>> Stashed changes
+            var query = new GetAllUserClientsQuery { pageNumber = 1, pageSize = 10 };
 
             var userClients = new List<UserClient>();
             var userClientDtos = new List<UserClientDto>();
 
-            _userClientRepository.GetAllAsync().Returns(userClients);
+            _userClientRepository.GetAllAsync(query.pageNumber, query.pageSize).Returns(userClients);
             _mapper.Map<List<UserClientDto>>(userClients).Returns(userClientDtos);
 
             // Act
@@ -119,7 +110,7 @@ namespace BuySmart.Application.UnitTests.UserClientHandlersTests
             // Assert
             Assert.NotNull(response);
             Assert.Empty(response);
-            await _userClientRepository.Received(1).GetAllAsync();
+            await _userClientRepository.Received(1).GetAllAsync(query.pageNumber, query.pageSize);
             _mapper.Received(1).Map<List<UserClientDto>>(userClients);
         }
     }

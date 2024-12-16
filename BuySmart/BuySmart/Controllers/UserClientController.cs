@@ -5,6 +5,8 @@ using Domain.Common;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Application.Commands.CartCommands;
+using Microsoft.AspNetCore.Authorization;
+using BuySmart.JWT;
 using Application.Utils;
 
 namespace BuySmart.Controllers
@@ -14,18 +16,18 @@ namespace BuySmart.Controllers
     public class UserClientController : ControllerBase
     {
         private readonly IMediator mediator;
-        public UserClientController(IMediator mediator)
+        private readonly IHttpContextAccessor httpContextAccessor;
+
+        public UserClientController(IMediator mediator, IHttpContextAccessor httpContextAccessor)
         {
             this.mediator = mediator;
+            this.httpContextAccessor = httpContextAccessor;
         }
         [HttpGet("GetAllUserClients")]
         public async Task<IActionResult> GetAllUsers()
         {
-<<<<<<< Updated upstream
+
             var users = await mediator.Send(new GetAllUserClientsQuery());
-=======
-            var users = await mediator.Send(new GetAllUserClientsQuery ());
->>>>>>> Stashed changes
             return Ok(users);
         }
 
@@ -36,10 +38,10 @@ namespace BuySmart.Controllers
             {
                 Page = page,
                 PageSize = pageSize,
-                Filter=null
+                Filter = null
             };
 
-            var result=await mediator.Send(query);
+            var result = await mediator.Send(query);
             if (result.IsSuccess)
             {
                 return Ok(result.Data);
@@ -81,13 +83,16 @@ namespace BuySmart.Controllers
             return NoContent();
         }
 
-        [HttpPut("UpdateUserClient/{id:guid}")]
-        public async Task<ActionResult<Result<object>>> UpdateUser(Guid id, [FromBody] UpdateUserClientCommand command)
+        [Authorize]
+        [HttpPut("UpdateUserClient")]
+        public async Task<ActionResult<Result<object>>> UpdateUser([FromBody] UpdateUserClientCommand command)
         {
-            if (id != command.UserId)
+            var userId = JwtHelper.GetUserIdFromJwt(httpContextAccessor.HttpContext);
+            if (userId == null)
             {
-                return BadRequest();
+                return Unauthorized();
             }
+            command.UserId = new Guid(userId);
             command.Password = BCrypt.Net.BCrypt.HashPassword(command.Password);
             var result = await mediator.Send(command);
             if (!result.IsSuccess)

@@ -32,7 +32,7 @@ namespace Identity.Repositories
             try
             {
                 var existingUser = await usersDbContext.Users.SingleOrDefaultAsync(u => u.Email == user.Email);
-                if (existingUser == null)
+                if (existingUser == null || !BCrypt.Net.BCrypt.Verify(user.Password, existingUser.Password))
                 {
                     return Result<string>.Failure("Invalid credentials");
                 }

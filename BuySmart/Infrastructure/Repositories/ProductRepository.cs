@@ -2,6 +2,8 @@
 using Infrastructure.Persistence;
 using Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Domain.Common;
+
 
 namespace Infrastructure.Repositories
 {
@@ -14,11 +16,9 @@ namespace Infrastructure.Repositories
         }
         public async Task<IEnumerable<Product>> GetAllAsync()
         {
-            return await context.Products.ToListAsync();
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
+            return await context.Products
+                .Include(p => p.Categories)
+                .ToListAsync();
         }
 
         public async Task<Product> GetByIdAsync(Guid productId)
@@ -31,22 +31,48 @@ namespace Infrastructure.Repositories
             return product;
         }
 
-        public async Task<Guid> AddAsync(Product product)
+        public async Task<Result<Guid>> AddAsync(Product product)
         {
-            await context.Products.AddAsync(product);
-            await context.SaveChangesAsync();
-            return product.ProductId;
+            try
+            {
+                await context.Products.AddAsync(product);
+                await context.SaveChangesAsync();
+                return Result<Guid>.Success(product.ProductId);
+            }
+            catch (Exception ex)
+            {
+                return Result<Guid>.Failure(ex.Message);
+            }
+
+
         }
 
-        public async Task UpdateAsync(Product product)
+        public async Task<Result<object>> UpdateAsync(Product product)
         {
-            var existingProduct = await context.Products.FindAsync(product.ProductId);
-            if (existingProduct == null)
+            try
             {
-                throw new KeyNotFoundException("Product not found");
+                var existingProduct = await context.Products.FindAsync(product.ProductId);
+                if (existingProduct == null)
+                {
+                    return Result<object>.Failure("Product not found");
+                }
+                existingProduct.Name = product.Name;
+                existingProduct.Description = product.Description;
+                existingProduct.Price = product.Price;
+                existingProduct.Stock = product.Stock;
+                existingProduct.Rating = product.Rating;
+                existingProduct.Image = product.Image;
+                existingProduct.BusinessId = product.BusinessId;
+                context.Products.Update(existingProduct);
+                await context.SaveChangesAsync();
+                return Result<object>.Success(new object());
+
             }
-            context.Entry(existingProduct).CurrentValues.SetValues(product);
-            await context.SaveChangesAsync();
+            catch (Exception ex)
+            {
+                return Result<object>.Failure(ex.Message);
+
+            }
         }
 
         public async Task DeleteAsync(Guid productId)

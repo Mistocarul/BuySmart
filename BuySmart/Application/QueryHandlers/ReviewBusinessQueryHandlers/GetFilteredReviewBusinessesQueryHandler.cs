@@ -9,7 +9,7 @@ using Gridify;
 
 namespace Application.QueryHandlers.ReviewBusinessQueryHandlers
 {
-    public class GetFilteredReviewBusinessesQueryHandler: IRequestHandler<GetFilteredReviewBusinessesQuery, Result<PagedResult<ReviewDto>>>
+    public class GetFilteredReviewBusinessesQueryHandler : IRequestHandler<GetFilteredReviewBusinessesQuery, Result<PagedResult<ReviewDto>>>
     {
         private readonly IReviewBusinessRepository repository;
         private readonly IMapper mapper;
@@ -26,7 +26,7 @@ namespace Application.QueryHandlers.ReviewBusinessQueryHandlers
             {
                 reviewBusinesses = reviewBusinesses.AsQueryable().Where(request.Filter);
             }
-            
+
             var totalCount = reviewBusinesses.Count();
             var pagedReviewBusinesses = reviewBusinesses.AsQueryable().ApplyPaging(request.Page, request.PageSize);
             var reviewBusinessDtos = mapper.Map<List<ReviewDto>>(pagedReviewBusinesses);

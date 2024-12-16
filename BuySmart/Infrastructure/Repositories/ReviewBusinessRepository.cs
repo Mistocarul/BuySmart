@@ -77,6 +77,7 @@ namespace Infrastructure.Repositories
         public async Task<IEnumerable<Review>> GetAllAsync()
         {
             return await context.Reviews.ToListAsync();
+
         }
         public async Task<Review> GetByIdAsync(Guid reviewId)
         {

@@ -5,6 +5,6 @@ namespace Application.Queries.ReviewBusinessQueries
 {
     public class GetAllReviewBusinessesQuery : IRequest<List<ReviewDto>>
     {
-    
+
     }
 }

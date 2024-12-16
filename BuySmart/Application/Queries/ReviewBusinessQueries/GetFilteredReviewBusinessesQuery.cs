@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace Application.Queries.ReviewBusinessQueries
 {
-    public class GetFilteredReviewBusinessesQuery: IRequest<Result<PagedResult<ReviewDto>>>
+    public class GetFilteredReviewBusinessesQuery : IRequest<Result<PagedResult<ReviewDto>>>
     {
         public int Page { get; set; }
         public int PageSize { get; set; }

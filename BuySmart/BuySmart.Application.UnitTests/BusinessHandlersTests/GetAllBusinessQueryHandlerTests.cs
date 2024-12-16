@@ -82,14 +82,14 @@ namespace BuySmart.Application.UnitTests.BusinessHandlersTests
             var reviews = new List<Review>();
             var reviewDtos = new List<ReviewDto>();
 
-            _reviewBusinessRepository.GetAllAsync().Returns(reviews);
+            _reviewBusinessRepository.GetAllAsync(1, 10).Returns(reviews);
             _mapper.Map<List<ReviewDto>>(reviews).Returns(reviewDtos);
 
             var query = new GetAllReviewBusinessesQuery();
             var response = await _handler.Handle(query, CancellationToken.None);
 
             Assert.Empty(response);
-            await _reviewBusinessRepository.Received(1).GetAllAsync();
+            await _reviewBusinessRepository.Received(1).GetAllAsync(1, 10);
         }
     }
 }
