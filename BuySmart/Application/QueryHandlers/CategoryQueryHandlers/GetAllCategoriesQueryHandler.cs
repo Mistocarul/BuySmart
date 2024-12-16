@@ -17,12 +17,7 @@ namespace Application.QueryHandlers.CategoryQueryHandlers
         }
         public async Task<List<CategoryDto>> Handle(GetAllCategoriesQuery request, CancellationToken cancellationToken)
         {
-            var categories = await categoryRepository.GetAllAsync(request.PageNumber, request.PageSize);
-
-            if (!string.IsNullOrEmpty(request.keyWord))
-            {
-                categories = categories.Where(c => c.Description.Contains(request.keyWord)).ToList();
-            }
+            var categories = await categoryRepository.GetAllAsync();
             return mapper.Map<List<CategoryDto>>(categories);
         }
     }

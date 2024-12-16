@@ -5,8 +5,7 @@ using Domain.Common;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Application.Commands.CartCommands;
-using Microsoft.AspNetCore.Authorization;
-using BuySmart.JWT;
+using Application.Utils;
 
 namespace BuySmart.Controllers
 {
@@ -15,18 +14,38 @@ namespace BuySmart.Controllers
     public class UserClientController : ControllerBase
     {
         private readonly IMediator mediator;
-        private readonly IHttpContextAccessor httpContextAccessor;
-
-        public UserClientController(IMediator mediator, IHttpContextAccessor httpContextAccessor)
+        public UserClientController(IMediator mediator)
         {
             this.mediator = mediator;
-            this.httpContextAccessor = httpContextAccessor;
         }
         [HttpGet("GetAllUserClients")]
-        public async Task<IActionResult> GetAllUsers(int pageNumber = 1, int pageSize = 10)
+        public async Task<IActionResult> GetAllUsers()
         {
-            var users = await mediator.Send(new GetAllUserClientsQuery { pageNumber = pageNumber, pageSize = pageSize});
+<<<<<<< Updated upstream
+            var users = await mediator.Send(new GetAllUserClientsQuery());
+=======
+            var users = await mediator.Send(new GetAllUserClientsQuery ());
+>>>>>>> Stashed changes
             return Ok(users);
+        }
+
+        [HttpGet("GetPaginatedUserClients")]
+        public async Task<ActionResult<PagedResult<UserClientDto>>> GetFilteredUserClients([FromQuery] int page, [FromQuery] int pageSize)
+        {
+            var query = new GetFilteredUserClientsQuery
+            {
+                Page = page,
+                PageSize = pageSize,
+                Filter=null
+            };
+
+            var result=await mediator.Send(query);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            return NotFound(result.ErrorMessage);
+
         }
 
         [HttpGet("GetUserClientById/{id}")]
@@ -62,16 +81,13 @@ namespace BuySmart.Controllers
             return NoContent();
         }
 
-        [Authorize]
-        [HttpPut("UpdateUserClient")]
-        public async Task<ActionResult<Result<object>>> UpdateUser([FromBody] UpdateUserClientCommand command)
+        [HttpPut("UpdateUserClient/{id:guid}")]
+        public async Task<ActionResult<Result<object>>> UpdateUser(Guid id, [FromBody] UpdateUserClientCommand command)
         {
-            var userId = JwtHelper.GetUserIdFromJwt(httpContextAccessor.HttpContext);
-            if (userId == null)
+            if (id != command.UserId)
             {
-                return Unauthorized();
+                return BadRequest();
             }
-            command.UserId = new Guid(userId);
             command.Password = BCrypt.Net.BCrypt.HashPassword(command.Password);
             var result = await mediator.Send(command);
             if (!result.IsSuccess)

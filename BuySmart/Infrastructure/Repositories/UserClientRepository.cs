@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
-    public class UserClientRepository : IUserRepository<UserClient>
+    public class UserClientRepository : IUserClientRepository
     {
         private readonly ApplicationDbContext context;
 
@@ -15,12 +15,13 @@ namespace Infrastructure.Repositories
             this.context = context;
         }
 
-        public async Task<IEnumerable<UserClient>> GetAllAsync(int pageNumber, int pageSize)
+        public async Task<IEnumerable<UserClient>> GetAllAsync()
         {
-            return await context.UserClients
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
+<<<<<<< Updated upstream
+            return await context.UserClients.ToListAsync();
+=======
+           return await context.UserClients.ToListAsync();
+>>>>>>> Stashed changes
         }
 
         public async Task<UserClient> GetByIdAsync(Guid userClientId)

@@ -1,9 +1,12 @@
 ﻿using Application.Commands.BusinessCommands;
 using Application.DTOs;
 using Application.Queries.BusinessQueries;
+using Application.Utils;
 using Domain.Common;
+using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
 
 namespace BuySmart.Controllers
 {
@@ -17,10 +20,33 @@ namespace BuySmart.Controllers
             this.mediator = mediator;
         }
         [HttpGet("GetAllBusinesses")]
-        public async Task<IActionResult> GetAllBusinesses(int pageNumber = 1, int pageSize = 10)
+        public async Task<IActionResult> GetAllBusinesses()
         {
-            var businesses = await mediator.Send(new GetAllBusinessesQuery { PageNumber = pageNumber, PageSize = pageSize });
+            var businesses = await mediator.Send(new GetAllBusinessesQuery ());
             return Ok(businesses);
+        }
+
+        [HttpGet("GetPaginatedBusinesses")]
+        public async Task<ActionResult<PagedResult<BusinessDto>>> GetFilteredBusinesses([FromQuery] int page, [FromQuery] int pageSize, [FromQuery] string? keyword)
+        {
+            Expression<Func<Business, bool>> filter = m =>
+            string.IsNullOrEmpty(keyword) || m.Description.Contains(keyword);
+            var query = new GetFilteredBusinessesQuery
+            {
+                Page = page,
+                PageSize = pageSize,
+                Filter = null
+            };
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                query.Filter = filter;
+            }
+            var result = await mediator.Send(query);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            return NotFound(result.ErrorMessage);
         }
 
         [HttpGet("GetBusinessById/{id}")]

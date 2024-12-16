@@ -13,26 +13,21 @@ namespace Infrastructure.Repositories
         {
             this.context = context;
         }
-        public async Task<IEnumerable<Category>> GetAllAsync(int pageNumber, int pageSize)
+        public async Task<IEnumerable<Category>> GetAllAsync()
         {
-            return await context.Categories
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
+           return await context.Categories.ToListAsync();
         }
         public async Task<Category> GetByIdAsync(Guid categoryId)
         {
-            Console.WriteLine($"Verificare ID categorie: {categoryId}");
             var category = await context.Categories.FindAsync(categoryId);
             if (category == null)
             {
-                Console.WriteLine("Categorie nu a fost găsită");
                 throw new KeyNotFoundException("Category not found");
             }
-            Console.WriteLine("Categorie găsită");
             return category;
         }
-
+<<<<<<< Updated upstream
+=======
 
         public async Task<IEnumerable<Category>> GetByNamesAsync(List<string> names)
         {
@@ -40,10 +35,9 @@ namespace Infrastructure.Repositories
                 .Where(c => names.Contains(c.Name))
                 .ToListAsync();
         }
-       
 
+>>>>>>> Stashed changes
         public async Task<Result<Guid>> AddAsync(Category category)
-
         {
             try
             {
@@ -61,7 +55,6 @@ namespace Infrastructure.Repositories
           try
             {
                 var existingCategory = await context.Categories.FindAsync(category.CategoryId);
-                Console.WriteLine($"Verificare ID categorie: {category.CategoryId}");
                 if (existingCategory == null)
                 {
                     return Result<object>.Failure("Category not found");

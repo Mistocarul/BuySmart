@@ -19,36 +19,9 @@ namespace Application.QueryHandlers.ProductQueryHandlers
 
         public async Task<List<ProductDto>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
-            var products = await productRepository.GetAllAsync(request.pageNumber, request.pageSize, request.order);
+            var products = await productRepository.GetAllAsync();
 
-            if (!string.IsNullOrEmpty(request.Name))
-            {
-                products = products.Where(p => p.Name.Contains(request.Name)).ToList();
-            }
-            if(request.CategoryId.HasValue)
-            {
-                products = products.Where(p => p.Categories.Any(c => c.CategoryId == request.CategoryId)).ToList();
-            }
-
-            if (request.MinPrice.HasValue)
-            {
-                products = products.Where(p => p.Price >= request.MinPrice.Value).ToList();
-            }
-
-            if (request.MaxPrice.HasValue)
-            {
-                products = products.Where(p => p.Price <= request.MaxPrice.Value).ToList();
-            }
-
-            List<ProductDto> productsDto = new List<ProductDto>();
-            foreach (var product in products)
-            {
-                var categoryDtos = mapper.Map<List<CategoryDto>>(product.Categories);
-                var productDto = mapper.Map<ProductDto>(product);
-                productDto.Categories = categoryDtos;
-                productsDto.Add(productDto);
-            }
-            return productsDto;
+            return mapper.Map<List<ProductDto>>(products);
         }
     }
 }

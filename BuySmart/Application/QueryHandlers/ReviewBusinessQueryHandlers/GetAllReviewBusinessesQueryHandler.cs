@@ -18,7 +18,7 @@ namespace Application.QueryHandlers.ReviewBusinessQueryHandlers
         }
         public async Task<List<ReviewDto>> Handle(GetAllReviewBusinessesQuery request, CancellationToken cancellationToken)
         {
-            var reviewBusinesses = await repository.GetAllAsync(request.PageNumber, request.PageSize);
+            var reviewBusinesses = await repository.GetAllAsync();
             return mapper.Map<List<ReviewDto>>(reviewBusinesses);
         }
     }

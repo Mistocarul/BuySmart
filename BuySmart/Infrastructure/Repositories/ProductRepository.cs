@@ -2,8 +2,6 @@
 using Infrastructure.Persistence;
 using Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Domain.Common;
-
 
 namespace Infrastructure.Repositories
 {
@@ -14,36 +12,13 @@ namespace Infrastructure.Repositories
         {
             this.context = context;
         }
-        public async Task<IEnumerable<Product>> GetAllAsync(int pageNumber, int pageSize, ProductOrder order)
+        public async Task<IEnumerable<Product>> GetAllAsync()
         {
-            if (order == ProductOrder.Asc)
-            {
-                return await context.Products
-                .OrderBy(p => p.Price)
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .Include(p => p.Categories)
-                .ToListAsync();
-            }
-            else if (order == ProductOrder.Desc)
-            {
-                return await context.Products
-                .OrderByDescending(p => p.Price)
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .Include(p => p.Categories)
-                .ToListAsync();
-            }
-            else 
-            {
-             return await context.Products
-            .OrderBy(p => p.ProductId)
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
-            .Include(p => p.Categories)
-            .ToListAsync();
-            }
-            
+            return await context.Products.ToListAsync();
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         }
 
         public async Task<Product> GetByIdAsync(Guid productId)
@@ -56,48 +31,22 @@ namespace Infrastructure.Repositories
             return product;
         }
 
-        public async Task<Result<Guid>> AddAsync(Product product)
+        public async Task<Guid> AddAsync(Product product)
         {
-            try
-            {
-                await context.Products.AddAsync(product);
-                await context.SaveChangesAsync();
-                return Result<Guid>.Success(product.ProductId);
-            }
-            catch (Exception ex)
-            {
-                return Result<Guid>.Failure(ex.Message);
-            }
-
-
+            await context.Products.AddAsync(product);
+            await context.SaveChangesAsync();
+            return product.ProductId;
         }
 
-        public async Task<Result<object>> UpdateAsync(Product product)
+        public async Task UpdateAsync(Product product)
         {
-            try
+            var existingProduct = await context.Products.FindAsync(product.ProductId);
+            if (existingProduct == null)
             {
-                var existingProduct = await context.Products.FindAsync(product.ProductId);
-                if (existingProduct == null)
-                {
-                    return Result<object>.Failure("Product not found");
-                }
-                existingProduct.Name = product.Name;
-                existingProduct.Description = product.Description;
-                existingProduct.Price = product.Price;
-                existingProduct.Stock = product.Stock;
-                existingProduct.Rating = product.Rating;
-                existingProduct.Image = product.Image;
-                existingProduct.BusinessId = product.BusinessId;
-                context.Products.Update(existingProduct);
-                await context.SaveChangesAsync();
-                return Result<object>.Success(new object());
-
+                throw new KeyNotFoundException("Product not found");
             }
-            catch (Exception ex)
-            {
-                return Result<object>.Failure(ex.Message);
-
-            }
+            context.Entry(existingProduct).CurrentValues.SetValues(product);
+            await context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(Guid productId)

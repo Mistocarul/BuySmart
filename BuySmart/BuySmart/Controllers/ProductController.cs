@@ -1,11 +1,12 @@
 ﻿using Application.Commands.ProductCommands;
 using Application.DTOs;
 using Application.Queries.ProductQueries;
+using Application.Utils;
 using Domain.Common;
 using Domain.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
 
 namespace BuySmart.Controllers
 {
@@ -19,23 +20,68 @@ namespace BuySmart.Controllers
             this.mediator = mediator;
         }
 
-        [Authorize]
         [HttpGet("GetAllProducts")]
-        public async Task<IActionResult> GetAllProducts([FromQuery] string? name, [FromQuery] Guid? categoryId, [FromQuery] decimal? minPrice, [FromQuery] decimal? maxPrice, ProductOrder order, int pageNumber = 1, int pageSize = 10)
+        public async Task<IActionResult> GetAllProducts()
         {
-            var query = new GetAllProductsQuery
-            {
-                Name = name,
-                CategoryId = categoryId,
-                MinPrice = minPrice,
-                MaxPrice = maxPrice,
-                pageNumber = pageNumber,
-                pageSize = pageSize,
-                order = order
-            };
-            var products = await mediator.Send(query);
+
+            var products = await mediator.Send(new GetAllProductsQuery());
             return Ok(products);
         }
+
+        [HttpGet("GetPaginatedProducts")]
+        public async Task<ActionResult<PagedResult<ProductDto>>> GetFilteredProducts([FromQuery] int page, [FromQuery] int pageSize, [FromQuery] string? name, [FromQuery] Guid? categoryId, [FromQuery] decimal? minPrice, [FromQuery] decimal? maxPrice, [FromQuery]  string? sortbyPriceDirection)
+        {
+            //expresii lambda care iau un produs si ret un bool
+            //practic imi definesc predicate pt filtrare 
+
+            Expression<Func<Product, bool>> filterByProductName = m =>
+            string.IsNullOrEmpty(name) || m.Name.Contains(name);
+
+            Expression<Func<Product, bool>> filterByCategoryId = p =>
+            !categoryId.HasValue || p.Categories.Any(c => c.CategoryId == categoryId);
+
+            Expression<Func<Product, bool>> filterByMinPrice = m =>
+            !minPrice.HasValue || m.Price >= minPrice;
+
+            Expression<Func<Product, bool>> filterByMaxPrice = m =>
+            !maxPrice.HasValue || m.Price <= maxPrice;
+
+
+            var query = new GetFilteredProductsQuery
+            {
+                Page = page,
+                PageSize = pageSize,
+                Filter = null,
+                SortDirection = sortbyPriceDirection,
+
+            };
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                query.Filter = filterByProductName;
+            }
+
+            if (categoryId.HasValue)
+            {
+                query.Filter = filterByCategoryId;
+            }
+            if (minPrice.HasValue)
+            {
+                query.Filter = filterByMinPrice;
+            }
+            if (maxPrice.HasValue)
+            {
+                query.Filter = filterByMaxPrice;
+            }
+
+
+            var result = await mediator.Send(query);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            return NotFound(result.ErrorMessage);
+        }      
 
         [HttpGet("GetProductById/{id}")]
         public async Task<ActionResult<ProductDto>> GetProductById(Guid id)
@@ -43,7 +89,6 @@ namespace BuySmart.Controllers
             return await mediator.Send(new GetProductByIdQuery { ProductId = id });
         }
 
-        [Authorize(Roles = "Business")]
         [HttpPost("CreateProduct")]
         public async Task<ActionResult<Result<Guid>>> CreateProduct([FromBody] CreateProductCommand command)
         {
@@ -80,3 +125,6 @@ namespace BuySmart.Controllers
         }
     }
 }
+
+
+

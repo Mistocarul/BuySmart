@@ -1,9 +1,12 @@
 ﻿using Application.Commands.ReviewBusinessCommands;
 using Application.DTOs;
 using Application.Queries.ReviewBusinessQueries;
+using Application.Utils;
 using Domain.Common;
+using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
 
 namespace BuySmart.Controllers
 {
@@ -18,10 +21,35 @@ namespace BuySmart.Controllers
         }
 
         [HttpGet("GetAllReviewBusinesses")]
-        public async Task<IActionResult> GetAllReviewBusinesses(int pageNumber = 1, int pageSize = 10)
+        public async Task<IActionResult> GetAllReviewBusinesses()
         {
-            var reviews = await mediator.Send(new GetAllReviewBusinessesQuery { PageNumber=pageNumber, PageSize = pageSize });
+            var reviews = await mediator.Send(new GetAllReviewBusinessesQuery ());
             return Ok(reviews);
+        }
+
+        [HttpGet("GetPaginatedReviewBusinesses")]
+        public async Task<ActionResult<PagedResult<ReviewDto>>> GetFilteredReviewBusinesses([FromQuery] int page, [FromQuery] int pageSize, [FromQuery] string? keyword)
+        {
+            Expression<Func<Review, bool>> filter=m=>
+            string.IsNullOrEmpty(keyword) || m.Comment.Contains(keyword);
+
+            var query = new GetFilteredReviewBusinessesQuery
+            {
+                Page = page,
+                PageSize = pageSize,
+                Filter = null
+            };
+
+            if(!string.IsNullOrEmpty(keyword))
+            {
+                query.Filter = filter;
+            }
+            var result = await mediator.Send(query);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            return NotFound(result.ErrorMessage);
         }
 
         [HttpGet("GetReviewBusinessById/{id}")]

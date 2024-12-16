@@ -10,13 +10,13 @@ namespace BuySmart.Application.UnitTests.UserBusinessHandlersTests
 {
     public class GetAllUserBusinessesQueryHandlerTests
     {
-        private readonly IUserRepository<UserBusiness> _userBusinessRepository;
+        private readonly IUserBusinessRepository _userBusinessRepository;
         private readonly IMapper _mapper;
         private readonly GetAllUserBusinessesQueryHandler _handler;
 
         public GetAllUserBusinessesQueryHandlerTests()
         {
-            _userBusinessRepository = Substitute.For<IUserRepository<UserBusiness>>();
+            _userBusinessRepository = Substitute.For<IUserBusinessRepository>();
             _mapper = Substitute.For<IMapper>();
             _handler = new GetAllUserBusinessesQueryHandler(_userBusinessRepository, _mapper);
         }
@@ -36,10 +36,15 @@ namespace BuySmart.Application.UnitTests.UserBusinessHandlersTests
             new UserBusinessDto { UserId = userBusinesses[1].UserId, Name = "Business 2", Email = "business2@example.com", UserType = UserType.Business, Image = "image2.png" }
         };
 
+<<<<<<< Updated upstream
+            _userBusinessRepository.GetAllAsync().Returns(userBusinesses);
+            _mapper.Map<List<UserBusinessDto>>(userBusinesses).Returns(userBusinessDtos);
+=======
 
-        _userBusinessRepository.GetAllAsync(1, 10).Returns(userBusinesses);
+        _userBusinessRepository.GetAllAsync().Returns(userBusinesses);
         _mapper.Map<List<UserBusinessDto>>(userBusinesses).Returns(userBusinessDtos);
 
+>>>>>>> Stashed changes
 
             // Act
             var result = await _handler.Handle(new GetAllUserBusinessesQuery(), CancellationToken.None);
@@ -55,10 +60,15 @@ namespace BuySmart.Application.UnitTests.UserBusinessHandlersTests
             var userBusinesses = new List<UserBusiness>();
             var userBusinessDtos = new List<UserBusinessDto>();
 
+<<<<<<< Updated upstream
+            _userBusinessRepository.GetAllAsync().Returns(userBusinesses);
+            _mapper.Map<List<UserBusinessDto>>(userBusinesses).Returns(userBusinessDtos);
+=======
 
-        _userBusinessRepository.GetAllAsync(1, 10).Returns(userBusinesses);
+        _userBusinessRepository.GetAllAsync().Returns(userBusinesses);
         _mapper.Map<List<UserBusinessDto>>(userBusinesses).Returns(userBusinessDtos);
 
+>>>>>>> Stashed changes
 
             // Act
             var result = await _handler.Handle(new GetAllUserBusinessesQuery(), CancellationToken.None);

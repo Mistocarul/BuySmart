@@ -1,9 +1,14 @@
 ﻿using Application.Commands.UserBusinessCommands;
 using Application.DTOs;
+using Application.Queries.CategoryQueries;
 using Application.Queries.UserBusinessQueries;
+using Application.Utils;
 using Domain.Common;
+using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Linq.Expressions;
 
 namespace BuySmart.Controllers
 {
@@ -59,8 +64,23 @@ namespace BuySmart.Controllers
         {
             var users = await mediator.Send(new GetAllUserBusinessesQuery { pageNumber = pageNumber, pageSize = pageSize });
             return Ok(users);
-
         }
 
+        [HttpGet("GetPaginatedUserBusinesses")]
+        public async Task<ActionResult<PagedResult<UserBusinessDto>>> GetFilteredUserBusinesses ([FromQuery] int page, [FromQuery] int pageSize)
+        {
+              var query = new GetFilteredUserBusinessesQuery
+               {
+                Page = page,
+                PageSize = pageSize,
+                Filter = null
+               };
+              var result = await mediator.Send(query);
+              if (result.IsSuccess)
+               {
+                return Ok(result.Data);
+    }
+              return NotFound(result.ErrorMessage);
+}
     }
 }
