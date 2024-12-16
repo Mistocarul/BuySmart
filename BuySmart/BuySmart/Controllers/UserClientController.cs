@@ -23,6 +23,7 @@ namespace BuySmart.Controllers
             this.mediator = mediator;
             this.httpContextAccessor = httpContextAccessor;
         }
+        [Authorize]
         [HttpGet("GetAllUserClients")]
         public async Task<IActionResult> GetAllUsers()
         {
@@ -31,6 +32,7 @@ namespace BuySmart.Controllers
             return Ok(users);
         }
 
+        [Authorize]
         [HttpGet("GetPaginatedUserClients")]
         public async Task<ActionResult<PagedResult<UserClientDto>>> GetFilteredUserClients([FromQuery] int page, [FromQuery] int pageSize)
         {
@@ -83,9 +85,15 @@ namespace BuySmart.Controllers
             return CreatedAtAction(nameof(CreateUserClient), new { id = result.Data }, result.Data);
         }
 
-        [HttpDelete("DeleteUserClient/{id:guid}")]
-        public async Task<ActionResult> DeleteUserById(Guid id)
+        [HttpDelete("DeleteUserClient")]
+        public async Task<ActionResult> DeleteUserById()
         {
+            var userId = JwtHelper.GetUserIdFromJwt(httpContextAccessor.HttpContext);
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+            var id = new Guid(userId);
             await mediator.Send(new DeleteUserClientCommand { UserId = id });
             return NoContent();
         }

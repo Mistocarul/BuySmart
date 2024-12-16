@@ -2,8 +2,10 @@
 using Application.DTOs;
 using Application.Queries.UserBusinessQueries;
 using Application.Utils;
+using BuySmart.JWT;
 using Domain.Common;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuySmart.Controllers
@@ -13,10 +15,14 @@ namespace BuySmart.Controllers
     public class UserBusinessController : ControllerBase
     {
         private readonly IMediator mediator;
-        public UserBusinessController(IMediator mediator)
+        public readonly IHttpContextAccessor httpContextAccessor;
+
+        public UserBusinessController(IMediator mediator, IHttpContextAccessor httpContextAccessor)
         {
             this.mediator = mediator;
+            this.httpContextAccessor = httpContextAccessor;
         }
+
         [HttpPost("CreateUserBusiness")]
         public async Task<ActionResult<Result<Guid>>> CreateUserBusiness([FromBody] CreateUserBusinessCommand command)
         {
@@ -29,16 +35,30 @@ namespace BuySmart.Controllers
             return CreatedAtAction(nameof(CreateUserBusiness), new { id = result.Data }, result.Data);
         }
 
-        [HttpDelete("DeleteUserBusiness/{id:guid}")]
-        public async Task<ActionResult> DeleteUserBusiness(Guid id)
+        [Authorize]
+        [HttpDelete("DeleteUserBusiness")]
+        public async Task<ActionResult> DeleteUserBusiness()
         {
+            var userId = JwtHelper.GetUserIdFromJwt(httpContextAccessor.HttpContext);
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+            var id = new Guid(userId);
             await mediator.Send(new DeleteUserBusinessCommand { UserId = id });
             return NoContent();
         }
 
+        [Authorize]
         [HttpPut("UpdateUserBusiness/{id:guid}")]
         public async Task<ActionResult<Result<object>>> UpdateUserBusiness(Guid id, [FromBody] UpdateUserBusinessCommand command)
         {
+            var userId = JwtHelper.GetUserIdFromJwt(httpContextAccessor.HttpContext);
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+            command.UserId = new Guid(userId);
             command.Password = BCrypt.Net.BCrypt.HashPassword(command.Password);
             if (id != command.UserId)
             {
@@ -48,13 +68,21 @@ namespace BuySmart.Controllers
             return NoContent();
 
         }
-        [HttpGet("GetUserBusinessById/{id:guid}")]
+        [Authorize]
+        [HttpGet("GetUserBusinessById")]
 
-        public async Task<ActionResult<UserBusinessDto>> GetUserBusinessById(Guid id)
+        public async Task<ActionResult<UserBusinessDto>> GetUserBusinessById()
         {
-            return await mediator.Send(new GetUserBusinessByIdQuery { Id = id });
+            var userId = JwtHelper.GetUserIdFromJwt(httpContextAccessor.HttpContext);
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+            GetUserBusinessByIdQuery query = new GetUserBusinessByIdQuery { Id = new Guid(userId) };
+            return await mediator.Send(query);
         }
 
+        [Authorize]
         [HttpGet("GetAllUserBusinesses")]
         public async Task<ActionResult> GetAllUserBusinesses()
         {
@@ -62,6 +90,7 @@ namespace BuySmart.Controllers
             return Ok(users);
         }
 
+        [Authorize]
         [HttpGet("GetPaginatedUserBusinesses")]
         public async Task<ActionResult<PagedResult<UserBusinessDto>>> GetFilteredUserBusinesses([FromQuery] int page, [FromQuery] int pageSize)
         {
