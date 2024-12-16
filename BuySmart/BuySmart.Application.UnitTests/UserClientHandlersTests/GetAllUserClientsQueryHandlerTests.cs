@@ -1,6 +1,6 @@
 using Application.DTOs;
-using Application.Queries.UserClientQueries;
 using Application.QueryHandlers.UserClientQueryHandlers;
+using Application.Queries.UserClientQueries;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Repositories;
@@ -10,108 +10,67 @@ namespace BuySmart.Application.UnitTests.UserClientHandlersTests
 {
     public class GetAllUserClientsQueryHandlerTests
     {
-        private readonly IUserRepository<UserClient> _userClientRepository;
-        private readonly IMapper _mapper;
-        private readonly GetAllUserClientsQueryHandler _handler;
+        private readonly IUserRepository<UserClient> userClientRepository;
+        private readonly IMapper mapper;
+        private readonly GetAllUserClientsQueryHandler handler;
 
         public GetAllUserClientsQueryHandlerTests()
         {
-            _userClientRepository = Substitute.For<IUserRepository<UserClient>>();
-            _mapper = Substitute.For<IMapper>();
-            _handler = new GetAllUserClientsQueryHandler(_userClientRepository, _mapper);
+            userClientRepository = Substitute.For<IUserRepository<UserClient>>();
+            mapper = Substitute.For<IMapper>();
+            handler = new GetAllUserClientsQueryHandler(userClientRepository, mapper);
         }
 
         [Fact]
-        public async Task Given_ValidRequest_When_HandleIsCalled_Then_ReturnsListOfUserClientDtos()
+        public async Task Handle_ShouldReturnMappedUserClients_WhenUserClientsExist()
         {
             // Arrange
-            var query = new GetAllUserClientsQuery { pageNumber = 1, pageSize = 10 };
-
+            var query = new GetAllUserClientsQuery();
             var userClients = new List<UserClient>
             {
-                new UserClient
-                {
-                    UserId = Guid.NewGuid(),
-                    Name = "John Doe",
-                    Email = "john.doe@example.com",
-                    Password = "password123",
-                    UserType = UserType.Client,
-                    Image = "image1.png",
-                    Orders = new List<Order>(),
-                    Reviews = new List<Review>(),
-                    Histories = new List<History>(),
-                    Recommendations = new List<Recommendation>(),
-                    Cart = null
-                },
-                new UserClient
-                {
-                    UserId = Guid.NewGuid(),
-                    Name = "Jane Smith",
-                    Email = "jane.smith@example.com",
-                    Password = "password456",
-                    UserType = UserType.Client,
-                    Image = "image2.png",
-                    Orders = new List<Order>(),
-                    Reviews = new List<Review>(),
-                    Histories = new List<History>(),
-                    Recommendations = new List<Recommendation>(),
-                    Cart = null
-                }
+                new UserClient { UserId = Guid.NewGuid(), Name = "UserClient1", Email = "user1@example.com" },
+                new UserClient { UserId = Guid.NewGuid(), Name = "UserClient2", Email = "user2@example.com" }
             };
-
             var userClientDtos = new List<UserClientDto>
             {
-                new UserClientDto
-                {
-                    UserId = userClients[0].UserId,
-                    Name = userClients[0].Name,
-                    Email = userClients[0].Email,
-                    UserType = userClients[0].UserType,
-                    Image = userClients[0].Image
-                },
-                new UserClientDto
-                {
-                    UserId = userClients[1].UserId,
-                    Name = userClients[1].Name,
-                    Email = userClients[1].Email,
-                    UserType = userClients[1].UserType,
-                    Image = userClients[1].Image
-                }
+                new UserClientDto { UserId = userClients[0].UserId, Name = "UserClient1", Email = "user1@example.com" },
+                new UserClientDto { UserId = userClients[1].UserId, Name = "UserClient2", Email = "user2@example.com" }
             };
 
-            _userClientRepository.GetAllAsync(query.pageNumber, query.pageSize).Returns(userClients);
-            _mapper.Map<List<UserClientDto>>(userClients).Returns(userClientDtos);
+            userClientRepository.GetAllAsync().Returns(userClients);
+            mapper.Map<List<UserClientDto>>(userClients).Returns(userClientDtos);
 
             // Act
-            var response = await _handler.Handle(query, CancellationToken.None);
+            var result = await handler.Handle(query, CancellationToken.None);
 
             // Assert
-            Assert.NotNull(response);
-            Assert.Equal(userClientDtos.Count, response.Count);
-            await _userClientRepository.Received(1).GetAllAsync(query.pageNumber, query.pageSize);
-            _mapper.Received(1).Map<List<UserClientDto>>(userClients);
+            Assert.Equal(userClientDtos.Count, result.Count);
+            Assert.Equal(userClientDtos[0].UserId, result[0].UserId);
+            Assert.Equal(userClientDtos[1].UserId, result[1].UserId);
+            await userClientRepository.Received(1).GetAllAsync();
         }
 
         [Fact]
-        public async Task Given_EmptyUserClients_When_HandleIsCalled_Then_ReturnsEmptyList()
+        public async Task Handle_ShouldReturnEmptyList_WhenNoUserClientsExist()
         {
             // Arrange
-            var query = new GetAllUserClientsQuery { pageNumber = 1, pageSize = 10 };
-
+            var query = new GetAllUserClientsQuery();
             var userClients = new List<UserClient>();
             var userClientDtos = new List<UserClientDto>();
 
-            _userClientRepository.GetAllAsync(query.pageNumber, query.pageSize).Returns(userClients);
-            _mapper.Map<List<UserClientDto>>(userClients).Returns(userClientDtos);
+            userClientRepository.GetAllAsync().Returns(userClients);
+            mapper.Map<List<UserClientDto>>(userClients).Returns(userClientDtos);
 
             // Act
-            var response = await _handler.Handle(query, CancellationToken.None);
+            var result = await handler.Handle(query, CancellationToken.None);
 
             // Assert
-            Assert.NotNull(response);
-            Assert.Empty(response);
-            await _userClientRepository.Received(1).GetAllAsync(query.pageNumber, query.pageSize);
-            _mapper.Received(1).Map<List<UserClientDto>>(userClients);
+            Assert.Empty(result);
+            await userClientRepository.Received(1).GetAllAsync();
         }
     }
 }
+
+
+
+
