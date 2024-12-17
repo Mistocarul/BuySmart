@@ -24,9 +24,6 @@ namespace Application.Commands.ProductCommands
             RuleFor(x => x.Rating)
                 .NotEmpty().WithMessage("Rating is required");
 
-            RuleFor(x => x.Image)
-                .NotEmpty().WithMessage("Image is required");
-
             RuleFor(x => x.BusinessId)
                 .NotEmpty().WithMessage("BusinessId is required");
         }

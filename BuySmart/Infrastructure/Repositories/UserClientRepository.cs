@@ -17,7 +17,22 @@ namespace Infrastructure.Repositories
 
         public async Task<IEnumerable<UserClient>> GetAllAsync()
         {
-            return await context.UserClients.ToListAsync();
+            var userClients = await context.UserClients.ToListAsync();
+            foreach (var userClient in userClients)
+            {
+                string profileFilePath = userClient.Image;
+                if (File.Exists(profileFilePath))
+                {
+                    byte[] imageArray = File.ReadAllBytes(profileFilePath);
+                    string base64ImageRepresentation = Convert.ToBase64String(imageArray);
+                    userClient.Image = base64ImageRepresentation;
+                }
+                else
+                {
+                    throw new FileNotFoundException("Image not found");
+                }
+            }
+            return userClients;
         }
 
         public async Task<UserClient> GetByIdAsync(Guid userClientId)
@@ -27,6 +42,17 @@ namespace Infrastructure.Repositories
             {
                 throw new KeyNotFoundException("UserClient not found");
             }
+            string profileFilePath = userClient.Image;
+            if (File.Exists(profileFilePath))
+            {
+                byte[] imageArray = File.ReadAllBytes(profileFilePath);
+                string base64ImageRepresentation = Convert.ToBase64String(imageArray);
+                userClient.Image = base64ImageRepresentation;
+            }
+            else
+            {
+                throw new FileNotFoundException("Image not found");
+            }    
             return userClient;
         }
 
