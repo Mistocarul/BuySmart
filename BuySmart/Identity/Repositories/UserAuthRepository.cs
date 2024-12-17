@@ -27,6 +27,23 @@ namespace Identity.Repositories
             this.context = context;
         }
 
+        public async Task<Result<string>> VerifyPassword(Guid userId, string password)
+        {
+            try
+            {
+                var existingUser = await usersDbContext.Users.SingleOrDefaultAsync(u => u.UserId == userId);
+                if (existingUser == null || !BCrypt.Net.BCrypt.Verify(password, existingUser.Password))
+                {
+                    return Result<string>.Failure("Invalid password");
+                }
+                return Result<string>.Success("Password is correct");
+            }
+            catch (Exception ex)
+            {
+                return Result<string>.Failure(ex.Message);
+            }
+        }
+
         public async Task<Result<string>> Login(User user)
         {
             try
@@ -253,5 +270,7 @@ namespace Identity.Repositories
             }
             return user;
         }
+
+        
     }
 }

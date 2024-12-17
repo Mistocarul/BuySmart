@@ -1,6 +1,8 @@
 ﻿using Application.Authentication;
+using BuySmart.JWT;
 using Domain.Common;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuySmart.Controllers
@@ -10,10 +12,12 @@ namespace BuySmart.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public AuthController(IMediator mediator)
+        public AuthController(IMediator mediator, IHttpContextAccessor httpContextAccessor)
         {
             _mediator = mediator;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         [HttpPost("SendConfirmationCode")]
@@ -45,6 +49,24 @@ namespace BuySmart.Controllers
             if (!result.IsSuccess)
             {
                 return BadRequest(result.ErrorMessage);
+            }
+            return Ok(result.Data);
+        }
+
+        [Authorize]
+        [HttpPost("VerifyPassword")]
+        public async Task<ActionResult<Result<string>>> VerifyPassword(VerifyPasswordCommand command)
+        {
+            var userId = JwtHelper.GetUserIdFromJwt(httpContextAccessor.HttpContext);
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+            command.UserId = new Guid(userId);
+            var result = await _mediator.Send(command);
+            if (!result.IsSuccess)
+            {
+                return Unauthorized(result.ErrorMessage);
             }
             return Ok(result.Data);
         }
