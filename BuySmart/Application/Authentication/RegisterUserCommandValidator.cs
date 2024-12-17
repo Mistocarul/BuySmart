@@ -1,5 +1,4 @@
 ﻿using Application.Authentication;
-using Domain.Entities;
 using FluentValidation;
 
 namespace Application.Commands.UserClientCommands

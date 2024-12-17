@@ -7,7 +7,6 @@ using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq.Expressions;
 using LinqKit;
 
 namespace BuySmart.Controllers

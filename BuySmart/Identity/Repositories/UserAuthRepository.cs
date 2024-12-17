@@ -214,5 +214,44 @@ namespace Identity.Repositories
             await context.SaveChangesAsync(cancellationToken);
             return userBusiness.UserId;
         }
+
+        public async Task DeleteUserAsync(Guid userId)
+        {
+            User? user = await usersDbContext.Users.FindAsync(userId);
+            if (user == null)
+            {
+                throw new KeyNotFoundException("User not found");
+            }
+            usersDbContext.Users.Remove(user);
+            await usersDbContext.SaveChangesAsync();
+            if (user.UserType == UserType.Client)
+            {
+                var userClient = await context.UserClients.FindAsync(userId);
+                if (userClient != null)
+                {
+                    context.UserClients.Remove(userClient);
+                    await context.SaveChangesAsync();
+                }
+            }
+            else if (user.UserType == UserType.Business)
+            {
+                var userBusiness = await context.UserBusinesses.FindAsync(userId);
+                if (userBusiness != null)
+                {
+                    context.UserBusinesses.Remove(userBusiness);
+                    await context.SaveChangesAsync();
+                }
+            }
+        }
+
+        public async Task<User> GetByIdAsync(Guid userId)
+        {
+            var user = await usersDbContext.Users.FindAsync(userId);
+            if (user == null)
+            {
+                throw new KeyNotFoundException("User not found");
+            }
+            return user;
+        }
     }
 }

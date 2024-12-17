@@ -1,6 +1,4 @@
-﻿using Microsoft.ML.Data;
-
-namespace Application.AIML
+﻿namespace Application.AIML
 {
     public class ProductData
     {

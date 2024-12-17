@@ -1,4 +1,5 @@
-﻿using Application.Commands.UserBusinessCommands;
+﻿using Application.Authentication;
+using Application.Commands.UserBusinessCommands;
 using Application.DTOs;
 using Application.Queries.UserBusinessQueries;
 using Application.Utils;
@@ -45,7 +46,7 @@ namespace BuySmart.Controllers
                 return Unauthorized();
             }
             var id = new Guid(userId);
-            await mediator.Send(new DeleteUserBusinessCommand { UserId = id });
+            await mediator.Send(new DeleteUserCommand { UserId = id });
             return NoContent();
         }
 

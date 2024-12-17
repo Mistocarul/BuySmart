@@ -8,6 +8,7 @@ using Application.Commands.CartCommands;
 using Microsoft.AspNetCore.Authorization;
 using BuySmart.JWT;
 using Application.Utils;
+using Application.Authentication;
 
 namespace BuySmart.Controllers
 {
@@ -94,7 +95,7 @@ namespace BuySmart.Controllers
                 return Unauthorized();
             }
             var id = new Guid(userId);
-            await mediator.Send(new DeleteUserClientCommand { UserId = id });
+            await mediator.Send(new DeleteUserCommand { UserId = id });
             return NoContent();
         }
 
