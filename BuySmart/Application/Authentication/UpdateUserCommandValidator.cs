@@ -1,34 +1,31 @@
 ﻿using Domain.Entities;
 using FluentValidation;
 
-namespace Application.Commands.UserBusinessCommands
+namespace Application.Authentication
 {
-    public class CreateUserBuisnessCommandValidator : AbstractValidator<CreateUserBusinessCommand>
+    public class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
     {
-        public CreateUserBuisnessCommandValidator()
-        {
-            RuleFor(ub => ub.Name)
+        public UpdateUserCommandValidator() {
+            RuleFor(uc => uc.UserId)
+                   .NotEmpty()
+                   .WithMessage("UserId is required.");
+
+            RuleFor(uc => uc.Name)
                 .NotEmpty()
                 .MaximumLength(200)
-                .MinimumLength(2)
-                .WithMessage("Name must be between 2 and 200 characters");
+                .WithMessage("Name must be between 1 and 200 characters");
 
-            RuleFor(ub => ub.Email)
+            RuleFor(uc => uc.Email)
                 .NotEmpty()
                 .EmailAddress()
                 .MaximumLength(200)
                 .WithMessage("Must be a valid email");
 
-            RuleFor(ub => ub.Password)
+            RuleFor(uc => uc.Password)
                 .NotEmpty()
                 .MinimumLength(6)
                 .MaximumLength(100)
                 .WithMessage("Password must be between 6 and 100 characters");
-
-            RuleFor(ub => ub.UserType)
-                .Equal(UserType.Business)
-                .WithMessage("UserType must be Business.");
-
 
             RuleFor(uc => uc.Image)
                 .Must(BeValidBase64)
@@ -41,6 +38,5 @@ namespace Application.Commands.UserBusinessCommands
             Span<byte> buffer = new Span<byte>(new byte[base64String.Length]);
             return Convert.TryFromBase64String(base64String, buffer, out _);
         }
-
     }
 }

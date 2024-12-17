@@ -10,5 +10,6 @@ namespace Domain.Repositories
         Task DeleteUserAsync(Guid userId);
         Task<User> GetByIdAsync(Guid userId);
         Task<Result<string>> VerifyPassword(Guid userId, string password);
+        Task<Result<object>> UpdateUserAsync(User user);
     }
 }

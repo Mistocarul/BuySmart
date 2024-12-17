@@ -52,7 +52,7 @@ namespace BuySmart.Controllers
 
         [Authorize]
         [HttpPut("UpdateUserBusiness/{id:guid}")]
-        public async Task<ActionResult<Result<object>>> UpdateUserBusiness(Guid id, [FromBody] UpdateUserBusinessCommand command)
+        public async Task<ActionResult<Result<object>>> UpdateUserBusiness(Guid id, [FromBody] UpdateUserCommand command)
         {
             var userId = JwtHelper.GetUserIdFromJwt(httpContextAccessor.HttpContext);
             if (userId == null)

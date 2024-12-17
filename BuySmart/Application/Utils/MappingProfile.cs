@@ -1,9 +1,7 @@
 ﻿using Application.Commands.BusinessCommands;
 using Application.Commands.CartCommands;
-
 using Application.Commands.ProductCommands;
 using Application.Commands.CategoryCommands;
-
 using Application.Commands.ReviewBusinessCommands;
 using Application.Commands.UserBusinessCommands;
 using Application.Commands.UserClientCommands;
@@ -28,6 +26,7 @@ namespace Application.Utils
             CreateMap<RegisterUserCommand, User>().ReverseMap();
             CreateMap<SendVerificationCodeCommand, User>().ReverseMap();
             CreateMap<LoginUserCommand, User>().ReverseMap();
+            CreateMap<UpdateUserCommand, User>().ReverseMap();
             CreateMap<User, UserClient>().ReverseMap();
             CreateMap<User, UserBusiness>().ReverseMap();
 

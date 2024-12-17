@@ -96,16 +96,5 @@ namespace Infrastructure.Repositories
                 return Result<object>.Failure(ex.Message);
             }
         }
-
-        public async Task DeleteAsync(Guid userClientId)
-        {
-            var userClient = await context.UserClients.FindAsync(userClientId);
-            if (userClient == null)
-            {
-                throw new KeyNotFoundException("UserClient not found");
-            }
-            context.UserClients.Remove(userClient);
-            await context.SaveChangesAsync();
-        }
     }
 }
