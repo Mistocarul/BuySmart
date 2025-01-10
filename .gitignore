@@ -40,3 +40,6 @@ artifacts/
 /BuySmart/BuySmart.IntegrationTests/TestResults
 /BuySmart/coverage
 /BuySmart/.sonarqube
+
+# Baza de date
+*.db

@@ -48,5 +48,26 @@ namespace BuySmart.Controllers
             }
             return Ok(result.Data);
         }
+<<<<<<< Updated upstream
+=======
+
+        [Authorize]
+        [HttpPost("VerifyPassword")]
+        public async Task<ActionResult<Result<string>>> VerifyPassword(VerifyPasswordCommand command)
+        {
+            var userId = JwtHelper.GetUserIdFromJwt(httpContextAccessor.HttpContext);
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+            command.UserId = new Guid(userId);
+            var result = await _mediator.Send(command);
+            if (!result.IsSuccess)
+            {
+                return Unauthorized(result.ErrorMessage);
+            }
+            return Ok(new { Data = result.Data });
+        }
+>>>>>>> Stashed changes
     }
 }
