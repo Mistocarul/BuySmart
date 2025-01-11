@@ -28,17 +28,6 @@ namespace Infrastructure.Repositories
 
         }
 
-        public async Task DeleteAsync(Guid userBusinessId)
-        {
-            var userBusiness = await context.UserBusinesses.FindAsync(userBusinessId);
-            if (userBusiness == null)
-            {
-                throw new KeyNotFoundException("UserBusiness not found");
-            }
-            context.UserBusinesses.Remove(userBusiness);
-            await context.SaveChangesAsync();
-        }
-
         public async Task<IEnumerable<UserBusiness>> GetAllAsync()
         {
             return await context.UserBusinesses.ToListAsync();

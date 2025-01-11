@@ -68,7 +68,7 @@ namespace BuySmart.Controllers
             {
                 return Unauthorized(result.ErrorMessage);
             }
-            return Ok(result.Data);
+            return Ok(new { Data = result.Data });
         }
     }
 }

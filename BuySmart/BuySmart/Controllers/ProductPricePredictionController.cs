@@ -1,4 +1,5 @@
 ﻿using Application.AIML;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookManagement.Controllers
@@ -22,6 +23,7 @@ namespace BookManagement.Controllers
             productPricePredictionModel.Train(sampleData);
         }
 
+        [Authorize]
         [HttpPost("predict")]
         public ActionResult<float> PredictPrice(ProductData product)
         {
