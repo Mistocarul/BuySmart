@@ -3,6 +3,8 @@ using Infrastructure.Persistence;
 using Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Domain.Common;
+using Microsoft.Extensions.Configuration;
+using System.Threading;
 
 
 namespace Infrastructure.Repositories
@@ -10,15 +12,29 @@ namespace Infrastructure.Repositories
     public class ProductRepository : IProductRepository
     {
         private readonly ApplicationDbContext context;
-        public ProductRepository(ApplicationDbContext context)
+        private readonly IConfiguration configuration;
+        public ProductRepository(ApplicationDbContext context, IConfiguration configuration)
         {
             this.context = context;
+            this.configuration = configuration;
         }
         public async Task<IEnumerable<Product>> GetAllAsync()
         {
-            return await context.Products
+            var products = await context.Products
                 .Include(p => p.Categories)
                 .ToListAsync();
+            foreach (var product in products)
+            {
+                string productPhotoPath = product.Image;
+                if (!File.Exists(productPhotoPath))
+                {
+                    throw new FileNotFoundException("Image not found");
+                }
+                byte[] imageArray = await File.ReadAllBytesAsync(productPhotoPath);
+                string base64ImageRepresentation = Convert.ToBase64String(imageArray);
+                product.Image = base64ImageRepresentation;
+            }
+            return products;
         }
 
         public async Task<Product> GetByIdAsync(Guid productId)
@@ -28,6 +44,14 @@ namespace Infrastructure.Repositories
             {
                 throw new KeyNotFoundException("Product not found");
             }
+            string productPhotoPath = product.Image;
+            if (!File.Exists(productPhotoPath))
+            {
+                throw new FileNotFoundException("Image not found");
+            }
+            byte[] imageArray = await File.ReadAllBytesAsync(productPhotoPath);
+            string base64ImageRepresentation = Convert.ToBase64String(imageArray);
+            product.Image = base64ImageRepresentation;
             return product;
         }
 
@@ -35,16 +59,43 @@ namespace Infrastructure.Repositories
         {
             try
             {
+                string relativePath = configuration["PathToPhotos:PathToProducts"];
+                string projectRoot = Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.Parent.FullName;
+                string fullPathToPhotos = Path.Combine(projectRoot, relativePath);
+                fullPathToPhotos = Path.GetFullPath(fullPathToPhotos);
+
                 await context.Products.AddAsync(product);
                 await context.SaveChangesAsync();
+
+                string productPhotoPath;
+
+                byte[] productImage = Convert.FromBase64String(product.Image);
+
+                if (productImage != null && productImage.Length > 0)
+                {
+                    string fileName = $"{product.Name}_{product.ProductId}.png";
+                    productPhotoPath = Path.Combine(fullPathToPhotos, fileName);
+                    await File.WriteAllBytesAsync(productPhotoPath, productImage);
+                }
+                else
+                {
+                    string defaultPhotoPath = Path.Combine(fullPathToPhotos, "default.png");
+                    string fileName = $"{product.Name}_{product.ProductId}.png";
+                    productPhotoPath = Path.Combine(fullPathToPhotos, fileName);
+                    File.Copy(defaultPhotoPath, productPhotoPath, overwrite: true);
+                }
+
+                product.Image = productPhotoPath;
+
+                context.Products.Update(product);
+                await context.SaveChangesAsync();
+
                 return Result<Guid>.Success(product.ProductId);
             }
             catch (Exception ex)
             {
                 return Result<Guid>.Failure(ex.Message);
             }
-
-
         }
 
         public async Task<Result<object>> UpdateAsync(Product product)

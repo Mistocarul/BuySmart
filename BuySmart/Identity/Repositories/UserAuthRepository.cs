@@ -27,6 +27,23 @@ namespace Identity.Repositories
             this.context = context;
         }
 
+        public async Task<Result<string>> VerifyPassword(Guid userId, string password)
+        {
+            try
+            {
+                var existingUser = await usersDbContext.Users.SingleOrDefaultAsync(u => u.UserId == userId);
+                if (existingUser == null || !BCrypt.Net.BCrypt.Verify(password, existingUser.Password))
+                {
+                    return Result<string>.Failure("Invalid password");
+                }
+                return Result<string>.Success("Password is correct");
+            }
+            catch (Exception ex)
+            {
+                return Result<string>.Failure(ex.Message);
+            }
+        }
+
         public async Task<Result<string>> Login(User user)
         {
             try
@@ -253,5 +270,61 @@ namespace Identity.Repositories
             }
             return user;
         }
+
+        public async Task<Result<object>> UpdateUserAsync(User user)
+        {
+            try
+            {
+                var existingUser = await usersDbContext.Users.FindAsync(user.UserId);
+                if (existingUser == null)
+                {
+                    return Result<object>.Failure("User not found");
+                }
+                // Update only the properties that are allowed to be changed
+                existingUser.Name = user.Name;
+                existingUser.Email = user.Email;
+                existingUser.Password = user.Password;
+                //existingUser.Image = user.Image;
+                usersDbContext.Users.Update(existingUser);
+                await usersDbContext.SaveChangesAsync();
+                if (user.UserType == UserType.Client)
+                {
+                    var existingUserClient = await context.UserClients.FindAsync(user.UserId);
+                    if (existingUserClient == null)
+                    {
+                        return Result<object>.Failure("UserClient not found");
+                    }
+                    // Update only the properties that are allowed to be changed
+                    existingUserClient.Name = user.Name;
+                    existingUserClient.Email = user.Email;
+                    existingUserClient.Password = user.Password;
+                    //existingUserClient.Image = user.Image;
+                    context.UserClients.Update(existingUserClient);
+                    await context.SaveChangesAsync();
+                }
+                else if (user.UserType == UserType.Business)
+                {
+                    var existingUserBusiness = await context.UserBusinesses.FindAsync(user.UserId);
+                    if (existingUserBusiness == null)
+                    {
+                        return Result<object>.Failure("UserBusiness not found");
+                    }
+                    // Update only the properties that are allowed to be changed
+                    existingUserBusiness.Name = user.Name;
+                    existingUserBusiness.Email = user.Email;
+                    existingUserBusiness.Password = user.Password;
+                    //existingUserBusiness.Image = user.Image;
+                    context.UserBusinesses.Update(existingUserBusiness);
+                    await context.SaveChangesAsync();
+                }
+                return Result<object>.Success(new object());
+            }
+            catch (Exception ex)
+            {
+                return Result<object>.Failure(ex.Message);
+            }
+        }
+
+
     }
 }

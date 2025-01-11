@@ -1,6 +1,8 @@
 ﻿using Application.Authentication;
+using BuySmart.JWT;
 using Domain.Common;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuySmart.Controllers
@@ -10,10 +12,12 @@ namespace BuySmart.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public AuthController(IMediator mediator)
+        public AuthController(IMediator mediator, IHttpContextAccessor httpContextAccessor)
         {
             _mediator = mediator;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         [HttpPost("SendConfirmationCode")]
@@ -48,8 +52,6 @@ namespace BuySmart.Controllers
             }
             return Ok(result.Data);
         }
-<<<<<<< Updated upstream
-=======
 
         [Authorize]
         [HttpPost("VerifyPassword")]
@@ -68,6 +70,5 @@ namespace BuySmart.Controllers
             }
             return Ok(new { Data = result.Data });
         }
->>>>>>> Stashed changes
     }
 }

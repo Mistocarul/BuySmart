@@ -80,7 +80,7 @@ namespace BuySmart.Controllers
             var cartResult = await mediator.Send(createCartCommand);
             if (!cartResult.IsSuccess)
             {
-                await mediator.Send(new DeleteUserClientCommand { UserId = result.Data });
+                await mediator.Send(new DeleteUserCommand { UserId = result.Data });
                 return BadRequest(cartResult.ErrorMessage);
             }
             return CreatedAtAction(nameof(CreateUserClient), new { id = result.Data }, result.Data);
@@ -101,7 +101,7 @@ namespace BuySmart.Controllers
 
         [Authorize]
         [HttpPut("UpdateUserClient")]
-        public async Task<ActionResult<Result<object>>> UpdateUser([FromBody] UpdateUserClientCommand command)
+        public async Task<ActionResult<Result<object>>> UpdateUser([FromBody] UpdateUserCommand command)
         {
             var userId = JwtHelper.GetUserIdFromJwt(httpContextAccessor.HttpContext);
             if (userId == null)

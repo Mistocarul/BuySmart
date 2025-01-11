@@ -29,9 +29,17 @@ namespace Application.Commands.UserClientCommands
                 .Equal(UserType.Client)
                 .WithMessage("UserType must be Client.");
 
+
             RuleFor(uc => uc.Image)
-                .MaximumLength(500)
-                .WithMessage("Image must be smaller than 500");
+                .Must(BeValidBase64)
+                .WithMessage("Image must be a valid base64 string")
+                .MaximumLength(500 * 4 / 3) // Adjusted for base64 encoding
+                .WithMessage("Image must be smaller than 500 characters in base64 format");
+        }
+        private bool BeValidBase64(string base64String)
+        {
+            Span<byte> buffer = new Span<byte>(new byte[base64String.Length]);
+            return Convert.TryFromBase64String(base64String, buffer, out _);
         }
     }
 }

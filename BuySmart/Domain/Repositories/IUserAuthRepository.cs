@@ -8,6 +8,8 @@ namespace Domain.Repositories
         Task<Result<string>> Login(User user);
         Task<Result<string>> SendVerificationCode(User user, CancellationToken cancellationToken);
         Task DeleteUserAsync(Guid userId);
-        Task<User> GetByIdAsync(Guid userId); 
+        Task<User> GetByIdAsync(Guid userId);
+        Task<Result<string>> VerifyPassword(Guid userId, string password);
+        Task<Result<object>> UpdateUserAsync(User user);
     }
 }

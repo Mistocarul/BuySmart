@@ -21,7 +21,7 @@ namespace BuySmart.Controllers
             this.mediator = mediator;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("GetAllProducts")]
         public async Task<IActionResult> GetAllProducts()
         {
@@ -78,7 +78,7 @@ namespace BuySmart.Controllers
             return await mediator.Send(new GetProductByIdQuery { ProductId = id });
         }
 
-        [Authorize(Roles = "Business")]
+        //[Authorize(Roles = "Business")]
         [HttpPost("CreateProduct")]
         public async Task<ActionResult<Result<Guid>>> CreateProduct([FromBody] CreateProductCommand command)
         {
