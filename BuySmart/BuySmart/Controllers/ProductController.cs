@@ -31,6 +31,14 @@ namespace BuySmart.Controllers
         }
 
         [Authorize]
+        [HttpGet("GetAllProductsByBusinessId/{businessId}")]
+        public async Task<IActionResult> GetAllProductsByBusinessId(Guid businessId)
+        {
+            var products = await mediator.Send(new GetAllProductsByBusinessIdQuery { BusinessId = businessId });
+            return Ok(products);
+        }
+
+        [Authorize]
         [HttpGet("GetPaginatedProducts")]
         public async Task<ActionResult<PagedResult<ProductDto>>> GetFilteredProducts([FromQuery] int page, [FromQuery] int pageSize, [FromQuery] string? name, [FromQuery] Guid? categoryId, [FromQuery] decimal? minPrice, [FromQuery] decimal? maxPrice, [FromQuery] string? sortbyPriceDirection)
         {
