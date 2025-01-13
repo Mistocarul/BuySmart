@@ -1,5 +1,4 @@
-﻿using Domain.Entities;
-using FluentValidation;
+﻿using FluentValidation;
 namespace Application.Authentication
 {
     public class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>

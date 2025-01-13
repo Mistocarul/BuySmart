@@ -51,8 +51,8 @@ namespace BuySmart.Controllers
         }
 
         [Authorize]
-        [HttpPut("UpdateUserBusiness/{id:guid}")]
-        public async Task<ActionResult<Result<object>>> UpdateUserBusiness(Guid id, [FromBody] UpdateUserCommand command)
+        [HttpPut("UpdateUserBusiness")]
+        public async Task<ActionResult<Result<object>>> UpdateUserBusiness([FromBody] UpdateUserCommand command)
         {
             var userId = JwtHelper.GetUserIdFromJwt(httpContextAccessor.HttpContext);
             if (userId == null)
@@ -61,14 +61,14 @@ namespace BuySmart.Controllers
             }
             command.UserId = new Guid(userId);
             command.Password = BCrypt.Net.BCrypt.HashPassword(command.Password);
-            if (id != command.UserId)
+            var result = await mediator.Send(command);
+            if (!result.IsSuccess)
             {
-                return BadRequest();
+                return BadRequest(result.ErrorMessage);
             }
-            await mediator.Send(command);
             return NoContent();
-
         }
+
         [Authorize]
         [HttpGet("GetUserBusinessById")]
 

@@ -31,6 +31,16 @@ namespace Infrastructure.Repositories
             return business;
         }
 
+        public async Task<Business> GetByUserBusinessIdAsync(Guid userId)
+        {
+            var business = await context.Businesses.FirstOrDefaultAsync(b => b.UserBusinessId == userId);
+            if (business == null)
+            {
+                throw new KeyNotFoundException("Business not found");
+            }
+            return business;
+        }
+
         public async Task<Result<Guid>> AddAsync(Business business)
         {
             
