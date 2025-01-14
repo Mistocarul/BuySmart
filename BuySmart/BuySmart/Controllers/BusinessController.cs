@@ -2,9 +2,11 @@
 using Application.DTOs;
 using Application.Queries.BusinessQueries;
 using Application.Utils;
+using BuySmart.JWT;
 using Domain.Common;
 using Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq.Expressions;
 
@@ -15,9 +17,12 @@ namespace BuySmart.Controllers
     public class BusinessController : ControllerBase
     {
         private readonly IMediator mediator;
-        public BusinessController(IMediator mediator)
+        private readonly IHttpContextAccessor httpContextAccessor;
+
+        public BusinessController(IMediator mediator, IHttpContextAccessor httpContextAccessor)
         {
             this.mediator = mediator;
+            this.httpContextAccessor = httpContextAccessor;
         }
         [HttpGet("GetAllBusinesses")]
         public async Task<IActionResult> GetAllBusinesses()
@@ -49,12 +54,28 @@ namespace BuySmart.Controllers
             return NotFound(result.ErrorMessage);
         }
 
+        [Authorize]
         [HttpGet("GetBusinessById/{id}")]
         public async Task<ActionResult<BusinessDto>> GetBusinessById(Guid id)
         {
             return await mediator.Send(new GetBusinessByIdQuery { Id = id });
         }
 
+        [Authorize(Roles = "Business")]
+        [HttpGet("GetBusinessByUserBusinessId")]
+        public async Task<ActionResult<BusinessDto>> GetBusinessByUserBusinessId()
+        {
+            var userId = JwtHelper.GetUserIdFromJwt(httpContextAccessor.HttpContext);
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+            var userGuid = new Guid(userId);
+            var result = await mediator.Send(new GetBusinessByUserBusinessIdQuery { UserBusinessId = userGuid });
+            return Ok(result);
+        }
+
+        [Authorize(Roles = "Business")]
         [HttpPost("CreateBusiness")]
         public async Task<ActionResult<Result<Guid>>> CreateBusiness([FromBody] CreateBusinessCommand command)
         {

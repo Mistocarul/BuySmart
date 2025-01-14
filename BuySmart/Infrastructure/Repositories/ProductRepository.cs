@@ -4,7 +4,6 @@ using Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Domain.Common;
 using Microsoft.Extensions.Configuration;
-using System.Threading;
 
 
 namespace Infrastructure.Repositories
@@ -22,6 +21,25 @@ namespace Infrastructure.Repositories
         {
             var products = await context.Products
                 .Include(p => p.Categories)
+                .ToListAsync();
+            foreach (var product in products)
+            {
+                string productPhotoPath = product.Image;
+                if (!File.Exists(productPhotoPath))
+                {
+                    throw new FileNotFoundException("Image not found");
+                }
+                byte[] imageArray = await File.ReadAllBytesAsync(productPhotoPath);
+                string base64ImageRepresentation = Convert.ToBase64String(imageArray);
+                product.Image = base64ImageRepresentation;
+            }
+            return products;
+        }
+
+        public async Task<IEnumerable<Product>> GetAllByBusinessIdAsync(Guid businessId)
+        {
+            var products = await context.Products
+                .Where(p => p.BusinessId == businessId)
                 .ToListAsync();
             foreach (var product in products)
             {
