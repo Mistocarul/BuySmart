@@ -2,5 +2,5 @@ projectKey=BuySmart
 serverUrl=http://localhost:9000
 serverVersion=10.7.0.96327
 dashboardUrl=http://localhost:9000/dashboard?id=BuySmart
-ceTaskId=aeca14c3-fada-4cf5-be93-e3d1cbf29e14
-ceTaskUrl=http://localhost:9000/api/ce/task?id=aeca14c3-fada-4cf5-be93-e3d1cbf29e14
+ceTaskId=19767de9-274e-47e7-b23f-a0bdf5d5bce9
+ceTaskUrl=http://localhost:9000/api/ce/task?id=19767de9-274e-47e7-b23f-a0bdf5d5bce9

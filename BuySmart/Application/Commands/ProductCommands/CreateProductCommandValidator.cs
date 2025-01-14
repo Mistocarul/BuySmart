@@ -1,4 +1,6 @@
 ﻿using FluentValidation;
+using System;
+using System.Linq.Expressions;
 
 namespace Application.Commands.ProductCommands
 {
@@ -6,25 +8,27 @@ namespace Application.Commands.ProductCommands
     {
         public CreateProductCommandValidator()
         {
+            ApplyStringRules(x => x.Name, "Name", 100);
+            ApplyStringRules(x => x.Description, "Description", 200);
 
-            RuleFor(x => x.Name)
-                        .NotEmpty().WithMessage("Name is required")
-                        .MaximumLength(100).WithMessage("Name must not exceed 100 characters");
-
-            RuleFor(x => x.Description)
-                .NotEmpty().WithMessage("Description is required");
-
-            RuleFor(x => x.Price)
-                .NotEmpty().WithMessage("Price is required");
-
-            RuleFor(x => x.Stock)
-                .NotEmpty().WithMessage("Stock is required");
-
-            RuleFor(x => x.Rating)
-                .NotEmpty().WithMessage("Rating is required");
-
-            RuleFor(x => x.BusinessId)
-                .NotEmpty().WithMessage("BusinessId is required");
+            ApplyNotEmptyRule(x => x.Price, "Price");
+            ApplyNotEmptyRule(x => x.Stock, "Stock");
+            ApplyNotEmptyRule(x => x.Rating, "Rating");
+            ApplyNotEmptyRule(x => x.BusinessId, "BusinessId");
         }
+
+        private void ApplyStringRules(Expression<Func<CreateProductCommand, string>> propertyExpression, string propertyName, int maxLength)
+        {
+            RuleFor(propertyExpression)
+                .NotEmpty().WithMessage($"{propertyName} is required")
+                .MaximumLength(maxLength).WithMessage($"{propertyName} must not exceed {maxLength} characters");
+        }
+
+        private void ApplyNotEmptyRule<T>(Expression<Func<CreateProductCommand, T>> propertyExpression, string propertyName)
+        {
+            RuleFor(propertyExpression)
+                .NotEmpty().WithMessage($"{propertyName} is required");
+        }
+
     }
 }

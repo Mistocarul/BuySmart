@@ -33,9 +33,9 @@ namespace Infrastructure.Repositories
             return await context.UserBusinesses.ToListAsync();
         }
 
-        public async Task<UserBusiness> GetByIdAsync(Guid userBusinessId)
+        public async Task<UserBusiness> GetByIdAsync(Guid userId)
         {
-            var userBusiness = await context.UserBusinesses.FindAsync(userBusinessId);
+            var userBusiness = await context.UserBusinesses.FindAsync(userId);
             if (userBusiness == null)
             {
                 throw new KeyNotFoundException("UserBusiness not found");
@@ -53,7 +53,7 @@ namespace Infrastructure.Repositories
                     return Result<object>.Failure("UserBusiness not found");
                 }
 
-                // Update only the properties that are allowed to be changed
+                
                 existingUserBusiness.Name = userBusiness.Name;
                 existingUserBusiness.Email = userBusiness.Email;
                 existingUserBusiness.Password = userBusiness.Password;

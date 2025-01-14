@@ -23,7 +23,7 @@ namespace Infrastructure.Repositories
                 string profileFilePath = userClient.Image;
                 if (File.Exists(profileFilePath))
                 {
-                    byte[] imageArray = File.ReadAllBytes(profileFilePath);
+                    byte[] imageArray = await File.ReadAllBytesAsync(profileFilePath);
                     string base64ImageRepresentation = Convert.ToBase64String(imageArray);
                     userClient.Image = base64ImageRepresentation;
                 }
@@ -35,9 +35,9 @@ namespace Infrastructure.Repositories
             return userClients;
         }
 
-        public async Task<UserClient> GetByIdAsync(Guid userClientId)
+        public async Task<UserClient> GetByIdAsync(Guid userId)
         {
-            var userClient = await context.UserClients.FindAsync(userClientId);
+            var userClient = await context.UserClients.FindAsync(userId);
             if (userClient == null)
             {
                 throw new KeyNotFoundException("UserClient not found");
@@ -45,7 +45,7 @@ namespace Infrastructure.Repositories
             string profileFilePath = userClient.Image;
             if (File.Exists(profileFilePath))
             {
-                byte[] imageArray = File.ReadAllBytes(profileFilePath);
+                byte[] imageArray = await File.ReadAllBytesAsync(profileFilePath);
                 string base64ImageRepresentation = Convert.ToBase64String(imageArray);
                 userClient.Image = base64ImageRepresentation;
             }
@@ -80,7 +80,7 @@ namespace Infrastructure.Repositories
                     return Result<object>.Failure("UserClient not found");
                 }
 
-                // Update only the properties that are allowed to be changed
+                
                 existingUserClient.Name = userClient.Name;
                 existingUserClient.Email = userClient.Email;
                 existingUserClient.Password = userClient.Password;

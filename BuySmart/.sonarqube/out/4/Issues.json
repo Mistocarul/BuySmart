@@ -5,13 +5,267 @@
     {
       "tool": {
         "name": "Microsoft (R) Visual C# Compiler",
-        "version": "4.11.0.0",
-        "fileVersion": "4.11.0-3.24468.6 (b4e5d1dd)",
-        "semanticVersion": "4.11.0",
+        "version": "4.12.0.0",
+        "fileVersion": "4.12.0-3.24523.4 (f3348c2a)",
+        "semanticVersion": "4.12.0",
         "language": "en-US"
       },
       "results": [
-      ]
+        {
+          "ruleId": "CS8604",
+          "level": "warning",
+          "message": "Possible null reference argument for parameter 'httpContext' in 'string? JwtHelper.GetUserIdFromJwt(HttpContext httpContext)'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/BuySmart/Controllers/UserClientController.cs",
+                "region": {
+                  "startLine": 60,
+                  "startColumn": 53,
+                  "endLine": 60,
+                  "endColumn": 84
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8604",
+          "level": "warning",
+          "message": "Possible null reference argument for parameter 'httpContext' in 'string? JwtHelper.GetUserIdFromJwt(HttpContext httpContext)'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/BuySmart/Controllers/UserBusinessController.cs",
+                "region": {
+                  "startLine": 44,
+                  "startColumn": 53,
+                  "endLine": 44,
+                  "endColumn": 84
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8604",
+          "level": "warning",
+          "message": "Possible null reference argument for parameter 'httpContext' in 'string? JwtHelper.GetUserIdFromJwt(HttpContext httpContext)'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/BuySmart/Controllers/UserBusinessController.cs",
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 53,
+                  "endLine": 58,
+                  "endColumn": 84
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8604",
+          "level": "warning",
+          "message": "Possible null reference argument for parameter 'httpContext' in 'string? JwtHelper.GetUserIdFromJwt(HttpContext httpContext)'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/BuySmart/Controllers/UserClientController.cs",
+                "region": {
+                  "startLine": 92,
+                  "startColumn": 53,
+                  "endLine": 92,
+                  "endColumn": 84
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8604",
+          "level": "warning",
+          "message": "Possible null reference argument for parameter 'httpContext' in 'string? JwtHelper.GetUserIdFromJwt(HttpContext httpContext)'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/BuySmart/Controllers/UserBusinessController.cs",
+                "region": {
+                  "startLine": 78,
+                  "startColumn": 53,
+                  "endLine": 78,
+                  "endColumn": 84
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8604",
+          "level": "warning",
+          "message": "Possible null reference argument for parameter 'httpContext' in 'string? JwtHelper.GetUserIdFromJwt(HttpContext httpContext)'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/BuySmart/Controllers/UserClientController.cs",
+                "region": {
+                  "startLine": 106,
+                  "startColumn": 53,
+                  "endLine": 106,
+                  "endColumn": 84
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1118",
+          "level": "warning",
+          "message": "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/BuySmart/Program.cs",
+                "region": {
+                  "startLine": 63,
+                  "startColumn": 22,
+                  "endLine": 63,
+                  "endColumn": 29
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S2068",
+          "level": "warning",
+          "message": "\"password\" detected here, make sure this is not a hard-coded credential.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/BuySmart/appsettings.json",
+                "region": {
+                  "startLine": 3,
+                  "startColumn": 27,
+                  "endLine": 3,
+                  "endColumn": 105
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6965",
+          "level": "warning",
+          "message": "REST API controller actions should be annotated with the appropriate HTTP verb attribute.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/BuySmart/Controllers/ProductPricePredictionController.cs",
+                "region": {
+                  "startLine": 25,
+                  "startColumn": 31,
+                  "endLine": 25,
+                  "endColumn": 46
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        }
+      ],
+      "rules": {
+        "CS8604": {
+          "id": "CS8604",
+          "shortDescription": "Possible null reference argument.",
+          "defaultLevel": "warning",
+          "helpUri": "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS8604)",
+          "properties": {
+            "category": "Compiler",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Compiler",
+              "Telemetry"
+            ]
+          }
+        },
+        "S1118": {
+          "id": "S1118",
+          "shortDescription": "Utility classes should not have public constructors",
+          "fullDescription": "Whenever there are portions of code that are duplicated and do not depend on the state of their container class, they can be centralized inside a \"utility class\". A utility class is a class that only has static members, hence it should not be instantiated.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-1118",
+          "properties": {
+            "category": "Major Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "TestSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S2068": {
+          "id": "S2068",
+          "shortDescription": "Hard-coded credentials are security-sensitive",
+          "fullDescription": "Because it is easy to extract strings from an application source code or binary, credentials should not be hard-coded. This is particularly true for applications that are distributed or that are open-source.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-2068",
+          "properties": {
+            "category": "Blocker Security Hotspot",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S6965": {
+          "id": "S6965",
+          "shortDescription": "REST API actions should be annotated with an HTTP verb attribute",
+          "fullDescription": "When building a REST API, it’s recommended to annotate the controller actions with the available HTTP attributes to be precise about what your API supports.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-6965",
+          "properties": {
+            "category": "Major Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "SonarWay"
+            ]
+          }
+        }
+      }
     }
   ]
 }

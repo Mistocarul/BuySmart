@@ -40,6 +40,7 @@ namespace BuySmart.Controllers
         [HttpDelete("DeleteUserBusiness")]
         public async Task<ActionResult> DeleteUserBusiness()
         {
+            
             var userId = JwtHelper.GetUserIdFromJwt(httpContextAccessor.HttpContext);
             if (userId == null)
             {
@@ -51,8 +52,8 @@ namespace BuySmart.Controllers
         }
 
         [Authorize]
-        [HttpPut("UpdateUserBusiness")]
-        public async Task<ActionResult<Result<object>>> UpdateUserBusiness([FromBody] UpdateUserCommand command)
+        [HttpPut("UpdateUserBusiness/{id:guid}")]
+        public async Task<ActionResult<Result<object>>> UpdateUserBusiness(Guid id, [FromBody] UpdateUserCommand command)
         {
             var userId = JwtHelper.GetUserIdFromJwt(httpContextAccessor.HttpContext);
             if (userId == null)
@@ -61,14 +62,14 @@ namespace BuySmart.Controllers
             }
             command.UserId = new Guid(userId);
             command.Password = BCrypt.Net.BCrypt.HashPassword(command.Password);
-            var result = await mediator.Send(command);
-            if (!result.IsSuccess)
+            if (id != command.UserId)
             {
-                return BadRequest(result.ErrorMessage);
+                return BadRequest();
             }
+            await mediator.Send(command);
             return NoContent();
-        }
 
+        }
         [Authorize]
         [HttpGet("GetUserBusinessById")]
 
