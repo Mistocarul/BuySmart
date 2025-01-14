@@ -39,7 +39,7 @@ namespace Infrastructure.Repositories
 
         public async Task<Product> GetByIdAsync(Guid productId)
         {
-            var product = await context.Products.FindAsync(productId);
+            var product = await context.Products.Include(p => p.Categories).FirstOrDefaultAsync(p => p.ProductId == productId);
             if (product == null)
             {
                 throw new KeyNotFoundException("Product not found");
