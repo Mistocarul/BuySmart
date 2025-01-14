@@ -1,188 +1,10 @@
-v
-BD:\Repos\BuySmart\BuySmart\Application\Utils\ValidationBehavior.cs 8r
-xÇÉ
->D:\Repos\BuySmart\BuySmart\Application\Utils\MappingProfile.cs 8r$	 !"#$'()Ç !"#$ó
-mD:\Repos\BuySmart\BuySmart\Application\QueryHandlers\UserClientQueryHandlers\GetUserClientByIdQueryHandler.cs 8r	
-Çó
-mD:\Repos\BuySmart\BuySmart\Application\QueryHandlers\UserClientQueryHandlers\GetAllUserClientsQueryHandler.cs 8r	
-Çõ
-qD:\Repos\BuySmart\BuySmart\Application\QueryHandlers\UserBusinessQueryHandlers\GetUserBusinessByIdQueryHandler.cs 8r	
-Çú
-rD:\Repos\BuySmart\BuySmart\Application\QueryHandlers\UserBusinessQueryHandlers\GetAllUserBusinessesQueryHandler.cs 8r	
-Çü
-uD:\Repos\BuySmart\BuySmart\Application\QueryHandlers\ReviewBusinessQueryHandlers\GetReviewBusinessByIdQueryHandler.cs 8r	
-Ç†
-vD:\Repos\BuySmart\BuySmart\Application\QueryHandlers\ReviewBusinessQueryHandlers\GetAllReviewBusinessesQueryHandler.cs 8r	
-Çå
-bD:\Repos\BuySmart\BuySmart\Application\QueryHandlers\ProductQueryHandlers\GetProductByIdHandler.cs 8r	
-Ç´
-gD:\Repos\BuySmart\BuySmart\Application\QueryHandlers\ProductQueryHandlers\GetAllProductsQueryHandler.cs 8r'	
-!"#$&'()+,-.xÇ!#&(+ì
-iD:\Repos\BuySmart\BuySmart\Application\QueryHandlers\BusinessQueryHandlers\GetBusinessByIdQueryHandler.cs 8r	
-Çí
-hD:\Repos\BuySmart\BuySmart\Application\QueryHandlers\BusinessQueryHandlers\GetAllBusinessQueryHandler.cs 8r	
-Çm
-ZD:\Repos\BuySmart\BuySmart\Application\Queries\UserClientQueries\GetUserClientByIdQuery.cs 8r		
-n
-ZD:\Repos\BuySmart\BuySmart\Application\Queries\UserClientQueries\GetAllUserClientsQuery.cs 8r
-	
-q
-^D:\Repos\BuySmart\BuySmart\Application\Queries\UserBusinessQueries\GetUserBusinessByIdQuery.cs 8r		
-s
-_D:\Repos\BuySmart\BuySmart\Application\Queries\UserBusinessQueries\GetAllUserBusinessesQuery.cs 8r
-	
-u
-bD:\Repos\BuySmart\BuySmart\Application\Queries\ReviewBusinessQueries\GetReviewBusinessByIdQuery.cs 8r		
-q
-cD:\Repos\BuySmart\BuySmart\Application\Queries\ReviewBusinessQueries\GetAllReviewBusinessesQuery.csr	g
-TD:\Repos\BuySmart\BuySmart\Application\Queries\ProductQueries\GetProductByIdQuery.cs 8r		s
-TD:\Repos\BuySmart\BuySmart\Application\Queries\ProductQueries\GetAllProductsQuery.cs 8r
-i
-VD:\Repos\BuySmart\BuySmart\Application\Queries\BusinessQueries\GetBusinessByIdQuery.cs 8r		
-l
-WD:\Repos\BuySmart\BuySmart\Application\Queries\BusinessQueries\GetAllBusinessesQuery.cs 8r	
-Y
-<D:\Repos\BuySmart\BuySmart\Application\DTOs\UserClientDto.cs 
-8
-r	
-Ç	
-[
->D:\Repos\BuySmart\BuySmart\Application\DTOs\UserBusinessDto.cs 
-8
-r	
-Ç	
-R
-8D:\Repos\BuySmart\BuySmart\Application\DTOs\ReviewDto.cs 8r	
-ÇT
-9D:\Repos\BuySmart\BuySmart\Application\DTOs\ProductDto.cs 8r	
-ÇH
-6D:\Repos\BuySmart\BuySmart\Application\DTOs\CartDto.cs 8rZ
-:D:\Repos\BuySmart\BuySmart\Application\DTOs\BusinessDto.cs 
-8
-jr	Ç	û
-fD:\Repos\BuySmart\BuySmart\Application\Commands\UserClientCommands\UpdateUserClientCommandValidator.cs 8r"	
- !#$%&'(Ç
- #e
-<D:\Repos\BuySmart\BuySmart\Application\DependecyInjection.cs 8r	
-Ç~
-]D:\Repos\BuySmart\BuySmart\Application\Commands\UserClientCommands\UpdateUserClientCommand.cs 8r	
-Ç
-É
-fD:\Repos\BuySmart\BuySmart\Application\Commands\UserClientCommands\DeleteUserClientCommandValidator.cs 8r	
-Ç	p
-]D:\Repos\BuySmart\BuySmart\Application\Commands\UserClientCommands\DeleteUserClientCommand.cs 8r		
-õ
-fD:\Repos\BuySmart\BuySmart\Application\Commands\UserClientCommands\CreateUserClientCommandValidator.cs 8r 	
- !"#$%Ç
- }
-]D:\Repos\BuySmart\BuySmart\Application\Commands\UserClientCommands\CreateUserClientCommand.cs 
-8
-r	
-Ç	
-ü
-jD:\Repos\BuySmart\BuySmart\Application\Commands\UserBusinessCommands\UpdateUserBusinessCommandValidator.cs 8r 	
- !"#$%Ç
- Ç
-aD:\Repos\BuySmart\BuySmart\Application\Commands\UserBusinessCommands\UpdateUserBusinessCommand.cs 8r	
-Ç
-á
-jD:\Repos\BuySmart\BuySmart\Application\Commands\UserBusinessCommands\DeleteUserBusinessCommandValidator.cs 8r	
-Ç	t
-aD:\Repos\BuySmart\BuySmart\Application\Commands\UserBusinessCommands\DeleteUserBusinessCommand.cs 8r		
-Å
-aD:\Repos\BuySmart\BuySmart\Application\Commands\UserBusinessCommands\CreateUserBusinessCommand.cs 
-8
-r	
-Ç	
-ü
-jD:\Repos\BuySmart\BuySmart\Application\Commands\UserBusinessCommands\CreateUserBuisnessCommandValidator.cs 8r 	
- !"#%&Ç
- ò
-nD:\Repos\BuySmart\BuySmart\Application\Commands\ReviewBusinessCommands\UpdateReviewBusinessCommandValidator.cs 8r	
-Ç	Ä
-eD:\Repos\BuySmart\BuySmart\Application\Commands\ReviewBusinessCommands\UpdateReviewBusinessCommand.cs 
-8
-r	
-Çä
-nD:\Repos\BuySmart\BuySmart\Application\Commands\ReviewBusinessCommands\DeleteReviewBusinessCommandValidator.cs 8r	
-Ç	x
-eD:\Repos\BuySmart\BuySmart\Application\Commands\ReviewBusinessCommands\DeleteReviewBusinessCommand.cs 8r		
-ï
-nD:\Repos\BuySmart\BuySmart\Application\Commands\ReviewBusinessCommands\CreateReviewBusinessCommandValidator.cs 8r	
-Ç	
-eD:\Repos\BuySmart\BuySmart\Application\Commands\ReviewBusinessCommands\CreateReviewBusinessCommand.cs 8r	
-Çò
-`D:\Repos\BuySmart\BuySmart\Application\Commands\ProductCommands\UpdateProductCommandValidator.cs 8r!	
- "#%&'()Ç"%|
-WD:\Repos\BuySmart\BuySmart\Application\Commands\ProductCommands\UpdateProductCommand.cs 8r	
-ÇÅ
-`D:\Repos\BuySmart\BuySmart\Application\Commands\ProductCommands\DeleteProductCommandValidator.cs 8r	
-Çj
-WD:\Repos\BuySmart\BuySmart\Application\Commands\ProductCommands\DeleteProductCommand.cs 8r		
-ï
-`D:\Repos\BuySmart\BuySmart\Application\Commands\ProductCommands\CreateProductCommandValidator.cs 8r	
- !#$%&'Ç #w
-WD:\Repos\BuySmart\BuySmart\Application\Commands\ProductCommands\CreateProductCommand.cs 8r	
-Ç	d
-QD:\Repos\BuySmart\BuySmart\Application\Commands\CartCommands\CreateCartCommand.cs 8r		
-ã
-bD:\Repos\BuySmart\BuySmart\Application\Commands\BusinessCommands\UpdateBusinessCommandValidator.cs 8r
-Ç
-w
-YD:\Repos\BuySmart\BuySmart\Application\Commands\BusinessCommands\UpdateBusinessCommand.cs 
-8
-r	
-Ç	
-~
-bD:\Repos\BuySmart\BuySmart\Application\Commands\BusinessCommands\DeleteBusinessCommandValidator.cs 8r	
-Ç
-l
-YD:\Repos\BuySmart\BuySmart\Application\Commands\BusinessCommands\DeleteBusinessCommand.cs 8r		
-é
-bD:\Repos\BuySmart\BuySmart\Application\Commands\BusinessCommands\CreateBusinessCommandValidator.cs 8r	
-Ç	w
-YD:\Repos\BuySmart\BuySmart\Application\Commands\BusinessCommands\CreateBusinessCommand.cs 
-8
-r	
-Ç	
-Ø
-rD:\Repos\BuySmart\BuySmart\Application\CommandHandlers\UserClientCommandHandlers\UpdateUserClientCommandHandler.cs
- 8r"	
- !"#%&'(xÇ
- "%£
-rD:\Repos\BuySmart\BuySmart\Application\CommandHandlers\UserClientCommandHandlers\DeleteUserClientCommandHandler.cs 8r	
-xÇß
-rD:\Repos\BuySmart\BuySmart\Application\CommandHandlers\UserClientCommandHandlers\CreateUserClientCommandHandler.cs 8r	
- !"xÇ≥
-vD:\Repos\BuySmart\BuySmart\Application\CommandHandlers\UserBusinessCommandHandlers\UpdateUserBusinessCommandHandler.cs
- 8r"	
- !"#%&'(xÇ
- "%ß
-vD:\Repos\BuySmart\BuySmart\Application\CommandHandlers\UserBusinessCommandHandlers\DeleteUserBusinessCommandHandler.cs 8r	
-xÇ´
-vD:\Repos\BuySmart\BuySmart\Application\CommandHandlers\UserBusinessCommandHandlers\CreateUserBusinessCommandHandler.cs 8r	
- !xÇ∑
-zD:\Repos\BuySmart\BuySmart\Application\CommandHandlers\ReviewBusinessCommandHandlers\UpdateReviewBusinessCommandHandler.cs
- 8r"	
- !"$%&'xÇ
-!$´
-zD:\Repos\BuySmart\BuySmart\Application\CommandHandlers\ReviewBusinessCommandHandlers\DeleteReviewBusinessCommandHandler.cs 8r	
-xÇØ
-zD:\Repos\BuySmart\BuySmart\Application\CommandHandlers\ReviewBusinessCommandHandlers\CreateReviewBusinessCommandHandler.cs 8r	
- !"xÇÆ
-lD:\Repos\BuySmart\BuySmart\Application\CommandHandlers\ProductCommandHandlers\UpdateProductCommandHandler.cs
- 8r'	
-!"#$%&)*+xÇ
-!"$&¢
-lD:\Repos\BuySmart\BuySmart\Application\CommandHandlers\ProductCommandHandlers\DeleteProductCommandHandler.cs 8r	
- !"xÇ∫
-lD:\Repos\BuySmart\BuySmart\Application\CommandHandlers\ProductCommandHandlers\CreateProductCommandHandler.cs 8r.	
- !"#$%&'(*+-./012345xÇ "&*+-.02ö
-fD:\Repos\BuySmart\BuySmart\Application\CommandHandlers\CartCommandHandlers\CreateCartCommandHandler.cs 8r	
-xÇ£
-nD:\Repos\BuySmart\BuySmart\Application\CommandHandlers\BusinessCommandHandlers\UpdateBusinessCommandHandler.cs 8r	
- !"xÇü
-nD:\Repos\BuySmart\BuySmart\Application\CommandHandlers\BusinessCommandHandlers\DeleteBusinessCommandHandler.cs 8r	
-xÇ¢
-nD:\Repos\BuySmart\BuySmart\Application\CommandHandlers\BusinessCommandHandlers\CreateBusinessCommandHandler.cs 8r	
- !xÇ
+ö
+/D:\BuySmart\BuySmart\Identity\UsersDbContext.cs 8rD	
+ !"#$%'()+,-./0123456789:;<=>?@ABCDEFGHIÇ #$'(+-./247:=?BD’
+@D:\BuySmart\BuySmart\Identity\Repositories\UserAuthRepository.csç 
+8*rÖ	
+ !"#$%&'()*+,-/012345679:;<=>?@ABCDFGHIJKLMOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxy{|}~ÄÅÇÉÑÖÜáâäãåçéèêëíìîïñóôöõúùü†°¢£•ß®©™¨≠Ø∞±≤≥¥µ∂∑∏π∫ªºΩæø¿¡¬√≈∆«»… ÀÃÕŒœ–—“”‘’◊ÿŸ⁄€‹›ﬂ‡·‚„‰ÂÊÁËÍÎÏÌÔÒÚÛÙıˆ˜¯˙˚¸˝ˇÄÅÇÉÑÖÜáàâäãåçéèêëíìîïñóòôöúùûü†°¢£§¶ß®©™´¨≠Æ∞±≤¥µ∂∑∏π∫ªºæø¿¬√ƒ≈∆«»… ÀÕŒœ—“”‘’÷◊ÿŸ⁄›ﬁx+Ç¸"#%'+346:?@BCFGKSTUVX]^_`ehiklmostvxy{|}~ÄÖçéêíîïñöúü†¢•ß©¨Ø±≤≥∑∏πΩæø¿≈«…Àœ—“”‘’◊€„‰ÂÊÁÍÎÏÛÙıˆ˜˙˚¸ÅÇÑÜáàäãçéëìîñóûü°£™´≠∞±≤¥µ∂∏πªæø¿¬√≈«» ÕŒœ—“‘ÿ≤
+HD:\BuySmart\BuySmart\Identity\Migrations\20250110202156_InitialCreate.cs 8j=r<	
+ !"#$%&'()*+,-.012346789:;>?@ACDEFGÇ "$%&'()+-06@Cw
+4D:\BuySmart\BuySmart\Identity\DependencyInjection.cs 8jr'	 !"#$%&(*+,-Ç
+(*

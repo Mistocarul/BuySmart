@@ -1,21 +1,283 @@
-À
-ND:\Repos\BuySmart\BuySmart\Infrastructure\Repositories\UserClientRepository.cs 8	j<rN	
- !"$%&'()*+,-./023456789:=>?@ACDEFGHIJKMNOPQRSTUVWXxÇ!()*.679=>?@ACDEIOPRTUÕ
-PD:\Repos\BuySmart\BuySmart\Infrastructure\Repositories\UserBusinessRepository.cs 8	jFrN	
- !"#$%&'(*+,-./023456789:<=>?@ABCDGHIJKMNOPQRSTUVWxÇ!"$&',4579@ACGHIJKMNOSË
-RD:\Repos\BuySmart\BuySmart\Infrastructure\Repositories\ReviewBusinessRepository.cs' 8j?r]	
- !"#$%&()*+,-./01345679:;<=@ABCEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcefx	Ç% !%-.03469:<@ABCEFJOSTVX\]_abÍ
-KD:\Repos\BuySmart\BuySmart\Infrastructure\Repositories\ProductRepository.cs# 8rg	
- !"#$%&'()*+,-/123456789;<=>?@ABCDEFIKLMNOPQRSTUVWXYZ[\]_`abdeghijklmnopqrxÇ'"'(+3468?@AEOPRTUVWXYZ[\]bijlnoÆ
-LD:\Repos\BuySmart\BuySmart\Infrastructure\Repositories\CategoryRepository.cs 8
-r<	
- !"#$%&'()*+,-./0123456789:;<>?xÇ %&'+,.01568:;ó
-HD:\Repos\BuySmart\BuySmart\Infrastructure\Repositories\CartRepository.cs 8r2	
- !"#%&'(*+,-/012456789xÇ!',16Ã
-LD:\Repos\BuySmart\BuySmart\Infrastructure\Repositories\BusinessRepository.cs 8
-j@rO	
-!"$%&'()*,-./012346789:;<=>ABCDGHIJKLMNOQRSTUVWYZ[^_xÇ&'),-.2:;=ABCDGHIMSTVYZ¥
-MD:\Repos\BuySmart\BuySmart\Infrastructure\Persistence\ApplicationDbContext.csb 8r‡	
-!"#%&'()*+,-./0123456789:;<=>?ABCEGHIKLNOQRTUVWX[\]^abcdefhijklmnopqrstuvwxyz{|~ÄÅÇÑÖÜáàäãåçéêëíìîñóòôöõùûü†°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥¥∑∏πªºΩæø¡¬√ƒ∆«»… ÃÕŒœ–—”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·„‰ÂÁÈÍÎÏÓÔÒÚÛıˆ¯˘˙¸˝ˇÄÅÉÑÖÜáàäãåçéèêëìîïñóòöõúùûü†°¢£§¶ß®©™´¨≠ÆØ∞±≤≥µ∂∑∏π∫ªºΩæø¿¡√ƒ≈∆«»… ÀÃÕŒœ–—“”‘’Çˆ!"%'()-0368:;<>ACEGKNQTUVX[\]^abcehjklpsvy{~ÄÇÑÖÜàäãåéêëíîñóòöùü†°•®´Æ∞≤∑∏πªºΩø¡¬√ƒ∆«» ÃÕŒ–”’÷◊€ﬁ„ÂÁÈÓÒı¯¸ˇÉÑÖáäåçéìîïóöúùû¢¶®©™Æ∞µ∑∏πΩø√≈∆«ÀÕ–t
-?D:\Repos\BuySmart\BuySmart\Infrastructure\DependecyInjection.cs	 8r	
-Ç
+p
+<D:\BuySmart\BuySmart\Application\Utils\ValidationBehavior.cs 8r
+xÇS
+5D:\BuySmart\BuySmart\Application\Utils\PagedResult.cs 8r	Çë
+8D:\BuySmart\BuySmart\Application\Utils\MappingProfile.cs 8r/	
+!"#$%&()*,-./0345789Ç!"#$%&()*,-./0345í
+gD:\BuySmart\BuySmart\Application\QueryHandlers\UserClientQueryHandlers\GetUserClientByIdQueryHandler.cs 8r	
+Ç©
+lD:\BuySmart\BuySmart\Application\QueryHandlers\UserClientQueryHandlers\GetFilteredUserClientsQueryHandler.cs
+ 8r#	 !"#$%&xÇ	 !#í
+gD:\BuySmart\BuySmart\Application\QueryHandlers\UserClientQueryHandlers\GetAllUserClientsQueryHandler.cs 8r	
+Çñ
+kD:\BuySmart\BuySmart\Application\QueryHandlers\UserBusinessQueryHandlers\GetUserBusinessByIdQueryHandler.cs 8r	
+ÇÆ
+qD:\BuySmart\BuySmart\Application\QueryHandlers\UserBusinessQueryHandlers\GetFilteredUserBusinessesQueryHandler.cs
+ 8r#	 !"#$%&xÇ	 !#ó
+lD:\BuySmart\BuySmart\Application\QueryHandlers\UserBusinessQueryHandlers\GetAllUserBusinessesQueryHandler.cs 8r	
+Çô
+oD:\BuySmart\BuySmart\Application\QueryHandlers\ReviewBusinessQueryHandlers\GetReviewBusinessByIdQueryHandler.cs 8r	
+Ç±
+uD:\BuySmart\BuySmart\Application\QueryHandlers\ReviewBusinessQueryHandlers\GetFilteredReviewBusinessesQueryHandler.cs
+ 8r"
+ !"#$%xÇ	 "ö
+pD:\BuySmart\BuySmart\Application\QueryHandlers\ReviewBusinessQueryHandlers\GetAllReviewBusinessesQueryHandler.cs 8r	
+ÇÜ
+\D:\BuySmart\BuySmart\Application\QueryHandlers\ProductQueryHandlers\GetProductByIdHandler.cs 8r	
+Çö
+aD:\BuySmart\BuySmart\Application\QueryHandlers\ProductQueryHandlers\GetAllProductsQueryHandler.cs
+ 8r	
+ !"xÇ	™
+iD:\BuySmart\BuySmart\Application\QueryHandlers\CategoryQueryHandlers\GetFilteredcategoriesQueryHandler.cs
+ 8j r"
+"#$&()*+xÇ	"#$(ç
+cD:\BuySmart\BuySmart\Application\QueryHandlers\CategoryQueryHandlers\GetCategoryByIdQueryHandler.cs 8r	
+Çé
+dD:\BuySmart\BuySmart\Application\QueryHandlers\CategoryQueryHandlers\GetAllCategoriesQueryHandler.cs 8r	
+Ç•
+iD:\BuySmart\BuySmart\Application\QueryHandlers\BusinessQueryHandlers\GetFilteredBusinessesQueryHandler.cs
+ 8r"
+ !"#$xÇ	!ç
+cD:\BuySmart\BuySmart\Application\QueryHandlers\BusinessQueryHandlers\GetBusinessByIdQueryHandler.cs 8r	
+Çå
+bD:\BuySmart\BuySmart\Application\QueryHandlers\BusinessQueryHandlers\GetAllBusinessQueryHandler.cs 8r	
+Çg
+TD:\BuySmart\BuySmart\Application\Queries\UserClientQueries\GetUserClientByIdQuery.cs 8r		
+r
+YD:\BuySmart\BuySmart\Application\Queries\UserClientQueries\GetFilteredUserClientsQuery.cs 8r	
+±
+fD:\BuySmart\BuySmart\Application\QueryHandlers\ProductQueryHandlers\GetFilteredProductsQueryHandler.cs 8r-
+ !"#$%&'()*+,.0123xÇ!#'*+,0b
+TD:\BuySmart\BuySmart\Application\Queries\UserClientQueries\GetAllUserClientsQuery.csr
+k
+XD:\BuySmart\BuySmart\Application\Queries\UserBusinessQueries\GetUserBusinessByIdQuery.cs 8r		
+w
+^D:\BuySmart\BuySmart\Application\Queries\UserBusinessQueries\GetFilteredUserBusinessesQuery.cs 8r	
+g
+YD:\BuySmart\BuySmart\Application\Queries\UserBusinessQueries\GetAllUserBusinessesQuery.csr	o
+\D:\BuySmart\BuySmart\Application\Queries\ReviewBusinessQueries\GetReviewBusinessByIdQuery.cs 8r		
+{
+[D:\BuySmart\BuySmart\Application\Commands\UserBusinessCommands\CreateUserBusinessCommand.cs 
+8
+r	
+Ç	
+f
+QD:\BuySmart\BuySmart\Application\Queries\BusinessQueries\GetAllBusinessesQuery.cs 8r	
+L
+2D:\BuySmart\BuySmart\Application\DTOs\ReviewDto.cs 8r	
+Çq
+QD:\BuySmart\BuySmart\Application\Commands\ProductCommands\CreateProductCommand.cs 8r	
+Ç	B
+0D:\BuySmart\BuySmart\Application\DTOs\CartDto.cs 8rr
+_D:\BuySmart\BuySmart\Application\Commands\ReviewBusinessCommands\DeleteReviewBusinessCommand.cs 8r		
+_
+6D:\BuySmart\BuySmart\Application\DependecyInjection.cs 8r	
+Çx
+WD:\BuySmart\BuySmart\Application\Commands\UserClientCommands\UpdateUserClientCommand.cs 8r	
+Ç
+w
+WD:\BuySmart\BuySmart\Application\Commands\UserClientCommands\CreateUserClientCommand.cs 
+8
+r	
+Ç	
+£
+dD:\BuySmart\BuySmart\Application\Commands\UserBusinessCommands\UpdateUserBusinessCommandValidator.cs 8r'	
+ !"#$%&()*+,-.Ç	"*|
+[D:\BuySmart\BuySmart\Application\Commands\UserBusinessCommands\UpdateUserBusinessCommand.cs 8r	
+Ç
+{
+bD:\BuySmart\BuySmart\Application\Queries\ReviewBusinessQueries\GetFilteredReviewBusinessesQuery.cs 8r	
+k
+]D:\BuySmart\BuySmart\Application\Queries\ReviewBusinessQueries\GetAllReviewBusinessesQuery.csr	
+a
+ND:\BuySmart\BuySmart\Application\Queries\ProductQueries\GetProductByIdQuery.cs 8r		m
+SD:\BuySmart\BuySmart\Application\Queries\ProductQueries\GetFilteredProductsQuery.cs 8r	
+\
+ND:\BuySmart\BuySmart\Application\Queries\ProductQueries\GetAllProductsQuery.csr	
+o
+VD:\BuySmart\BuySmart\Application\Queries\CategoryQueries\GetFilteredCategoriesQuery.cs 8r	
+c
+PD:\BuySmart\BuySmart\Application\Queries\CategoryQueries\GetCategoryByIdQuery.cs 8r		
+f
+QD:\BuySmart\BuySmart\Application\Queries\CategoryQueries\GetAllCategoriesQuery.cs 8r	
+o
+VD:\BuySmart\BuySmart\Application\Queries\BusinessQueries\GetFilteredBusinessesQuery.cs 8r	
+c
+PD:\BuySmart\BuySmart\Application\Queries\BusinessQueries\GetBusinessByIdQuery.cs 8r		
+•
+dD:\BuySmart\BuySmart\Application\Commands\UserBusinessCommands\CreateUserBuisnessCommandValidator.cs 8j$r'	
+!"#$%&'()*+-.Ç
+!)*J
+0D:\BuySmart\BuySmart\Application\DTOs\UserDto.cs 8r
+	
+ÇL
+6D:\BuySmart\BuySmart\Application\DTOs\UserClientDto.cs 8r	ÇN
+8D:\BuySmart\BuySmart\Application\DTOs\UserBusinessDto.cs 8r	
+Çí
+hD:\BuySmart\BuySmart\Application\Commands\ReviewBusinessCommands\UpdateReviewBusinessCommandValidator.cs 8r	
+Ç	O
+3D:\BuySmart\BuySmart\Application\DTOs\ProductDto.cs 8r	
+ÇL
+4D:\BuySmart\BuySmart\Application\DTOs\CategoryDto.cs 8r		ÇT
+4D:\BuySmart\BuySmart\Application\DTOs\BusinessDto.cs 
+8
+jr	Ç	Ñ
+hD:\BuySmart\BuySmart\Application\Commands\ReviewBusinessCommands\DeleteReviewBusinessCommandValidator.cs 8r	
+Ç	ò
+`D:\BuySmart\BuySmart\Application\Commands\UserClientCommands\UpdateUserClientCommandValidator.cs 8r"	
+ !#$%&'(Ç
+ #°
+`D:\BuySmart\BuySmart\Application\Commands\UserClientCommands\CreateUserClientCommandValidator.cs 8j$r'	
+!"#$%&'()*+,-Ç
+!)*è
+hD:\BuySmart\BuySmart\Application\Commands\ReviewBusinessCommands\CreateReviewBusinessCommandValidator.cs 8r	
+Ç	y
+_D:\BuySmart\BuySmart\Application\Commands\ReviewBusinessCommands\CreateReviewBusinessCommand.cs 8r	
+Çí
+ZD:\BuySmart\BuySmart\Application\Commands\ProductCommands\UpdateProductCommandValidator.cs
+ 8r	
+ !"#$Ç
+ f
+SD:\BuySmart\BuySmart\Application\Commands\CategoryCommands\DeleteCategoryCommand.cs 8r		
+v
+ZD:\BuySmart\BuySmart\Application\Commands\ProductCommands\DeleteProductCommandValidator.cs 8r	
+Ç	d
+QD:\BuySmart\BuySmart\Application\Commands\ProductCommands\DeleteProductCommand.cs 8r		
+é
+ZD:\BuySmart\BuySmart\Application\Commands\ProductCommands\CreateProductCommandValidator.cs 8r	
+!"Çz
+_D:\BuySmart\BuySmart\Application\Commands\ReviewBusinessCommands\UpdateReviewBusinessCommand.cs 
+8
+r	
+Ç{
+\D:\BuySmart\BuySmart\Application\Commands\CategoryCommands\UpdateCategoryCommandValidator.cs 8r	
+Ç	
+m
+SD:\BuySmart\BuySmart\Application\Commands\CategoryCommands\UpdateCategoryCommand.cs 8r	
+Ç	
+w
+\D:\BuySmart\BuySmart\Application\Commands\CategoryCommands\DeleteCategoryCommandValidator.cs 8r	
+Ç	q
+QD:\BuySmart\BuySmart\Application\Commands\ProductCommands\UpdateProductCommand.cs 8r	
+Ç	
+}
+\D:\BuySmart\BuySmart\Application\Commands\CategoryCommands\CreateCategoryCommandValidator.cs 8r	
+Ç	l
+SD:\BuySmart\BuySmart\Application\Commands\CategoryCommands\CreateCategoryCommand.cs 8r
+	
+Ç	^
+KD:\BuySmart\BuySmart\Application\Commands\CartCommands\CreateCartCommand.cs 8r		
+Ü
+\D:\BuySmart\BuySmart\Application\Commands\BusinessCommands\UpdateBusinessCommandValidator.cs 8r	
+Çq
+SD:\BuySmart\BuySmart\Application\Commands\BusinessCommands\UpdateBusinessCommand.cs 
+8
+r	
+Ç	
+x
+\D:\BuySmart\BuySmart\Application\Commands\BusinessCommands\DeleteBusinessCommandValidator.cs 8r	
+Ç
+f
+SD:\BuySmart\BuySmart\Application\Commands\BusinessCommands\DeleteBusinessCommand.cs 8r		
+à
+\D:\BuySmart\BuySmart\Application\Commands\BusinessCommands\CreateBusinessCommandValidator.cs 8r	
+Ç	q
+SD:\BuySmart\BuySmart\Application\Commands\BusinessCommands\CreateBusinessCommand.cs 
+8
+r	
+Ç	
+©
+lD:\BuySmart\BuySmart\Application\CommandHandlers\UserClientCommandHandlers\UpdateUserClientCommandHandler.cs
+ 8r"	
+ !"#%&'(xÇ
+ "%°
+lD:\BuySmart\BuySmart\Application\CommandHandlers\UserClientCommandHandlers\CreateUserClientCommandHandler.cs 8r	
+ !"xÇ≠
+pD:\BuySmart\BuySmart\Application\CommandHandlers\UserBusinessCommandHandlers\UpdateUserBusinessCommandHandler.cs
+ 8r"	
+ !"#%&'(xÇ
+ "%•
+pD:\BuySmart\BuySmart\Application\CommandHandlers\UserBusinessCommandHandlers\CreateUserBusinessCommandHandler.cs 8r	
+ !xÇ±
+tD:\BuySmart\BuySmart\Application\CommandHandlers\ReviewBusinessCommandHandlers\UpdateReviewBusinessCommandHandler.cs
+ 8r"	
+ !"$%&'xÇ
+!$§
+tD:\BuySmart\BuySmart\Application\CommandHandlers\ReviewBusinessCommandHandlers\DeleteReviewBusinessCommandHandler.cs 8r	
+xÇ©
+tD:\BuySmart\BuySmart\Application\CommandHandlers\ReviewBusinessCommandHandlers\CreateReviewBusinessCommandHandler.cs 8r	
+ !"xÇ£
+fD:\BuySmart\BuySmart\Application\CommandHandlers\ProductCommandHandlers\UpdateProductCommandHandler.cs
+ 8r"	
+ !$%&xÇ
+!ñ
+fD:\BuySmart\BuySmart\Application\CommandHandlers\ProductCommandHandlers\DeleteProductCommandHandler.cs 8r	
+xÇ¥
+fD:\BuySmart\BuySmart\Application\CommandHandlers\ProductCommandHandlers\CreateProductCommandHandler.cs 8r.	
+ !"#$%&'(*+-./012345xÇ "&*+-.02ú
+hD:\BuySmart\BuySmart\Application\CommandHandlers\CategoryCommandHandlers\UpdateCategoryCommandHandler.cs 8r	
+xÇò
+hD:\BuySmart\BuySmart\Application\CommandHandlers\CategoryCommandHandlers\DeleteCategoryCommandHandler.cs 8r	
+xÇú
+hD:\BuySmart\BuySmart\Application\CommandHandlers\CategoryCommandHandlers\CreateCategoryCommandHandler.cs 8r	
+xÇî
+`D:\BuySmart\BuySmart\Application\CommandHandlers\CartCommandHandlers\CreateCartCommandHandler.cs 8r	
+xÇù
+hD:\BuySmart\BuySmart\Application\CommandHandlers\BusinessCommandHandlers\UpdateBusinessCommandHandler.cs 8r	
+ !"xÇò
+hD:\BuySmart\BuySmart\Application\CommandHandlers\BusinessCommandHandlers\DeleteBusinessCommandHandler.cs 8r	
+xÇú
+hD:\BuySmart\BuySmart\Application\CommandHandlers\BusinessCommandHandlers\CreateBusinessCommandHandler.cs 8r	
+ !xÇ~
+OD:\BuySmart\BuySmart\Application\Authentication\VerifyPasswordCommandHandler.cs 8r	
+xÇ`
+HD:\BuySmart\BuySmart\Application\Authentication\VerifyPasswordCommand.cs 8r
+	
+Ç	å
+MD:\BuySmart\BuySmart\Application\Authentication\UpdateUserCommandValidator.cs 8jr&	
+ !"#$%&Ç	"#â
+KD:\BuySmart\BuySmart\Application\Authentication\UpdateUserCommandHandler.cs
+ 8r#	
+ !"#$&'()xÇ
+ !#&c
+DD:\BuySmart\BuySmart\Application\Authentication\UpdateUserCommand.cs 
+8
+r	
+Çã
+WD:\BuySmart\BuySmart\Application\Authentication\SendVerificationCodeCommandValidator.cs 8r	
+ !"xÇã
+UD:\BuySmart\BuySmart\Application\Authentication\SendVerificationCodeCommandHandler.cs 8r	
+xÇn
+ND:\BuySmart\BuySmart\Application\Authentication\SendVerificationCodeCommand.cs 
+8
+r	
+Ç	
+o
+OD:\BuySmart\BuySmart\Application\Authentication\RegisterUserCommandValidator.cs 8r	
+Ç
+~
+MD:\BuySmart\BuySmart\Application\Authentication\RegisterUserCommandHandler.cs 8r	
+xÇ]
+FD:\BuySmart\BuySmart\Application\Authentication\RegisterUserCommand.cs 8r		
+Ç\
+CD:\BuySmart\BuySmart\Application\Authentication\LoginUserCommand.cs 8r
+	
+Ç	~
+JD:\BuySmart\BuySmart\Application\Authentication\LoginUserCommandHandler.cs 8r	
+ !xÇo
+LD:\BuySmart\BuySmart\Application\Authentication\LoginUserCommandValidator.cs 8r	
+Ç	j
+MD:\BuySmart\BuySmart\Application\Authentication\DeleteUserCommandValidator.cs 8r	
+Ç
+|
+KD:\BuySmart\BuySmart\Application\Authentication\DeleteUserCommandHandler.cs 8r	
+xÇW
+DD:\BuySmart\BuySmart\Application\Authentication\DeleteUserCommand.cs 8r		
+í
+DD:\BuySmart\BuySmart\Application\AIML\ProductPricePredictionModel.cs 8r*	
+ !"#%&'()*+-.012345xÇ !"')*-.012R
+?D:\BuySmart\BuySmart\Application\AIML\ProductPricePrediction.cs 8r		
+{
+=D:\BuySmart\BuySmart\Application\AIML\ProductDataGenerator.cs 8	r"	
+ !"#$&')*+,xÇ ")J
+4D:\BuySmart\BuySmart\Application\AIML\ProductData.cs 8rÇ

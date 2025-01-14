@@ -59,9 +59,28 @@ namespace Infrastructure.Repositories
         {
             try
             {
-                string relativePath = configuration["PathToPhotos:PathToProducts"];
-                string projectRoot = Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.Parent.FullName;
-                string fullPathToPhotos = Path.Combine(projectRoot, relativePath);
+                string? relativePath = configuration["PathToPhotos:PathToProducts"];
+                if (string.IsNullOrEmpty(relativePath))
+                {
+                    return Result<Guid>.Failure("The path to the photos is not configured.");
+                }
+
+                var projectRootDir = Directory.GetParent(AppContext.BaseDirectory)
+                                    ?.Parent?.Parent?.Parent;
+
+                if (projectRootDir == null)
+                {
+                    return Result<Guid>.Failure("Could not determine the project root directory.");
+                }
+
+                string fullPathToPhotos = Path.Combine(projectRootDir.FullName, relativePath);
+
+                if (!Directory.Exists(fullPathToPhotos))
+                {
+                    return Result<Guid>.Failure($"The photos directory does not exist at path: {fullPathToPhotos}");
+                }
+
+
                 fullPathToPhotos = Path.GetFullPath(fullPathToPhotos);
 
                 await context.Products.AddAsync(product);

@@ -5,13 +5,1958 @@
     {
       "tool": {
         "name": "Microsoft (R) Visual C# Compiler",
-        "version": "4.11.0.0",
-        "fileVersion": "4.11.0-3.24468.6 (b4e5d1dd)",
-        "semanticVersion": "4.11.0",
+        "version": "4.12.0.0",
+        "fileVersion": "4.12.0-3.24523.4 (f3348c2a)",
+        "semanticVersion": "4.12.0",
         "language": "en-US"
       },
       "results": [
-      ]
+        {
+          "ruleId": "CS8618",
+          "level": "warning",
+          "message": "Non-nullable property 'Products' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable.",
+          "suppressionStates": [
+            "suppressedInSource"
+          ],
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 16,
+                  "endLine": 9,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 11,
+                  "startColumn": 31,
+                  "endLine": 11,
+                  "endColumn": 39
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8618",
+          "level": "warning",
+          "message": "Non-nullable property 'Categories' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable.",
+          "suppressionStates": [
+            "suppressedInSource"
+          ],
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 16,
+                  "endLine": 9,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 12,
+                  "startColumn": 32,
+                  "endLine": 12,
+                  "endColumn": 42
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8618",
+          "level": "warning",
+          "message": "Non-nullable property 'Carts' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable.",
+          "suppressionStates": [
+            "suppressedInSource"
+          ],
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 16,
+                  "endLine": 9,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 13,
+                  "startColumn": 28,
+                  "endLine": 13,
+                  "endColumn": 33
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8618",
+          "level": "warning",
+          "message": "Non-nullable property 'Users' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable.",
+          "suppressionStates": [
+            "suppressedInSource"
+          ],
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 16,
+                  "endLine": 9,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 28,
+                  "endLine": 14,
+                  "endColumn": 33
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8618",
+          "level": "warning",
+          "message": "Non-nullable property 'OrderItems' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable.",
+          "suppressionStates": [
+            "suppressedInSource"
+          ],
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 16,
+                  "endLine": 9,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 15,
+                  "startColumn": 33,
+                  "endLine": 15,
+                  "endColumn": 43
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8618",
+          "level": "warning",
+          "message": "Non-nullable property 'Reviews' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable.",
+          "suppressionStates": [
+            "suppressedInSource"
+          ],
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 16,
+                  "endLine": 9,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 30,
+                  "endLine": 16,
+                  "endColumn": 37
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8618",
+          "level": "warning",
+          "message": "Non-nullable property 'Businesses' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable.",
+          "suppressionStates": [
+            "suppressedInSource"
+          ],
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 16,
+                  "endLine": 9,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 32,
+                  "endLine": 17,
+                  "endColumn": 42
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8618",
+          "level": "warning",
+          "message": "Non-nullable property 'Orders' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable.",
+          "suppressionStates": [
+            "suppressedInSource"
+          ],
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 16,
+                  "endLine": 9,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 18,
+                  "startColumn": 29,
+                  "endLine": 18,
+                  "endColumn": 35
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8618",
+          "level": "warning",
+          "message": "Non-nullable property 'Recommendations' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable.",
+          "suppressionStates": [
+            "suppressedInSource"
+          ],
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 16,
+                  "endLine": 9,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 19,
+                  "startColumn": 38,
+                  "endLine": 19,
+                  "endColumn": 53
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8618",
+          "level": "warning",
+          "message": "Non-nullable property 'Histories' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable.",
+          "suppressionStates": [
+            "suppressedInSource"
+          ],
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 16,
+                  "endLine": 9,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 20,
+                  "startColumn": 31,
+                  "endLine": 20,
+                  "endColumn": 40
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8618",
+          "level": "warning",
+          "message": "Non-nullable property 'UserBusinesses' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable.",
+          "suppressionStates": [
+            "suppressedInSource"
+          ],
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 16,
+                  "endLine": 9,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 21,
+                  "startColumn": 36,
+                  "endLine": 21,
+                  "endColumn": 50
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8618",
+          "level": "warning",
+          "message": "Non-nullable property 'UserClients' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable.",
+          "suppressionStates": [
+            "suppressedInSource"
+          ],
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 16,
+                  "endLine": 9,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Persistence/ApplicationDbContext.cs",
+                "region": {
+                  "startLine": 22,
+                  "startColumn": 34,
+                  "endLine": 22,
+                  "endColumn": 45
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'uuid_generate_v4()' 11 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 21,
+                  "startColumn": 101,
+                  "endLine": 21,
+                  "endColumn": 121
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 34,
+                  "startColumn": 97,
+                  "endLine": 34,
+                  "endColumn": 117
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 50,
+                  "startColumn": 97,
+                  "endLine": 50,
+                  "endColumn": 117
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 67,
+                  "startColumn": 97,
+                  "endLine": 67,
+                  "endColumn": 117
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 106,
+                  "startColumn": 97,
+                  "endLine": 106,
+                  "endColumn": 117
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 124,
+                  "startColumn": 98,
+                  "endLine": 124,
+                  "endColumn": 118
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 155,
+                  "startColumn": 100,
+                  "endLine": 155,
+                  "endColumn": 120
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 179,
+                  "startColumn": 100,
+                  "endLine": 179,
+                  "endColumn": 120
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 205,
+                  "startColumn": 102,
+                  "endLine": 205,
+                  "endColumn": 122
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 263,
+                  "startColumn": 107,
+                  "endLine": 263,
+                  "endColumn": 127
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 290,
+                  "startColumn": 99,
+                  "endLine": 290,
+                  "endColumn": 119
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null,
+              "4": null,
+              "5": null,
+              "6": null,
+              "7": null,
+              "8": null,
+              "9": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'character varying(200)' 9 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 22,
+                  "startColumn": 55,
+                  "endLine": 22,
+                  "endColumn": 79
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 35,
+                  "startColumn": 55,
+                  "endLine": 35,
+                  "endColumn": 79
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 56,
+                  "endLine": 36,
+                  "endColumn": 80
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 37,
+                  "startColumn": 59,
+                  "endLine": 37,
+                  "endColumn": 83
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 39,
+                  "startColumn": 56,
+                  "endLine": 39,
+                  "endColumn": 80
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 87,
+                  "startColumn": 58,
+                  "endLine": 87,
+                  "endColumn": 82
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 130,
+                  "startColumn": 66,
+                  "endLine": 130,
+                  "endColumn": 90
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 156,
+                  "startColumn": 55,
+                  "endLine": 156,
+                  "endColumn": 79
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 161,
+                  "startColumn": 56,
+                  "endLine": 161,
+                  "endColumn": 80
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null,
+              "4": null,
+              "5": null,
+              "6": null,
+              "7": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'Users' 5 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 31,
+                  "startColumn": 23,
+                  "endLine": 31,
+                  "endColumn": 30
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 41,
+                  "endLine": 58,
+                  "endColumn": 48
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 75,
+                  "startColumn": 41,
+                  "endLine": 75,
+                  "endColumn": 48
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 405,
+                  "startColumn": 24,
+                  "endLine": 405,
+                  "endColumn": 31
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 450,
+                  "startColumn": 23,
+                  "endLine": 450,
+                  "endColumn": 30
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'UserId' 8 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 59,
+                  "startColumn": 42,
+                  "endLine": 59,
+                  "endColumn": 50
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 76,
+                  "startColumn": 42,
+                  "endLine": 76,
+                  "endColumn": 50
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 98,
+                  "startColumn": 42,
+                  "endLine": 98,
+                  "endColumn": 50
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 116,
+                  "startColumn": 42,
+                  "endLine": 116,
+                  "endColumn": 50
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 147,
+                  "startColumn": 42,
+                  "endLine": 147,
+                  "endColumn": 50
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 197,
+                  "startColumn": 42,
+                  "endLine": 197,
+                  "endColumn": 50
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 282,
+                  "startColumn": 42,
+                  "endLine": 282,
+                  "endColumn": 50
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 317,
+                  "startColumn": 42,
+                  "endLine": 317,
+                  "endColumn": 50
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null,
+              "4": null,
+              "5": null,
+              "6": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'UserClients' 7 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 64,
+                  "startColumn": 23,
+                  "endLine": 64,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 115,
+                  "startColumn": 41,
+                  "endLine": 115,
+                  "endColumn": 54
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 146,
+                  "startColumn": 41,
+                  "endLine": 146,
+                  "endColumn": 54
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 196,
+                  "startColumn": 41,
+                  "endLine": 196,
+                  "endColumn": 54
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 281,
+                  "startColumn": 41,
+                  "endLine": 281,
+                  "endColumn": 54
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 316,
+                  "startColumn": 41,
+                  "endLine": 316,
+                  "endColumn": 54
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 441,
+                  "startColumn": 23,
+                  "endLine": 441,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null,
+              "4": null,
+              "5": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'Businesses' 6 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 81,
+                  "startColumn": 23,
+                  "endLine": 81,
+                  "endColumn": 35
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 140,
+                  "startColumn": 41,
+                  "endLine": 140,
+                  "endColumn": 53
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 170,
+                  "startColumn": 41,
+                  "endLine": 170,
+                  "endColumn": 53
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 304,
+                  "startColumn": 41,
+                  "endLine": 304,
+                  "endColumn": 53
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 323,
+                  "startColumn": 24,
+                  "endLine": 323,
+                  "endColumn": 36
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 444,
+                  "startColumn": 23,
+                  "endLine": 444,
+                  "endColumn": 35
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null,
+              "4": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'Carts' 4 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 103,
+                  "startColumn": 23,
+                  "endLine": 103,
+                  "endColumn": 30
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 218,
+                  "startColumn": 41,
+                  "endLine": 218,
+                  "endColumn": 48
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 329,
+                  "startColumn": 24,
+                  "endLine": 329,
+                  "endColumn": 31
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 429,
+                  "startColumn": 23,
+                  "endLine": 429,
+                  "endColumn": 30
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'Orders' 5 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 121,
+                  "startColumn": 23,
+                  "endLine": 121,
+                  "endColumn": 31
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 224,
+                  "startColumn": 41,
+                  "endLine": 224,
+                  "endColumn": 49
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 360,
+                  "startColumn": 24,
+                  "endLine": 360,
+                  "endColumn": 32
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 365,
+                  "startColumn": 24,
+                  "endLine": 365,
+                  "endColumn": 32
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 432,
+                  "startColumn": 23,
+                  "endLine": 432,
+                  "endColumn": 31
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'timestamp with time zone' 4 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 127,
+                  "startColumn": 62,
+                  "endLine": 127,
+                  "endColumn": 88
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 182,
+                  "startColumn": 62,
+                  "endLine": 182,
+                  "endColumn": 88
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 266,
+                  "startColumn": 71,
+                  "endLine": 266,
+                  "endColumn": 97
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 296,
+                  "startColumn": 63,
+                  "endLine": 296,
+                  "endColumn": 89
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'Products' 8 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 152,
+                  "startColumn": 23,
+                  "endLine": 152,
+                  "endColumn": 33
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 190,
+                  "startColumn": 41,
+                  "endLine": 190,
+                  "endColumn": 51
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 230,
+                  "startColumn": 41,
+                  "endLine": 230,
+                  "endColumn": 51
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 254,
+                  "startColumn": 41,
+                  "endLine": 254,
+                  "endColumn": 51
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 275,
+                  "startColumn": 41,
+                  "endLine": 275,
+                  "endColumn": 51
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 310,
+                  "startColumn": 41,
+                  "endLine": 310,
+                  "endColumn": 51
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 375,
+                  "startColumn": 24,
+                  "endLine": 375,
+                  "endColumn": 34
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 438,
+                  "startColumn": 23,
+                  "endLine": 438,
+                  "endColumn": 33
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null,
+              "4": null,
+              "5": null,
+              "6": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'double precision' 5 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 159,
+                  "startColumn": 56,
+                  "endLine": 159,
+                  "endColumn": 74
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 160,
+                  "startColumn": 57,
+                  "endLine": 160,
+                  "endColumn": 75
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 209,
+                  "startColumn": 59,
+                  "endLine": 209,
+                  "endColumn": 77
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 267,
+                  "startColumn": 65,
+                  "endLine": 267,
+                  "endColumn": 83
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 294,
+                  "startColumn": 57,
+                  "endLine": 294,
+                  "endColumn": 75
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'Histories' 4 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 176,
+                  "startColumn": 23,
+                  "endLine": 176,
+                  "endColumn": 34
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 335,
+                  "startColumn": 24,
+                  "endLine": 335,
+                  "endColumn": 35
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 340,
+                  "startColumn": 24,
+                  "endLine": 340,
+                  "endColumn": 35
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 414,
+                  "startColumn": 23,
+                  "endLine": 414,
+                  "endColumn": 34
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'ProductId' 9 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 191,
+                  "startColumn": 42,
+                  "endLine": 191,
+                  "endColumn": 53
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 231,
+                  "startColumn": 42,
+                  "endLine": 231,
+                  "endColumn": 53
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 255,
+                  "startColumn": 42,
+                  "endLine": 255,
+                  "endColumn": 53
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 276,
+                  "startColumn": 42,
+                  "endLine": 276,
+                  "endColumn": 53
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 311,
+                  "startColumn": 42,
+                  "endLine": 311,
+                  "endColumn": 53
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 336,
+                  "startColumn": 25,
+                  "endLine": 336,
+                  "endColumn": 36
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 356,
+                  "startColumn": 25,
+                  "endLine": 356,
+                  "endColumn": 36
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 381,
+                  "startColumn": 25,
+                  "endLine": 381,
+                  "endColumn": 36
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 396,
+                  "startColumn": 25,
+                  "endLine": 396,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null,
+              "4": null,
+              "5": null,
+              "6": null,
+              "7": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'OrderItems' 5 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 202,
+                  "startColumn": 23,
+                  "endLine": 202,
+                  "endColumn": 35
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 345,
+                  "startColumn": 24,
+                  "endLine": 345,
+                  "endColumn": 36
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 350,
+                  "startColumn": 24,
+                  "endLine": 350,
+                  "endColumn": 36
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 355,
+                  "startColumn": 24,
+                  "endLine": 355,
+                  "endColumn": 36
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 417,
+                  "startColumn": 23,
+                  "endLine": 417,
+                  "endColumn": 35
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'Recommendations' 4 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 260,
+                  "startColumn": 23,
+                  "endLine": 260,
+                  "endColumn": 40
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 380,
+                  "startColumn": 24,
+                  "endLine": 380,
+                  "endColumn": 41
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 385,
+                  "startColumn": 24,
+                  "endLine": 385,
+                  "endColumn": 41
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 423,
+                  "startColumn": 23,
+                  "endLine": 423,
+                  "endColumn": 40
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'Reviews' 5 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 287,
+                  "startColumn": 23,
+                  "endLine": 287,
+                  "endColumn": 32
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 390,
+                  "startColumn": 24,
+                  "endLine": 390,
+                  "endColumn": 33
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 395,
+                  "startColumn": 24,
+                  "endLine": 395,
+                  "endColumn": 33
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 400,
+                  "startColumn": 24,
+                  "endLine": 400,
+                  "endColumn": 33
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 426,
+                  "startColumn": 23,
+                  "endLine": 426,
+                  "endColumn": 32
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'UserClientId' 5 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 330,
+                  "startColumn": 25,
+                  "endLine": 330,
+                  "endColumn": 39
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 341,
+                  "startColumn": 25,
+                  "endLine": 341,
+                  "endColumn": 39
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 366,
+                  "startColumn": 25,
+                  "endLine": 366,
+                  "endColumn": 39
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 386,
+                  "startColumn": 25,
+                  "endLine": 386,
+                  "endColumn": 39
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/BuySmart/BuySmart/Infrastructure/Migrations/20241201140636_InitialCreate.cs",
+                "region": {
+                  "startLine": 401,
+                  "startColumn": 25,
+                  "endLine": 401,
+                  "endColumn": 39
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null
+            }
+          }
+        }
+      ],
+      "rules": {
+        "CS8618": {
+          "id": "CS8618",
+          "shortDescription": "Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.",
+          "defaultLevel": "warning",
+          "helpUri": "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS8618)",
+          "properties": {
+            "category": "Compiler",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Compiler",
+              "Telemetry"
+            ]
+          }
+        },
+        "S1192": {
+          "id": "S1192",
+          "shortDescription": "String literals should not be duplicated",
+          "fullDescription": "Duplicated string literals make the process of refactoring complex and error-prone, as any change would need to be propagated on all occurrences.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-1192",
+          "properties": {
+            "category": "Minor Code Smell",
+            "isEnabledByDefault": false,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "SonarWay"
+            ]
+          }
+        }
+      }
     }
   ]
 }

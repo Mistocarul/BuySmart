@@ -82,7 +82,7 @@ namespace Identity.Repositories
             {
                 var verificationCode = new Random().Next(100000, 999999);
                 var imageFromString = Convert.FromBase64String(user.Image);
-                var existingUser = await context.Users.SingleOrDefaultAsync(u => u.Email == user.Email);
+                var existingUser = await context.Users.SingleOrDefaultAsync(u => u.Email == user.Email, cancellationToken);
                 if (existingUser != null)
                 {
                     return Result<string>.Failure("Email already exists");
@@ -112,15 +112,15 @@ namespace Identity.Repositories
                 }
                 else
                 {
-                    var existingConfirmationCode = await usersDbContext.ConfirmationCodes.SingleOrDefaultAsync(c => c.Email == user.Email);
+                    var existingConfirmationCode = await usersDbContext.ConfirmationCodes.SingleOrDefaultAsync(c => c.Email == user.Email, cancellationToken);
                     if (existingConfirmationCode != null)
                     {
                         usersDbContext.ConfirmationCodes.Remove(existingConfirmationCode);
                     }
                     usersDbContext.ConfirmationCodes.Add(confirmationCode);
                     await usersDbContext.SaveChangesAsync(cancellationToken);
-                    //remove all confirmation codes older than 30 minutes
-                    var oldConfirmationCodes = await usersDbContext.ConfirmationCodes.Where(c => c.CreationTime.AddMinutes(30) < DateTime.UtcNow).ToListAsync();
+                   
+                    var oldConfirmationCodes = await usersDbContext.ConfirmationCodes.Where(c => c.CreationTime.AddMinutes(30) < DateTime.UtcNow).ToListAsync(cancellationToken);
                     if (oldConfirmationCodes != null) {
                         usersDbContext.ConfirmationCodes.RemoveRange(oldConfirmationCodes);
                         await usersDbContext.SaveChangesAsync(cancellationToken);
@@ -134,21 +134,41 @@ namespace Identity.Repositories
             }
         }
 
-        public async Task<Result<Guid>> Register(int confirmationCode, CancellationToken cancellationToken)
+        public async Task<Result<Guid>> Register(int verificationCode, CancellationToken cancellationToken)
         {
             try
             {
-                var confirmationCodeEntity = await usersDbContext.ConfirmationCodes.SingleOrDefaultAsync(c => c.Code == confirmationCode);
-                if (confirmationCodeEntity == null || confirmationCodeEntity.CreationTime.AddMinutes(30) < DateTime.UtcNow)
+                var confirmationCodeEntity = await usersDbContext.ConfirmationCodes.SingleOrDefaultAsync(c => c.Code == verificationCode, cancellationToken);
+                if (confirmationCodeEntity == null)
+                {
+                    return Result<Guid>.Failure("Invalid confirmation code");
+                }
+                if (confirmationCodeEntity.CreationTime.AddMinutes(30) < DateTime.UtcNow)
                 {
                     usersDbContext.ConfirmationCodes.Remove(confirmationCodeEntity);
                     await usersDbContext.SaveChangesAsync(cancellationToken);
                     return Result<Guid>.Failure("Invalid confirmation code");
                 }
 
-                string relativePath = configuration["PathToPhotos:Path"];
-                string projectRoot = Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.Parent.FullName;
-                string fullPathToPhotos = Path.Combine(projectRoot, relativePath);
+                string? relativePath = configuration["PathToPhotos:Path"];
+                if (string.IsNullOrEmpty(relativePath))
+                {
+                    return Result<Guid>.Failure("The path to the photos is not configured.");
+                }
+
+                var projectRootDir = Directory.GetParent(AppContext.BaseDirectory)?.Parent?.Parent?.Parent;
+                if (projectRootDir == null)
+                {
+                    return Result<Guid>.Failure("Could not determine the project root directory.");
+                }
+
+                string fullPathToPhotos = Path.Combine(projectRootDir.FullName, relativePath);
+
+                if (!Directory.Exists(fullPathToPhotos))
+                {
+                    return Result<Guid>.Failure($"The photos directory does not exist at path: {fullPathToPhotos}");
+                }
+
                 fullPathToPhotos = Path.GetFullPath(fullPathToPhotos);
                 string profilePhotoPath;
 
@@ -280,11 +300,11 @@ namespace Identity.Repositories
                 {
                     return Result<object>.Failure("User not found");
                 }
-                // Update only the properties that are allowed to be changed
+                
                 existingUser.Name = user.Name;
                 existingUser.Email = user.Email;
                 existingUser.Password = user.Password;
-                //existingUser.Image = user.Image;
+                
                 usersDbContext.Users.Update(existingUser);
                 await usersDbContext.SaveChangesAsync();
                 if (user.UserType == UserType.Client)
@@ -294,11 +314,11 @@ namespace Identity.Repositories
                     {
                         return Result<object>.Failure("UserClient not found");
                     }
-                    // Update only the properties that are allowed to be changed
+                    
                     existingUserClient.Name = user.Name;
                     existingUserClient.Email = user.Email;
                     existingUserClient.Password = user.Password;
-                    //existingUserClient.Image = user.Image;
+                    
                     context.UserClients.Update(existingUserClient);
                     await context.SaveChangesAsync();
                 }
@@ -309,11 +329,11 @@ namespace Identity.Repositories
                     {
                         return Result<object>.Failure("UserBusiness not found");
                     }
-                    // Update only the properties that are allowed to be changed
+                    
                     existingUserBusiness.Name = user.Name;
                     existingUserBusiness.Email = user.Email;
                     existingUserBusiness.Password = user.Password;
-                    //existingUserBusiness.Image = user.Image;
+                    
                     context.UserBusinesses.Update(existingUserBusiness);
                     await context.SaveChangesAsync();
                 }

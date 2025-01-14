@@ -1,36 +1,36 @@
 ﻿using FluentValidation;
+using System;
+using System.Linq.Expressions;
 
 namespace Application.Commands.ProductCommands
 {
     public class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
     {
-        public UpdateProductCommandValidator() 
+        public UpdateProductCommandValidator()
         {
-            RuleFor(x => x.ProductId)
-                .NotEmpty().WithMessage("ProductId is required");
+            ApplyNotEmptyRule(x => x.ProductId, "ProductId");
 
-            RuleFor(x => x.Name)
-                .NotEmpty().WithMessage("Name is required")
-                .MaximumLength(100).WithMessage("Name must not exceed 100 characters");
+            ApplyStringRules(x => x.Name, "Name", 100);
+            ApplyStringRules(x => x.Description, "Description", 200);
 
-            RuleFor(x => x.Description)
-                .NotEmpty().WithMessage("Description is required")
-                .MaximumLength(200).WithMessage("Description must not exceed 200 characters");
+            ApplyNotEmptyRule(x => x.Price, "Price");
+            ApplyNotEmptyRule(x => x.Stock, "Stock");
+            ApplyNotEmptyRule(x => x.Rating, "Rating");
+            ApplyNotEmptyRule(x => x.Image, "Image");
+            ApplyNotEmptyRule(x => x.BusinessId, "BusinessId");
+        }
 
-            RuleFor(x => x.Price)
-                .NotEmpty().WithMessage("Price is required");
+        private void ApplyStringRules(Expression<Func<UpdateProductCommand, string>> propertyExpression, string propertyName, int maxLength)
+        {
+            RuleFor(propertyExpression)
+                .NotEmpty().WithMessage($"{propertyName} is required")
+                .MaximumLength(maxLength).WithMessage($"{propertyName} must not exceed {maxLength} characters");
+        }
 
-            RuleFor(x => x.Stock)
-                .NotEmpty().WithMessage("Stock is required");
-
-            RuleFor(x => x.Rating)
-                .NotEmpty().WithMessage("Rating is required");
-
-            RuleFor(x => x.Image)
-                .NotEmpty().WithMessage("Image is required");
-
-            RuleFor(x => x.BusinessId)
-                .NotEmpty().WithMessage("BusinessId is required");
+        private void ApplyNotEmptyRule<T>(Expression<Func<UpdateProductCommand, T>> propertyExpression, string propertyName)
+        {
+            RuleFor(propertyExpression)
+                .NotEmpty().WithMessage($"{propertyName} is required");
         }
     }
 }

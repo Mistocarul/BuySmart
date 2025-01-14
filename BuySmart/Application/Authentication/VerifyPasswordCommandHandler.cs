@@ -9,12 +9,10 @@ namespace Application.Authentication
     public class VerifyPasswordCommandHandler : IRequestHandler<VerifyPasswordCommand, Result<string>>
     {
         private readonly IUserAuthRepository<User> userRepository;
-        private readonly IMapper mapper;
 
-        public VerifyPasswordCommandHandler(IUserAuthRepository<User> userRepository, IMapper mapper)
+        public VerifyPasswordCommandHandler(IUserAuthRepository<User> userRepository)
         {
             this.userRepository = userRepository;
-            this.mapper = mapper;
         }
         public async Task<Result<string>> Handle(VerifyPasswordCommand request, CancellationToken cancellationToken)
         {

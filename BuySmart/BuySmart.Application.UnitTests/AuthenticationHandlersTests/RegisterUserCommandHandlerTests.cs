@@ -17,7 +17,7 @@ namespace BuySmart.Application.UnitTests.Authentication
         {
             userRepository = Substitute.For<IUserAuthRepository<User>>();
             mapper = Substitute.For<IMapper>();
-            handler = new RegisterUserCommandHandler(userRepository, mapper);
+            handler = new RegisterUserCommandHandler(userRepository);
         }
 
         [Fact]

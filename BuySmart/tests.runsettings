@@ -9,4 +9,10 @@
       </DataCollector>
     </DataCollectors>
   </DataCollectionRunSettings>
+ <RunConfiguration>
+    <!-- Dezactivează Shadow Copy -->
+    <DisableAppDomain>true</DisableAppDomain>
+    <DisableParallelization>true</DisableParallelization>
+    <ShadowCopy>false</ShadowCopy>
+  </RunConfiguration>
 </RunSettings>
