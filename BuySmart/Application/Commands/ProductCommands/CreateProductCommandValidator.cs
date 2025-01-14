@@ -12,8 +12,7 @@ namespace Application.Commands.ProductCommands
                         .MaximumLength(100).WithMessage("Name must not exceed 100 characters");
 
             RuleFor(x => x.Description)
-                .NotEmpty().WithMessage("Description is required")
-                .MaximumLength(200).WithMessage("Description must not exceed 200 characters");
+                .NotEmpty().WithMessage("Description is required");
 
             RuleFor(x => x.Price)
                 .NotEmpty().WithMessage("Price is required");
