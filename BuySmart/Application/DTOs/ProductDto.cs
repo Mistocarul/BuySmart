@@ -11,7 +11,5 @@
         public ICollection<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
         public Guid BusinessId { get; set; }
 
-        public Guid BusinessId { get; set; }
-
     }
 }
