@@ -20,88 +20,6 @@
   </Settings>
   <Rules>
     <Rule>
-      <Key>S1133</Key>
-    </Rule>
-    <Rule>
-      <Key>S1134</Key>
-    </Rule>
-    <Rule>
-      <Key>S1135</Key>
-    </Rule>
-    <Rule>
-      <Key>S1940</Key>
-    </Rule>
-    <Rule>
-      <Key>S2222</Key>
-    </Rule>
-    <Rule>
-      <Key>S2225</Key>
-    </Rule>
-    <Rule>
-      <Key>S2234</Key>
-    </Rule>
-    <Rule>
-      <Key>S2340</Key>
-    </Rule>
-    <Rule>
-      <Key>S2342</Key>
-      <Parameters>
-        <Parameter>
-          <Key>flagsAttributeFormat</Key>
-          <Value>^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?s$</Value>
-        </Parameter>
-        <Parameter>
-          <Key>format</Key>
-          <Value>^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$</Value>
-        </Parameter>
-      </Parameters>
-    </Rule>
-    <Rule>
-      <Key>S2344</Key>
-    </Rule>
-    <Rule>
-      <Key>S2345</Key>
-    </Rule>
-    <Rule>
-      <Key>S2346</Key>
-    </Rule>
-    <Rule>
-      <Key>S2347</Key>
-      <Parameters>
-        <Parameter>
-          <Key>format</Key>
-          <Value>^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$</Value>
-        </Parameter>
-      </Parameters>
-    </Rule>
-    <Rule>
-      <Key>S2349</Key>
-    </Rule>
-    <Rule>
-      <Key>S2355</Key>
-    </Rule>
-    <Rule>
-      <Key>S2358</Key>
-    </Rule>
-    <Rule>
-      <Key>S2583</Key>
-    </Rule>
-    <Rule>
-      <Key>S2589</Key>
-    </Rule>
-    <Rule>
-      <Key>S3431</Key>
-    </Rule>
-    <Rule>
-      <Key>S5856</Key>
-    </Rule>
-    <Rule>
-      <Key>S6145</Key>
-    </Rule>
-    <Rule>
-      <Key>S6146</Key>
-    </Rule>
-    <Rule>
       <Key>S101</Key>
       <Parameters>
         <Parameter>
@@ -142,6 +60,15 @@
     </Rule>
     <Rule>
       <Key>S1125</Key>
+    </Rule>
+    <Rule>
+      <Key>S1133</Key>
+    </Rule>
+    <Rule>
+      <Key>S1134</Key>
+    </Rule>
+    <Rule>
+      <Key>S1135</Key>
     </Rule>
     <Rule>
       <Key>S114</Key>
@@ -240,6 +167,9 @@
       <Key>S1871</Key>
     </Rule>
     <Rule>
+      <Key>S1940</Key>
+    </Rule>
+    <Rule>
       <Key>S1944</Key>
     </Rule>
     <Rule>
@@ -267,6 +197,15 @@
       <Key>S2178</Key>
     </Rule>
     <Rule>
+      <Key>S2222</Key>
+    </Rule>
+    <Rule>
+      <Key>S2225</Key>
+    </Rule>
+    <Rule>
+      <Key>S2234</Key>
+    </Rule>
+    <Rule>
       <Key>S2257</Key>
     </Rule>
     <Rule>
@@ -282,7 +221,50 @@
       </Parameters>
     </Rule>
     <Rule>
+      <Key>S2340</Key>
+    </Rule>
+    <Rule>
+      <Key>S2342</Key>
+      <Parameters>
+        <Parameter>
+          <Key>format</Key>
+          <Value>^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$</Value>
+        </Parameter>
+        <Parameter>
+          <Key>flagsAttributeFormat</Key>
+          <Value>^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?s$</Value>
+        </Parameter>
+      </Parameters>
+    </Rule>
+    <Rule>
+      <Key>S2344</Key>
+    </Rule>
+    <Rule>
+      <Key>S2345</Key>
+    </Rule>
+    <Rule>
+      <Key>S2346</Key>
+    </Rule>
+    <Rule>
+      <Key>S2347</Key>
+      <Parameters>
+        <Parameter>
+          <Key>format</Key>
+          <Value>^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$</Value>
+        </Parameter>
+      </Parameters>
+    </Rule>
+    <Rule>
+      <Key>S2349</Key>
+    </Rule>
+    <Rule>
       <Key>S2352</Key>
+    </Rule>
+    <Rule>
+      <Key>S2355</Key>
+    </Rule>
+    <Rule>
+      <Key>S2358</Key>
     </Rule>
     <Rule>
       <Key>S2359</Key>
@@ -313,6 +295,12 @@
     </Rule>
     <Rule>
       <Key>S2551</Key>
+    </Rule>
+    <Rule>
+      <Key>S2583</Key>
+    </Rule>
+    <Rule>
+      <Key>S2589</Key>
     </Rule>
     <Rule>
       <Key>S2612</Key>
@@ -352,6 +340,9 @@
     </Rule>
     <Rule>
       <Key>S3385</Key>
+    </Rule>
+    <Rule>
+      <Key>S3431</Key>
     </Rule>
     <Rule>
       <Key>S3449</Key>
@@ -523,7 +514,16 @@
       <Key>S5773</Key>
     </Rule>
     <Rule>
+      <Key>S5856</Key>
+    </Rule>
+    <Rule>
       <Key>S5944</Key>
+    </Rule>
+    <Rule>
+      <Key>S6145</Key>
+    </Rule>
+    <Rule>
+      <Key>S6146</Key>
     </Rule>
     <Rule>
       <Key>S6444</Key>

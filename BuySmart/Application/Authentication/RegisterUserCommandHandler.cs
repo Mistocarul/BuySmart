@@ -9,12 +9,10 @@ namespace Application.Authentication
     public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, Result<Guid>>
     {
         private readonly IUserAuthRepository<User> repository;
-        private readonly IMapper mapper;
 
-        public RegisterUserCommandHandler(IUserAuthRepository<User> repository, IMapper mapper)
+        public RegisterUserCommandHandler(IUserAuthRepository<User> repository)
         {
             this.repository = repository;
-            this.mapper = mapper;
         }
 
         public async Task<Result<Guid>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)

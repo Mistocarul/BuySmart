@@ -57,7 +57,14 @@ namespace BuySmart.Controllers
         [HttpPost("VerifyPassword")]
         public async Task<ActionResult<Result<string>>> VerifyPassword(VerifyPasswordCommand command)
         {
-            var userId = JwtHelper.GetUserIdFromJwt(httpContextAccessor.HttpContext);
+            var httpContext = httpContextAccessor.HttpContext;
+            if (httpContext == null)
+            {
+                return Unauthorized();
+            }
+
+            var userId = JwtHelper.GetUserIdFromJwt(httpContext);
+            
             if (userId == null)
             {
                 return Unauthorized();

@@ -60,4 +60,6 @@ app.MapControllers();
 
 await app.RunAsync();
 
-public static partial class Program { }
+public partial class Program 
+{ 
+}

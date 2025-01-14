@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace Application.AIML
 {
-    public class ProductDataGenerator
+    public static class ProductDataGenerator
     {
         public static List<ProductData> GetProducts(string filePath)
         {
@@ -27,20 +27,14 @@ namespace Application.AIML
                         continue;
                     }
 
-                    //Console.WriteLine($"Description: {description}, Price: {priceString}");
-
                     float price = 0;
-
-                    if (!string.IsNullOrEmpty(priceString) && float.TryParse(priceString, NumberStyles.Any, CultureInfo.InvariantCulture, out price))
-                    {
-                        // Prețul va fi corect interpretat
-                    }
 
                     products.Add(new ProductData
                     {
-                        Description = description,
+                        Description = description ?? string.Empty, 
                         Price = price
                     });
+
                 }
             }
 

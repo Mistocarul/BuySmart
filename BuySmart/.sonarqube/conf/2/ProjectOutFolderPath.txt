@@ -1,1 +1,1 @@
-D:\Repos\BuySmart\BuySmart\.sonarqube\out\2
+D:\BuySmart\BuySmart\.sonarqube\out\2

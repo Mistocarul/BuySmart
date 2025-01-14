@@ -28,7 +28,7 @@ namespace Application.Authentication
                 .MaximumLength(500000 * 4 / 3) // Adjusted for base64 encoding
                 .WithMessage("Image must be smaller than 500 characters in base64 format");
         }
-        private bool BeValidBase64(string base64String)
+        private static bool BeValidBase64(string base64String)
         {
             Span<byte> buffer = new Span<byte>(new byte[base64String.Length]);
             return Convert.TryFromBase64String(base64String, buffer, out _);

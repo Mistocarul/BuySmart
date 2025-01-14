@@ -1,33 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RuleSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Rules for SonarQube" Description="This rule set was automatically generated from SonarQube" ToolsVersion="14.0">
   <Rules AnalyzerId="SonarAnalyzer.VisualBasic" RuleNamespace="SonarAnalyzer.VisualBasic">
-    <Rule Id="S1133" Action="Warning" />
-    <Rule Id="S1134" Action="Warning" />
-    <Rule Id="S1135" Action="Warning" />
-    <Rule Id="S1147" Action="None" />
-    <Rule Id="S1940" Action="Warning" />
-    <Rule Id="S2222" Action="Warning" />
-    <Rule Id="S2225" Action="Warning" />
-    <Rule Id="S2234" Action="Warning" />
-    <Rule Id="S2340" Action="Warning" />
-    <Rule Id="S2342" Action="Warning" />
-    <Rule Id="S2343" Action="None" />
-    <Rule Id="S2344" Action="Warning" />
-    <Rule Id="S2345" Action="Warning" />
-    <Rule Id="S2346" Action="Warning" />
-    <Rule Id="S2347" Action="Warning" />
-    <Rule Id="S2348" Action="None" />
-    <Rule Id="S2349" Action="Warning" />
-    <Rule Id="S2354" Action="None" />
-    <Rule Id="S2355" Action="Warning" />
-    <Rule Id="S2357" Action="None" />
-    <Rule Id="S2358" Action="Warning" />
-    <Rule Id="S2583" Action="Warning" />
-    <Rule Id="S2589" Action="Warning" />
-    <Rule Id="S3431" Action="Warning" />
-    <Rule Id="S5856" Action="Warning" />
-    <Rule Id="S6145" Action="Warning" />
-    <Rule Id="S6146" Action="Warning" />
     <Rule Id="S101" Action="Warning" />
     <Rule Id="S103" Action="None" />
     <Rule Id="S104" Action="None" />
@@ -42,7 +15,11 @@
     <Rule Id="S112" Action="Warning" />
     <Rule Id="S1123" Action="Warning" />
     <Rule Id="S1125" Action="Warning" />
+    <Rule Id="S1133" Action="Warning" />
+    <Rule Id="S1134" Action="Warning" />
+    <Rule Id="S1135" Action="Warning" />
     <Rule Id="S114" Action="Warning" />
+    <Rule Id="S1147" Action="None" />
     <Rule Id="S1151" Action="None" />
     <Rule Id="S1155" Action="Warning" />
     <Rule Id="S1163" Action="Warning" />
@@ -76,6 +53,7 @@
     <Rule Id="S1821" Action="None" />
     <Rule Id="S1862" Action="Warning" />
     <Rule Id="S1871" Action="Warning" />
+    <Rule Id="S1940" Action="Warning" />
     <Rule Id="S1944" Action="Warning" />
     <Rule Id="S2053" Action="Warning" />
     <Rule Id="S2068" Action="Warning" />
@@ -83,12 +61,28 @@
     <Rule Id="S2094" Action="Warning" />
     <Rule Id="S2166" Action="Warning" />
     <Rule Id="S2178" Action="Warning" />
+    <Rule Id="S2222" Action="Warning" />
+    <Rule Id="S2225" Action="Warning" />
+    <Rule Id="S2234" Action="Warning" />
     <Rule Id="S2257" Action="Warning" />
     <Rule Id="S2259" Action="Warning" />
     <Rule Id="S2302" Action="None" />
     <Rule Id="S2304" Action="Warning" />
     <Rule Id="S2339" Action="None" />
+    <Rule Id="S2340" Action="Warning" />
+    <Rule Id="S2342" Action="Warning" />
+    <Rule Id="S2343" Action="None" />
+    <Rule Id="S2344" Action="Warning" />
+    <Rule Id="S2345" Action="Warning" />
+    <Rule Id="S2346" Action="Warning" />
+    <Rule Id="S2347" Action="Warning" />
+    <Rule Id="S2348" Action="None" />
+    <Rule Id="S2349" Action="Warning" />
     <Rule Id="S2352" Action="Warning" />
+    <Rule Id="S2354" Action="None" />
+    <Rule Id="S2355" Action="Warning" />
+    <Rule Id="S2357" Action="None" />
+    <Rule Id="S2358" Action="Warning" />
     <Rule Id="S2359" Action="Warning" />
     <Rule Id="S2360" Action="None" />
     <Rule Id="S2362" Action="None" />
@@ -109,6 +103,8 @@
     <Rule Id="S2429" Action="None" />
     <Rule Id="S2437" Action="Warning" />
     <Rule Id="S2551" Action="Warning" />
+    <Rule Id="S2583" Action="Warning" />
+    <Rule Id="S2589" Action="Warning" />
     <Rule Id="S2612" Action="Warning" />
     <Rule Id="S2692" Action="Warning" />
     <Rule Id="S2737" Action="Warning" />
@@ -122,6 +118,7 @@
     <Rule Id="S3358" Action="Warning" />
     <Rule Id="S3363" Action="Warning" />
     <Rule Id="S3385" Action="Warning" />
+    <Rule Id="S3431" Action="Warning" />
     <Rule Id="S3449" Action="Warning" />
     <Rule Id="S3453" Action="Warning" />
     <Rule Id="S3464" Action="Warning" />
@@ -184,7 +181,10 @@
     <Rule Id="S5693" Action="Warning" />
     <Rule Id="S5753" Action="Warning" />
     <Rule Id="S5773" Action="Warning" />
+    <Rule Id="S5856" Action="Warning" />
     <Rule Id="S5944" Action="Warning" />
+    <Rule Id="S6145" Action="Warning" />
+    <Rule Id="S6146" Action="Warning" />
     <Rule Id="S6354" Action="None" />
     <Rule Id="S6444" Action="Warning" />
     <Rule Id="S6513" Action="None" />
